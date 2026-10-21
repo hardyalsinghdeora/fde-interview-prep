@@ -17,7 +17,7 @@ The technical owner of a customer relationship: keeps accounts healthy, drives a
 
 **Titles and aliases.** Technical Account Manager, Customer Success Engineer, Customer Success Architect, Customer Engineer, Enterprise Support TAM, Customer Success Account Manager (Microsoft), Success Architect. Titles vary: read the job description.
 
-> **Note on "Customer Engineer" at Google Cloud.** At Google Cloud, "Customer Engineer" (CE) is mainly a **pre-sales** technical role that works alongside sales on new workloads and opportunities, closer to a Solutions Engineer. Google Cloud also has **Technical Account Managers** who work post-sale with Premium Support customers. This file focuses on the post-sale account-ownership work; if you are interviewing for a pre-sales CE role, also prepare [03-solutions-engineer.md](03-solutions-engineer.md) and [04-solutions-architect.md](04-solutions-architect.md).
+> **Note on "Customer Engineer" at Google Cloud.** At Google Cloud, "Customer Engineer" (CE) is mainly a **pre-sales** technical role that works alongside sales on new workloads and opportunities, closer to a Solutions Engineer. Google Cloud also has **Technical Account Managers** who work post-sale with Premium Support customers. This file focuses on the post-sale account-ownership work; if you are interviewing for a pre-sales CE role, also prepare [03-solutions-engineer.md](../03-solutions-engineer/README.md) and [04-solutions-architect.md](../04-solutions-architect/README.md).
 
 **Who hires (examples, titles vary).** AWS (TAMs in Enterprise Support), Google Cloud (Customer Engineers, TAMs), Microsoft (Customer Success Account Managers, Cloud Solution Architects), and many SaaS and infrastructure companies with post-sale technical teams, such as Datadog, Okta, Cloudflare, MongoDB and Atlassian.
 
@@ -55,27 +55,27 @@ Loops vary by company and level. The rounds below are typical or reported, not g
 
 | Round | What it tests | Prepare with |
 |---|---|---|
-| Recruiter screen | Motivation for post-sale work, customer experience, travel, compensation | [01-recruiter-and-motivation](../01-recruiter-and-motivation/README.md) |
-| Hiring manager | Book-of-business management, escalation stories, prioritisation | [10-behavioral](../10-behavioral/README.md), this file |
-| Technical / role-related knowledge | Cloud and networking fundamentals, product area depth, troubleshooting out loud. Google reportedly calls this "Role-Related Knowledge" (RRK) | [08-cloud-devops-integration](../08-cloud-devops-integration/README.md), [12-debugging-troubleshooting](../12-debugging-troubleshooting/README.md), [13-cs-fundamentals](../13-cs-fundamentals/README.md) |
-| Problem solving / general cognitive ability | Structuring an ambiguous problem (Google reportedly calls this GCA) | [04-decomposition](../04-decomposition/README.md) |
-| Customer role-play | Escalation call, angry executive, renewal-risk conversation | [09-customer-scenarios](../09-customer-scenarios/README.md), this file |
+| Recruiter screen | Motivation for post-sale work, customer experience, travel, compensation | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/README.md) |
+| Hiring manager | Book-of-business management, escalation stories, prioritisation | [10-behavioral](../../topics/10-behavioral/README.md), this file |
+| Technical / role-related knowledge | Cloud and networking fundamentals, product area depth, troubleshooting out loud. Google reportedly calls this "Role-Related Knowledge" (RRK) | [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md), [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/README.md), [13-cs-fundamentals](../../topics/13-cs-fundamentals/README.md) |
+| Problem solving / general cognitive ability | Structuring an ambiguous problem (Google reportedly calls this GCA) | [04-decomposition](../../topics/04-decomposition/README.md) |
+| Customer role-play | Escalation call, angry executive, renewal-risk conversation | [09-customer-scenarios](../../topics/09-customer-scenarios/README.md), this file |
 | QBR or presentation exercise | Turning account data into a story for executives | This file (QBR exercise) |
-| Written exercise | Incident summary, escalation email, ticket triage | This file, [12-debugging-troubleshooting](../12-debugging-troubleshooting/ANSWERS.md) |
-| Values / culture | Googleyness & Leadership (Google), Leadership Principles (Amazon), company values elsewhere | [10-behavioral](../10-behavioral/README.md), this file |
+| Written exercise | Incident summary, escalation email, ticket triage | This file, [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/ANSWERS.md) |
+| Values / culture | Googleyness & Leadership (Google), Leadership Principles (Amazon), company values elsewhere | [10-behavioral](../../topics/10-behavioral/README.md), this file |
 
 ---
 
 ## Common rounds — use the shared sections
 
-- [09-customer-scenarios](../09-customer-scenarios/README.md) — the core of this role. Prioritise section B (difficult situations: angry executive, champion leaves, users won't adopt, sales over-promised) and section E (ROI, expansion, churn, prioritising five customers). See [answers](../09-customer-scenarios/ANSWERS.md).
-- [12-debugging-troubleshooting](../12-debugging-troubleshooting/README.md) — section B (production scenarios) and section D (limited access, communicating during an outage, post-mortems). TAMs are judged on how they run troubleshooting with the customer on the call.
-- [08-cloud-devops-integration](../08-cloud-devops-integration/README.md) — sections A, B, C and E: APIs, auth/SSO, cloud networking, HA/DR, SLIs/SLOs/SLAs. For cloud-provider TAM roles, know one cloud in depth.
-- [10-behavioral](../10-behavioral/README.md) — customer focus, conflict, prioritisation and pressure. Have at least two escalation stories and one churn-save story ready.
-- [13-cs-fundamentals](../13-cs-fundamentals/README.md) — networking (DNS, TLS, HTTP, load balancing) comes up in technical screens for cloud TAM roles.
-- [07-data-and-sql](../07-data-and-sql/README.md) — basic SQL for pulling usage and cost data; section A prompts are enough.
-- [01-recruiter-and-motivation](../01-recruiter-and-motivation/README.md) — adapt "Why FDE?" into "Why post-sale, why TAM?".
-- [14-questions-to-ask](../14-questions-to-ask/README.md) — add questions about book size, segmentation and how TAMs are measured.
+- [09-customer-scenarios](../../topics/09-customer-scenarios/README.md) — the core of this role. Prioritise section B (difficult situations: angry executive, champion leaves, users won't adopt, sales over-promised) and section E (ROI, expansion, churn, prioritising five customers). See [answers](../../topics/09-customer-scenarios/ANSWERS.md).
+- [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/README.md) — section B (production scenarios) and section D (limited access, communicating during an outage, post-mortems). TAMs are judged on how they run troubleshooting with the customer on the call.
+- [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md) — sections A, B, C and E: APIs, auth/SSO, cloud networking, HA/DR, SLIs/SLOs/SLAs. For cloud-provider TAM roles, know one cloud in depth.
+- [10-behavioral](../../topics/10-behavioral/README.md) — customer focus, conflict, prioritisation and pressure. Have at least two escalation stories and one churn-save story ready.
+- [13-cs-fundamentals](../../topics/13-cs-fundamentals/README.md) — networking (DNS, TLS, HTTP, load balancing) comes up in technical screens for cloud TAM roles.
+- [07-data-and-sql](../../topics/07-data-and-sql/README.md) — basic SQL for pulling usage and cost data; section A prompts are enough.
+- [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/README.md) — adapt "Why FDE?" into "Why post-sale, why TAM?".
+- [14-questions-to-ask](../../topics/14-questions-to-ask/README.md) — add questions about book size, segmentation and how TAMs are measured.
 
 ---
 

@@ -52,24 +52,24 @@ Typical/reported shape; varies by company.
 
 | Round | What it tests | How to prepare |
 |---|---|---|
-| Recruiter screen | Motivation, travel, customer-facing fit | [01-recruiter-and-motivation](../01-recruiter-and-motivation/README.md) |
-| Technical screen | SQL, Python/pandas, statistics basics | [07-data-and-sql](../07-data-and-sql/README.md) (A, B, F) |
+| Recruiter screen | Motivation, travel, customer-facing fit | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/README.md) |
+| Technical screen | SQL, Python/pandas, statistics basics | [07-data-and-sql](../../topics/07-data-and-sql/README.md) (A, B, F) |
 | Take-home on a messy dataset | Cleaning, framing, modelling, honesty about limits | Questions below |
 | Take-home presentation | Explaining results to a mixed technical/business panel | Questions below |
-| ML fundamentals / case study | Metrics, validation, leakage, model choice | [06-ai-llm section I](../06-ai-llm/README.md) and questions below |
-| ML system design for a customer | Deployment, monitoring, retraining under customer constraints | [03-system-design](../03-system-design/README.md), [08-cloud-devops-integration](../08-cloud-devops-integration/README.md) |
-| Customer role-play | Problem framing, explaining a model, handling pushback | [09-customer-scenarios](../09-customer-scenarios/README.md) |
-| Coding (some companies) | Practical Python or DS&A | [02-coding](../02-coding/README.md) |
-| Behavioral | Ownership, ambiguity, customer impact | [10-behavioral](../10-behavioral/README.md) |
+| ML fundamentals / case study | Metrics, validation, leakage, model choice | [06-ai-llm section I](../../topics/06-ai-llm/README.md) and questions below |
+| ML system design for a customer | Deployment, monitoring, retraining under customer constraints | [03-system-design](../../topics/03-system-design/README.md), [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md) |
+| Customer role-play | Problem framing, explaining a model, handling pushback | [09-customer-scenarios](../../topics/09-customer-scenarios/README.md) |
+| Coding (some companies) | Practical Python or DS&A | [02-coding](../../topics/02-coding/README.md) |
+| Behavioral | Ownership, ambiguity, customer impact | [10-behavioral](../../topics/10-behavioral/README.md) |
 
 ## Common rounds — use the shared sections
 
-- [07-data-and-sql](../07-data-and-sql/README.md) — highest priority: SQL prompts (A), pipelines and data quality (D), pandas wrangling (F). Entity resolution and PII handling come up with customer data.
-- [06-ai-llm](../06-ai-llm/README.md) — section I (classic ML) for fundamentals; E (evaluation) and C (RAG) if the role includes LLM work.
-- [04-decomposition](../04-decomposition/README.md) — framing a vague business problem into an analytics plan.
-- [09-customer-scenarios](../09-customer-scenarios/README.md) — "the data is worse than expected", "the customer wants a guarantee the AI will never be wrong", explaining technical ideas to executives.
-- [03-system-design](../03-system-design/README.md) and [08-cloud-devops-integration](../08-cloud-devops-integration/README.md) — deploying into a customer's cloud or on-prem environment.
-- [10-behavioral](../10-behavioral/README.md) — customer focus and failure stories.
+- [07-data-and-sql](../../topics/07-data-and-sql/README.md) — highest priority: SQL prompts (A), pipelines and data quality (D), pandas wrangling (F). Entity resolution and PII handling come up with customer data.
+- [06-ai-llm](../../topics/06-ai-llm/README.md) — section I (classic ML) for fundamentals; E (evaluation) and C (RAG) if the role includes LLM work.
+- [04-decomposition](../../topics/04-decomposition/README.md) — framing a vague business problem into an analytics plan.
+- [09-customer-scenarios](../../topics/09-customer-scenarios/README.md) — "the data is worse than expected", "the customer wants a guarantee the AI will never be wrong", explaining technical ideas to executives.
+- [03-system-design](../../topics/03-system-design/README.md) and [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md) — deploying into a customer's cloud or on-prem environment.
+- [10-behavioral](../../topics/10-behavioral/README.md) — customer focus and failure stories.
 
 ## Role-specific questions
 
@@ -225,7 +225,7 @@ Example: CRM and billing system disagree on customer start dates and status.
 6. **Use what will be available at prediction time.** If production scoring will read from CRM, train on CRM data, even if billing is cleaner, or the model will see different inputs in production.
 7. **Add a conflict flag** as a feature if it is informative, and report data-quality issues to the customer as a separate deliverable.
 
-For entity matching across systems, see entity resolution in [07-data-and-sql](../07-data-and-sql/README.md).
+For entity matching across systems, see entity resolution in [07-data-and-sql](../../topics/07-data-and-sql/README.md).
 
 #### How do you present take-home results to a mixed technical and business panel?
 
@@ -334,7 +334,7 @@ Common families:
 - **Ratios:** discounts / spend, refunds / orders.
 - **Domain features from experts:** ask the customer's staff what they look at; their heuristics often become the strongest features.
 
-In SQL, window functions and date filters do most of this (see [07-data-and-sql](../07-data-and-sql/README.md)). Keep the feature code in one function or SQL model used for both training and scoring, to avoid training/serving skew.
+In SQL, window functions and date filters do most of this (see [07-data-and-sql](../../topics/07-data-and-sql/README.md)). Keep the feature code in one function or SQL model used for both training and scoring, to avoid training/serving skew.
 
 #### How do you avoid leakage when building time-based features?
 
@@ -544,7 +544,7 @@ Bring the work to the data:
 - **Handle PII:** minimise fields, mask where possible, follow their data-protection policies.
 - **If federated or on-device learning is proposed,** be cautious: it adds complexity and is rarely needed for a single customer.
 
-Plan extra time; access approval is often the longest step. See [08-cloud-devops-integration](../08-cloud-devops-integration/README.md) for on-prem and air-gapped deployment patterns.
+Plan extra time; access approval is often the longest step. See [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md) for on-prem and air-gapped deployment patterns.
 
 #### How do you monitor a model running in a customer's environment?
 
@@ -633,7 +633,7 @@ Ask early who will own it. If nobody at the customer can, the project is at risk
 - Data must stay on modest on-prem hardware.
 - Strict consistency and simple auditing are needed.
 
-A practical path: start with an LLM to deliver value and to **create labels** (reviewed by humans), measure on a labelled test set, then consider distilling into a cheaper classifier if volume justifies it. Compare options on the same test set for accuracy, cost per 1,000 tickets and latency. See [06-ai-llm](../06-ai-llm/README.md) for prompting and fine-tuning details.
+A practical path: start with an LLM to deliver value and to **create labels** (reviewed by humans), measure on a labelled test set, then consider distilling into a cheaper classifier if volume justifies it. Compare options on the same test set for accuracy, cost per 1,000 tickets and latency. See [06-ai-llm](../../topics/06-ai-llm/README.md) for prompting and fine-tuning details.
 
 #### How do you evaluate an LLM-based extraction pipeline on a customer's documents?
 
@@ -646,7 +646,7 @@ A practical path: start with an LLM to deliver value and to **create labels** (r
 7. **Regression testing:** rerun the gold set on every prompt or model change.
 8. **Monitor in production:** sample reviews and human corrections feed the gold set.
 
-See evaluation in [06-ai-llm](../06-ai-llm/README.md) for LLM-as-judge and eval tooling.
+See evaluation in [06-ai-llm](../../topics/06-ai-llm/README.md) for LLM-as-judge and eval tooling.
 
 ### Role-specific behavioral
 
@@ -689,12 +689,12 @@ Example framing (adapt to your own experience): "In my current team, my best wor
 ## Prep checklist
 
 - [ ] Do a timed practice take-home: pick a messy public dataset (for example a city open-data portal export), write a decision-framed question, and deliver a notebook plus a 10-slide presentation in four to six hours.
-- [ ] Practise data profiling and cleaning in pandas and SQL until the first-hour checks are automatic ([07-data-and-sql](../07-data-and-sql/README.md) section F).
+- [ ] Practise data profiling and cleaning in pandas and SQL until the first-hour checks are automatic ([07-data-and-sql](../../topics/07-data-and-sql/README.md) section F).
 - [ ] Build a leakage-safe feature pipeline with a cutoff date and a time-based backtest for an event dataset.
 - [ ] Prepare a one-page explanation of precision, recall and thresholds using a cost table, and rehearse it for a non-technical listener.
 - [ ] Practise a SHAP-based explanation of a single prediction in plain English.
 - [ ] Review experiment design: sample size estimation, randomisation units, difference-in-differences and selection bias.
-- [ ] Sketch a deployment and monitoring architecture for a model inside a customer's cloud with no data egress, including retraining and rollback ([03-system-design](../03-system-design/README.md), [08-cloud-devops-integration](../08-cloud-devops-integration/README.md)).
+- [ ] Sketch a deployment and monitoring architecture for a model inside a customer's cloud with no data egress, including retraining and rollback ([03-system-design](../../topics/03-system-design/README.md), [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md)).
 - [ ] Write a model card and a handover runbook for one of your past projects.
-- [ ] Prepare an LLM vs. classical model comparison for a text classification task, with cost and accuracy on the same test set ([06-ai-llm](../06-ai-llm/README.md)).
+- [ ] Prepare an LLM vs. classical model comparison for a text classification task, with cost and accuracy on the same test set ([06-ai-llm](../../topics/06-ai-llm/README.md)).
 - [ ] Prepare four STAR stories: a model that created value, a model that did not, telling a customer "no", and winning over a skeptical domain expert.

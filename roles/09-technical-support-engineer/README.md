@@ -53,24 +53,24 @@ Rounds vary by company; this is the typical/reported shape, not a guarantee.
 
 | Round | What it tests | How to prepare |
 |---|---|---|
-| Recruiter screen | Motivation, shift/on-call availability, written English | [01-recruiter-and-motivation](../01-recruiter-and-motivation/README.md) |
-| Technical screen | Linux, networking, HTTP, DNS, TLS, SQL basics, "how does X work" | [13-cs-fundamentals](../13-cs-fundamentals/README.md), [08-cloud-devops-integration](../08-cloud-devops-integration/README.md) |
-| Troubleshooting / log-reading round | Hypothesis-driven debugging, reading logs and stack traces | [12-debugging-troubleshooting](../12-debugging-troubleshooting/README.md) and the questions below |
+| Recruiter screen | Motivation, shift/on-call availability, written English | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/README.md) |
+| Technical screen | Linux, networking, HTTP, DNS, TLS, SQL basics, "how does X work" | [13-cs-fundamentals](../../topics/13-cs-fundamentals/README.md), [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md) |
+| Troubleshooting / log-reading round | Hypothesis-driven debugging, reading logs and stack traces | [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/README.md) and the questions below |
 | Ticket triage exercise (live or take-home) | Prioritisation, severity judgment, first actions | Questions below |
 | Written reply exercise | Tone, clarity, accuracy, de-escalation in writing | Questions below |
-| Light coding / scripting (some companies) | Parse a log, call an API, write a small script | [02-coding](../02-coding/README.md) (practical problems), [08 Linux & scripting](../08-cloud-devops-integration/README.md) |
-| Customer role-play (some companies) | Live call with an "angry customer" interviewer | [09-customer-scenarios](../09-customer-scenarios/README.md) |
-| Hiring manager / behavioral | Ownership, empathy, working with engineering | [10-behavioral](../10-behavioral/README.md) |
+| Light coding / scripting (some companies) | Parse a log, call an API, write a small script | [02-coding](../../topics/02-coding/README.md) (practical problems), [08 Linux & scripting](../../topics/08-cloud-devops-integration/README.md) |
+| Customer role-play (some companies) | Live call with an "angry customer" interviewer | [09-customer-scenarios](../../topics/09-customer-scenarios/README.md) |
+| Hiring manager / behavioral | Ownership, empathy, working with engineering | [10-behavioral](../../topics/10-behavioral/README.md) |
 
 ## Common rounds — use the shared sections
 
-- [12-debugging-troubleshooting](../12-debugging-troubleshooting/README.md) — the most important shared section. Prioritise section B (production troubleshooting) and C (LLM troubleshooting if the product is AI).
-- [13-cs-fundamentals](../13-cs-fundamentals/README.md) — networking (DNS, TCP, TLS, HTTP status codes) and operating systems come up as rapid-fire questions.
-- [08-cloud-devops-integration](../08-cloud-devops-integration/README.md) — APIs, auth (OAuth, API keys, SSO/SAML), Linux & scripting.
-- [07-data-and-sql](../07-data-and-sql/README.md) — SQL concepts and basic queries; support engineers often query internal data to investigate.
-- [09-customer-scenarios](../09-customer-scenarios/README.md) — difficult situations and communication; most map directly onto support.
-- [10-behavioral](../10-behavioral/README.md) — customer focus, conflict, failure.
-- [02-coding](../02-coding/README.md) — only the practical problems (parsing, string handling, API calls); deep DS&A is rare for support roles.
+- [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/README.md) — the most important shared section. Prioritise section B (production troubleshooting) and C (LLM troubleshooting if the product is AI).
+- [13-cs-fundamentals](../../topics/13-cs-fundamentals/README.md) — networking (DNS, TCP, TLS, HTTP status codes) and operating systems come up as rapid-fire questions.
+- [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md) — APIs, auth (OAuth, API keys, SSO/SAML), Linux & scripting.
+- [07-data-and-sql](../../topics/07-data-and-sql/README.md) — SQL concepts and basic queries; support engineers often query internal data to investigate.
+- [09-customer-scenarios](../../topics/09-customer-scenarios/README.md) — difficult situations and communication; most map directly onto support.
+- [10-behavioral](../../topics/10-behavioral/README.md) — customer focus, conflict, failure.
+- [02-coding](../../topics/02-coding/README.md) — only the practical problems (parsing, string handling, API calls); deep DS&A is rare for support roles.
 
 ## Role-specific questions
 
@@ -727,6 +727,6 @@ Example framing (adapt to your own experience): "I am at my best when debugging 
 - [ ] Study the company's product: sign up for a free tier, follow the quickstart, break something on purpose, and see what error messages and docs you get.
 - [ ] Read the company's public status page history and a few post-incident reports to understand their incident communication style.
 - [ ] Write one KB article and one bug report in the formats above for an issue you have actually hit.
-- [ ] Review HTTP status codes, DNS, TLS, OAuth/API keys, and SSO basics from [13-cs-fundamentals](../13-cs-fundamentals/README.md) and [08-cloud-devops-integration](../08-cloud-devops-integration/README.md).
+- [ ] Review HTTP status codes, DNS, TLS, OAuth/API keys, and SSO basics from [13-cs-fundamentals](../../topics/13-cs-fundamentals/README.md) and [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md).
 - [ ] Prepare four STAR stories: hard technical fix, turned an angry customer around, influenced a product fix, made and corrected a mistake.
 - [ ] Prepare an honest answer on shifts, on-call and weekend coverage, and on your longer-term career direction.

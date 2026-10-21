@@ -54,26 +54,26 @@ Loops vary by company and level. The rounds below are typical or reported, not g
 
 | Round | What it tests | Prepare with |
 |---|---|---|
-| Recruiter screen | Delivery experience, platforms you know, travel, why post-sale delivery | [01-recruiter-and-motivation](../01-recruiter-and-motivation/README.md) |
-| Hiring manager | Projects delivered, how you handle scope, timelines and difficult customers | [10-behavioral](../10-behavioral/README.md), this file |
-| Technical: SQL and data | Joins, deduplication, reconciliation queries, data modelling | [07-data-and-sql](../07-data-and-sql/README.md) |
-| Technical: integration and APIs | REST, auth, webhooks, files, error handling, idempotency, ERP/CRM knowledge | [08-cloud-devops-integration](../08-cloud-devops-integration/README.md), this file |
-| Practical exercise or take-home | Map a CSV to a schema, write a load script, design an integration | [02-coding](../02-coding/README.md) (practical), this file |
-| Case study / scenario | Plan an implementation, handle a change request, go/no-go decision | [04-decomposition](../04-decomposition/README.md), [09-customer-scenarios](../09-customer-scenarios/README.md), this file |
-| Debugging | Failed integration, missing records, sync errors | [12-debugging-troubleshooting](../12-debugging-troubleshooting/README.md) |
-| Behavioral / values | Ownership, conflict, delivering under pressure | [10-behavioral](../10-behavioral/README.md) |
+| Recruiter screen | Delivery experience, platforms you know, travel, why post-sale delivery | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/README.md) |
+| Hiring manager | Projects delivered, how you handle scope, timelines and difficult customers | [10-behavioral](../../topics/10-behavioral/README.md), this file |
+| Technical: SQL and data | Joins, deduplication, reconciliation queries, data modelling | [07-data-and-sql](../../topics/07-data-and-sql/README.md) |
+| Technical: integration and APIs | REST, auth, webhooks, files, error handling, idempotency, ERP/CRM knowledge | [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md), this file |
+| Practical exercise or take-home | Map a CSV to a schema, write a load script, design an integration | [02-coding](../../topics/02-coding/README.md) (practical), this file |
+| Case study / scenario | Plan an implementation, handle a change request, go/no-go decision | [04-decomposition](../../topics/04-decomposition/README.md), [09-customer-scenarios](../../topics/09-customer-scenarios/README.md), this file |
+| Debugging | Failed integration, missing records, sync errors | [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/README.md) |
+| Behavioral / values | Ownership, conflict, delivering under pressure | [10-behavioral](../../topics/10-behavioral/README.md) |
 
 ---
 
 ## Common rounds — use the shared sections
 
-- [07-data-and-sql](../07-data-and-sql/README.md) — the most important technical section for this role. Prioritise deduplication, anti-joins, NULL behaviour, data modelling, schema drift, idempotent re-runs, backfills, data quality checks and entity resolution. See [answers](../07-data-and-sql/ANSWERS.md).
-- [08-cloud-devops-integration](../08-cloud-devops-integration/README.md) — section A (APIs and integration: idempotency, pagination, webhooks, legacy SFTP/CSV, flaky APIs, iPaaS, Salesforce/SAP/Workday) and section B (OAuth, SSO, SCIM, security reviews).
-- [09-customer-scenarios](../09-customer-scenarios/README.md) — section A (scoping, changing requirements, estimating) and section B (bad data with a fixed deadline, IT won't give access, sales over-promised, scope added without time).
-- [12-debugging-troubleshooting](../12-debugging-troubleshooting/README.md) — "data doesn't match the source system", "duplicates after a re-run", "webhook isn't arriving", "cron job didn't run".
-- [02-coding](../02-coding/README.md) — practical coding (parsing files, calling APIs, transforming JSON) matters more than hard algorithms for this role.
-- [10-behavioral](../10-behavioral/README.md) — prepare stories on missed deadlines, difficult stakeholders, and juggling several customers.
-- [14-questions-to-ask](../14-questions-to-ask/README.md) — add questions about typical project length, concurrent projects per engineer, utilisation targets and how handoff to support works.
+- [07-data-and-sql](../../topics/07-data-and-sql/README.md) — the most important technical section for this role. Prioritise deduplication, anti-joins, NULL behaviour, data modelling, schema drift, idempotent re-runs, backfills, data quality checks and entity resolution. See [answers](../../topics/07-data-and-sql/ANSWERS.md).
+- [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md) — section A (APIs and integration: idempotency, pagination, webhooks, legacy SFTP/CSV, flaky APIs, iPaaS, Salesforce/SAP/Workday) and section B (OAuth, SSO, SCIM, security reviews).
+- [09-customer-scenarios](../../topics/09-customer-scenarios/README.md) — section A (scoping, changing requirements, estimating) and section B (bad data with a fixed deadline, IT won't give access, sales over-promised, scope added without time).
+- [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/README.md) — "data doesn't match the source system", "duplicates after a re-run", "webhook isn't arriving", "cron job didn't run".
+- [02-coding](../../topics/02-coding/README.md) — practical coding (parsing files, calling APIs, transforming JSON) matters more than hard algorithms for this role.
+- [10-behavioral](../../topics/10-behavioral/README.md) — prepare stories on missed deadlines, difficult stakeholders, and juggling several customers.
+- [14-questions-to-ask](../../topics/14-questions-to-ask/README.md) — add questions about typical project length, concurrent projects per engineer, utilisation targets and how handoff to support works.
 
 ---
 
@@ -896,5 +896,5 @@ A system the customer cannot maintain becomes a support burden and a renewal ris
 6. Prepare a go-live checklist and a cutover runbook template, and be ready to walk through a go/no-go decision.
 7. Prepare three stories: a project you recovered, a customization you pushed back on, and a migration or go-live problem you handled.
 8. If the company implements a specific platform, take its free admin or implementation learning path (for example Salesforce Trailhead) and learn its standard configuration options.
-9. Review [07-data-and-sql](../07-data-and-sql/README.md) sections A, B and D and [08-cloud-devops-integration](../08-cloud-devops-integration/README.md) sections A and B.
+9. Review [07-data-and-sql](../../topics/07-data-and-sql/README.md) sections A, B and D and [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md) sections A and B.
 10. Prepare questions about project length, concurrent projects, utilisation targets, use of SIs, and how handoff to support works.

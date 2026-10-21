@@ -14,7 +14,7 @@ Travel varies by company and account: some FDEs spend multiple days a week on-si
 
 **Common titles / aliases:** Forward Deployed Engineer (FDE), Forward Deployed Software Engineer (FDSE, Palantir), Forward Deployed AI Engineer, Applied AI Engineer, AI Deployment Engineer, Field Engineer, Customer Engineer (some companies), Founding/Deployment Engineer at startups.
 
-**Companies that hire for it (examples):** Palantir (FDSE, the role's origin), OpenAI, Anthropic, Scale AI, Databricks, Salesforce (Agentforce), Ramp, Sierra, Decagon, Harvey, Glean, Cohere, Anduril, and many AI-native startups. See [11-company-specific](../11-company-specific/README.md).
+**Companies that hire for it (examples):** Palantir (FDSE, the role's origin), OpenAI, Anthropic, Scale AI, Databricks, Salesforce (Agentforce), Ramp, Sierra, Decagon, Harvey, Glean, Cohere, Anduril, and many AI-native startups. See [11-company-specific](../../topics/11-company-specific/README.md).
 
 **How it differs from nearby roles:**
 
@@ -22,7 +22,7 @@ Travel varies by company and account: some FDEs spend multiple days a week on-si
 |---|---|
 | Core SWE | Builds one product for many users; rarely owns a specific customer outcome. FDE builds for a specific customer, then generalises. |
 | Solutions / Sales Engineer | Mostly pre-sale demos and technical validation. FDE writes production code and stays after the contract is signed. |
-| Deployment Strategist | Business/problem owner on the same account; usually does not ship production code. See [02-deployment-strategist.md](02-deployment-strategist.md). |
+| Deployment Strategist | Business/problem owner on the same account; usually does not ship production code. See [02-deployment-strategist.md](../02-deployment-strategist/README.md). |
 | Consultant | Bills hours on client-owned systems. FDE builds on and improves their own company's platform. |
 
 **Who it suits:** engineers who like seeing users use what they built, are comfortable with ambiguity and messy data, enjoy learning new domains quickly, can write production code without a large team around them, and can hold a room with a customer executive.
@@ -46,26 +46,26 @@ Loops vary by company and change often; the rounds below are **typical / candida
 
 | Round | What it tests | Prepare with |
 |---|---|---|
-| Recruiter screen | "Why FDE not SWE?", travel, customer fit | [01-recruiter-and-motivation](../01-recruiter-and-motivation/README.md) |
-| Coding (DS&A or practical/incremental) | Clean, working code under changing requirements | [02-coding](../02-coding/README.md) |
-| Take-home on the company's API (common at AI labs) | Building something real; then defending it | [06-ai-llm](../06-ai-llm/README.md), this file (exercises) |
-| Decomposition (Palantir, Databricks, others) | Breaking a vague problem into a plan | [04-decomposition](../04-decomposition/README.md) |
-| Learning round (Palantir) | Learning something new fast | [05-learning-round](../05-learning-round/README.md) |
-| Applied system design | Architecture in a customer's real constraints | [03-system-design](../03-system-design/README.md) |
-| Debugging / re-engineering | Unfamiliar code, root-causing | [12-debugging-troubleshooting](../12-debugging-troubleshooting/README.md) |
-| Customer role-play / demo | Scoping, pushback, presenting | [09-customer-scenarios](../09-customer-scenarios/README.md), this file |
-| Hiring manager / values | Ownership, ambiguity, motivation | [10-behavioral](../10-behavioral/README.md) |
+| Recruiter screen | "Why FDE not SWE?", travel, customer fit | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/README.md) |
+| Coding (DS&A or practical/incremental) | Clean, working code under changing requirements | [02-coding](../../topics/02-coding/README.md) |
+| Take-home on the company's API (common at AI labs) | Building something real; then defending it | [06-ai-llm](../../topics/06-ai-llm/README.md), this file (exercises) |
+| Decomposition (Palantir, Databricks, others) | Breaking a vague problem into a plan | [04-decomposition](../../topics/04-decomposition/README.md) |
+| Learning round (Palantir) | Learning something new fast | [05-learning-round](../../topics/05-learning-round/README.md) |
+| Applied system design | Architecture in a customer's real constraints | [03-system-design](../../topics/03-system-design/README.md) |
+| Debugging / re-engineering | Unfamiliar code, root-causing | [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/README.md) |
+| Customer role-play / demo | Scoping, pushback, presenting | [09-customer-scenarios](../../topics/09-customer-scenarios/README.md), this file |
+| Hiring manager / values | Ownership, ambiguity, motivation | [10-behavioral](../../topics/10-behavioral/README.md) |
 
 ## Common rounds — use the shared sections
 
-- [01 Recruiter & motivation](../01-recruiter-and-motivation/ANSWERS.md): nail the 60-second "Why FDE?" and the travel answer first; this screen rejects many strong engineers.
-- [02 Coding](../02-coding/ANSWERS.md): prioritise practical/incremental and API-style problems over hard DS&A, unless you are interviewing at Palantir or Scale.
-- [03 System design](../03-system-design/ANSWERS.md): focus on section A (applied, customer-context prompts): legacy systems, on-prem, regulated data.
-- [04 Decomposition](../04-decomposition/ANSWERS.md): essential for Palantir FDSE; useful everywhere for the "vague customer ask" round.
-- [06 AI / LLM](../06-ai-llm/ANSWERS.md) and [part 2](../06-ai-llm/ANSWERS-part2.md): essential for AI-lab FDE roles; evals and production reliability matter most.
-- [07 Data & SQL](../07-data-and-sql/ANSWERS.md) and [08 Cloud, DevOps & integration](../08-cloud-devops-integration/ANSWERS.md): the daily work; expect follow-ups on auth, networking and messy data.
-- [09 Customer scenarios](../09-customer-scenarios/ANSWERS.md): the generic role-plays (angry exec, scope creep, bad data). This file goes deeper on FDE-only situations.
-- [10 Behavioral](../10-behavioral/ANSWERS.md) and [00 story bank](../00-overview/ANSWERS.md): prepare stories for ownership, ambiguity and customer impact.
+- [01 Recruiter & motivation](../../topics/01-recruiter-and-motivation/ANSWERS.md): nail the 60-second "Why FDE?" and the travel answer first; this screen rejects many strong engineers.
+- [02 Coding](../../topics/02-coding/ANSWERS.md): prioritise practical/incremental and API-style problems over hard DS&A, unless you are interviewing at Palantir or Scale.
+- [03 System design](../../topics/03-system-design/ANSWERS.md): focus on section A (applied, customer-context prompts): legacy systems, on-prem, regulated data.
+- [04 Decomposition](../../topics/04-decomposition/ANSWERS.md): essential for Palantir FDSE; useful everywhere for the "vague customer ask" round.
+- [06 AI / LLM](../../topics/06-ai-llm/ANSWERS.md) and [part 2](../../topics/06-ai-llm/ANSWERS-part2.md): essential for AI-lab FDE roles; evals and production reliability matter most.
+- [07 Data & SQL](../../topics/07-data-and-sql/ANSWERS.md) and [08 Cloud, DevOps & integration](../../topics/08-cloud-devops-integration/ANSWERS.md): the daily work; expect follow-ups on auth, networking and messy data.
+- [09 Customer scenarios](../../topics/09-customer-scenarios/ANSWERS.md): the generic role-plays (angry exec, scope creep, bad data). This file goes deeper on FDE-only situations.
+- [10 Behavioral](../../topics/10-behavioral/ANSWERS.md) and [00 story bank](../../topics/00-overview/ANSWERS.md): prepare stories for ownership, ambiguity and customer impact.
 
 ## Role-specific questions
 
@@ -180,7 +180,7 @@ Plan for it before arriving; you cannot download your way out on-site.
 - **Adapt the workflow:** develop and test on an unclassified mirror with synthetic data, then promote builds through the customer's transfer process. Keep releases small because each transfer is costly.
 - **Follow the rules strictly:** no personal devices, no copying data out, no discussing details outside cleared spaces.
 
-Mention any experience with on-prem, regulated or offline systems. See [08-cloud-devops-integration](../08-cloud-devops-integration/ANSWERS.md) for on-prem and air-gapped deployment detail.
+Mention any experience with on-prem, regulated or offline systems. See [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/ANSWERS.md) for on-prem and air-gapped deployment detail.
 
 ### Prototype-to-production ownership
 
@@ -416,7 +416,7 @@ Example: an agent that drafts responses to insurance claim queries.
 6. **Production:** retries and rate-limit handling, prompt caching for long shared context, logging of every prompt, tool call and output for audit, version pinning of models and prompts, monitoring and sampled human review.
 7. **Rollout:** shadow mode, then assistive with human approval, then wider scope as metrics hold.
 
-Details: [06-ai-llm](../06-ai-llm/ANSWERS.md).
+Details: [06-ai-llm](../../topics/06-ai-llm/ANSWERS.md).
 
 #### You hit a platform limitation in the middle of a deployment. What do you do?
 1. **Confirm it is real:** check docs, internal channels and the core team; often there is an undocumented way or a newer feature.
@@ -438,7 +438,7 @@ Learn by building, aimed at the customer's actual use case.
 - **Build for my customer early:** a prototype on the customer's data (or a realistic mock) by week 2–3, reviewed by a senior FDE.
 - **Keep notes:** a personal "how do I" document; share the useful parts back as internal docs.
 
-Mention how you have done this before with a new framework or codebase, with a timeline. See also [05-learning-round](../05-learning-round/ANSWERS.md).
+Mention how you have done this before with a new framework or codebase, with a timeline. See also [05-learning-round](../../topics/05-learning-round/ANSWERS.md).
 
 #### How do you keep a customer deployment working through platform releases and model version changes?
 Treat upgrades as a planned, tested activity, not a surprise.
@@ -472,7 +472,7 @@ If all three genuinely need more than one person, I raise it as a staffing probl
 5. **Contain before fixing:** rollback, disable a failing job, switch to a fallback.
 6. **Afterwards:** a written post-incident review for each, and check whether the incidents share a cause (a platform release, a shared dependency).
 
-See [12-debugging-troubleshooting](../12-debugging-troubleshooting/ANSWERS.md) for incident triage detail.
+See [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/ANSWERS.md) for incident triage detail.
 
 #### How do you make sure nothing from one customer (data, code, credentials, context) leaks into another's deployment?
 Separation by default, enforced by tooling rather than memory.
@@ -556,7 +556,7 @@ Prepare a backup recording, short scripted path, and two or three likely objecti
 5. **Phase it:** v0 read-only from one source; v1 more sources and users; v2 write-back and automation.
 6. **Call out risks and decisions** they need to make: data ownership, security review, which team runs it.
 
-Keep the diagram simple and talk through one record's journey end to end. See [03-system-design](../03-system-design/ANSWERS.md) for applied design prompts.
+Keep the diagram simple and talk through one record's journey end to end. See [03-system-design](../../topics/03-system-design/ANSWERS.md) for applied design prompts.
 
 #### Exercise: live triage. A customer integration broke overnight; diagnose it with incomplete information while keeping the customer informed.
 **What they score:** structured diagnosis, communication, and not guessing.
@@ -569,7 +569,7 @@ Keep the diagram simple and talk through one record's journey end to end. See [0
 6. **Fix and verify,** then backfill the missed window and confirm with the customer.
 7. **Follow up:** a short written incident summary with cause, fix and prevention (for example an alert on credential expiry).
 
-Think aloud, state hypotheses and how you would test each. See [12-debugging-troubleshooting](../12-debugging-troubleshooting/ANSWERS.md).
+Think aloud, state hypotheses and how you would test each. See [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/ANSWERS.md).
 
 #### Exercise: take-home build on our API, then defend your design choices to an engineer playing the customer's CTO.
 **For the build:**
@@ -584,7 +584,7 @@ Think aloud, state hypotheses and how you would test each. See [12-debugging-tro
 - When challenged, do not get defensive; treat it as a design discussion: "That's a fair point; here's how I'd change it."
 - Translate for the CTO: security, cost, maintainability, how it would run in their environment.
 
-See [06-ai-llm](../06-ai-llm/ANSWERS.md) for the technical depth interviewers probe.
+See [06-ai-llm](../../topics/06-ai-llm/ANSWERS.md) for the technical depth interviewers probe.
 
 #### Exercise: write a one-page summary of a six-week pilot for the customer's executive sponsor.
 Executives read the top third. Structure:
@@ -603,9 +603,9 @@ Rules: plain language, no jargon, numbers over adjectives, one page. Put technic
 - [ ] Write and rehearse a 60-second "Why FDE?" answer and an honest answer on how much travel you can do.
 - [ ] Build one small end-to-end project on the target company's platform or API (a Foundry learning environment if available, or an OpenAI/Anthropic API app with tools and an eval set), and be ready to demo it in 10 minutes.
 - [ ] Prepare a demo script with a backup recording and three likely objections, and practise it with a friend interrupting you.
-- [ ] Prepare stories for: shipping under a deadline, influencing a product decision, owning a customer or user outcome, handling an incident, and learning a new system fast. Use the [story bank](../00-overview/ANSWERS.md).
+- [ ] Prepare stories for: shipping under a deadline, influencing a product decision, owning a customer or user outcome, handling an incident, and learning a new system fast. Use the [story bank](../../topics/00-overview/ANSWERS.md).
 - [ ] Practise one customer architecture whiteboard and one live-triage exercise out loud, timed.
 - [ ] Write a sample one-page pilot summary and a sample product feedback ticket; reuse them as talking points.
 - [ ] Read the target company's FDE job post, engineering blog and customer case studies; note two or three deployments you could discuss.
-- [ ] Review [09-customer-scenarios](../09-customer-scenarios/ANSWERS.md) and [11-company-specific](../11-company-specific/ANSWERS.md) for the target company.
-- [ ] Prepare questions about travel, accounts per FDE, how field feedback reaches product, and on-call expectations ([14-questions-to-ask](../14-questions-to-ask/README.md)).
+- [ ] Review [09-customer-scenarios](../../topics/09-customer-scenarios/ANSWERS.md) and [11-company-specific](../../topics/11-company-specific/ANSWERS.md) for the target company.
+- [ ] Prepare questions about travel, accounts per FDE, how field feedback reaches product, and on-call expectations ([14-questions-to-ask](../../topics/14-questions-to-ask/README.md)).

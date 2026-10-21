@@ -40,26 +40,26 @@ Loops vary by company and change often. The table shows a typical/reported shape
 
 | Round | What it tests | Prepare with |
 |---|---|---|
-| Recruiter screen | Motivation, why customer-facing, why this lab/company | [01-recruiter-and-motivation](../01-recruiter-and-motivation/README.md) |
-| Technical screen / practical coding | Clean Python, API calls, data handling; sometimes classic DS&A | [02-coding](../02-coding/README.md) |
+| Recruiter screen | Motivation, why customer-facing, why this lab/company | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/README.md) |
+| Technical screen / practical coding | Clean Python, API calls, data handling; sometimes classic DS&A | [02-coding](../../topics/02-coding/README.md) |
 | Prompt-optimisation exercise | Diagnosing and improving a real-looking prompt against examples | This file, "Prompt optimisation" |
-| Live LLM coding with API access (reported at some labs) | Calling the API, structured output, tool use, concurrency, quick evals | This file, "Live LLM coding"; [06-ai-llm](../06-ai-llm/README.md) |
-| Take-home + deep dive (common) | RAG / agent / eval harness, then defending choices | [06-ai-llm section J](../06-ai-llm/ANSWERS-part2.md) |
-| Use-case / applied system design | Designing a customer deployment with real constraints | [03-system-design](../03-system-design/ANSWERS.md) |
-| Customer scenario / presentation | Explaining trade-offs, handling objections, exec communication | [09-customer-scenarios](../09-customer-scenarios/ANSWERS.md) |
-| Hiring manager / values | Ownership, judgment, safety views (labs) | [10-behavioral](../10-behavioral/ANSWERS.md), [11-company-specific](../11-company-specific/ANSWERS.md) |
+| Live LLM coding with API access (reported at some labs) | Calling the API, structured output, tool use, concurrency, quick evals | This file, "Live LLM coding"; [06-ai-llm](../../topics/06-ai-llm/README.md) |
+| Take-home + deep dive (common) | RAG / agent / eval harness, then defending choices | [06-ai-llm section J](../../topics/06-ai-llm/ANSWERS-part2.md) |
+| Use-case / applied system design | Designing a customer deployment with real constraints | [03-system-design](../../topics/03-system-design/ANSWERS.md) |
+| Customer scenario / presentation | Explaining trade-offs, handling objections, exec communication | [09-customer-scenarios](../../topics/09-customer-scenarios/ANSWERS.md) |
+| Hiring manager / values | Ownership, judgment, safety views (labs) | [10-behavioral](../../topics/10-behavioral/ANSWERS.md), [11-company-specific](../../topics/11-company-specific/ANSWERS.md) |
 
 ---
 
 ## Common rounds — use the shared sections
 
-- [06-ai-llm](../06-ai-llm/README.md) — the most important shared section. Prioritise B (prompting), E (evaluation), G (production: rate limits, cost, latency, deprecation) and H (safety). This file assumes you know those fundamentals and goes one step further into customer-specific situations.
-- [11-company-specific](../11-company-specific/README.md) — the OpenAI and Anthropic sections; read the company's own docs, cookbooks and model release notes before the loop.
-- [03-system-design](../03-system-design/README.md) — section B (AI/LLM system design) and the follow-up questions in D.
-- [09-customer-scenarios](../09-customer-scenarios/README.md) — scoping, difficult situations, business acumen; the pricing and objection questions matter more here than in many FDE loops.
-- [02-coding](../02-coding/README.md) — practical / incremental problems; rate limiter and concurrency questions come up because API work needs them.
-- [12-debugging-troubleshooting](../12-debugging-troubleshooting/README.md) — section C (LLM-specific troubleshooting).
-- [10-behavioral](../10-behavioral/README.md) and [14-questions-to-ask](../14-questions-to-ask/README.md).
+- [06-ai-llm](../../topics/06-ai-llm/README.md) — the most important shared section. Prioritise B (prompting), E (evaluation), G (production: rate limits, cost, latency, deprecation) and H (safety). This file assumes you know those fundamentals and goes one step further into customer-specific situations.
+- [11-company-specific](../../topics/11-company-specific/README.md) — the OpenAI and Anthropic sections; read the company's own docs, cookbooks and model release notes before the loop.
+- [03-system-design](../../topics/03-system-design/README.md) — section B (AI/LLM system design) and the follow-up questions in D.
+- [09-customer-scenarios](../../topics/09-customer-scenarios/README.md) — scoping, difficult situations, business acumen; the pricing and objection questions matter more here than in many FDE loops.
+- [02-coding](../../topics/02-coding/README.md) — practical / incremental problems; rate limiter and concurrency questions come up because API work needs them.
+- [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/README.md) — section C (LLM-specific troubleshooting).
+- [10-behavioral](../../topics/10-behavioral/README.md) and [14-questions-to-ask](../../topics/14-questions-to-ask/README.md).
 
 ---
 
@@ -641,7 +641,7 @@ Structure (about 20 minutes plus questions):
 5. **Production view (3 min):** cost per request, latency, risks and mitigations, what changes at 100x scale.
 6. **Next steps (2 min):** what you would do with another week.
 
-Keep technical depth in backup slides; go there when engineers ask. Speak to the executive in outcomes and risk, to engineers in trade-offs. Admit weaknesses before they find them. See also [06-ai-llm section J](../06-ai-llm/ANSWERS-part2.md) for take-home follow-ups.
+Keep technical depth in backup slides; go there when engineers ask. Speak to the executive in outcomes and risk, to engineers in trade-offs. Admit weaknesses before they find them. See also [06-ai-llm section J](../../topics/06-ai-llm/ANSWERS-part2.md) for take-home follow-ups.
 
 #### Tell me about a time you improved an AI or ML system's quality through measurement.
 **What they look for:** you defined "better" before changing things, built or used an evaluation, made changes based on error analysis, and can quote numbers.
@@ -675,6 +675,6 @@ Keep technical depth in backup slides; go there when engineers ask. Speak to the
 4. Memorise the current price list structure, batch and caching discounts, rate-limit concepts and deprecation policy for your target provider (check the live docs the week of the interview).
 5. Prepare a one-page cost model template and practise a cost estimate out loud with stated assumptions.
 6. Rehearse a 20-minute take-home presentation with a demo, eval results and a failure analysis.
-7. Prepare stories on: improving quality with measurement, saying no to a customer, unblocking a security/legal review, and turning field feedback into product change ([10-behavioral](../10-behavioral/ANSWERS.md)).
-8. Re-read [06-ai-llm](../06-ai-llm/README.md) sections B, E, G and H and answer each question out loud.
-9. Prepare questions about how the team splits time between customers, assets and product feedback ([14-questions-to-ask](../14-questions-to-ask/README.md)).
+7. Prepare stories on: improving quality with measurement, saying no to a customer, unblocking a security/legal review, and turning field feedback into product change ([10-behavioral](../../topics/10-behavioral/ANSWERS.md)).
+8. Re-read [06-ai-llm](../../topics/06-ai-llm/README.md) sections B, E, G and H and answer each question out loud.
+9. Prepare questions about how the team splits time between customers, assets and product feedback ([14-questions-to-ask](../../topics/14-questions-to-ask/README.md)).

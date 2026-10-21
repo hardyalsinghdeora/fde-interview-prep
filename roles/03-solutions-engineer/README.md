@@ -42,25 +42,25 @@ Loops vary by company; this is the typical reported shape, not a guarantee.
 
 | Round | What it tests | Prepare with |
 |---|---|---|
-| Recruiter screen | Motivation for pre-sales, comfort with variable comp and travel, product interest | [01-recruiter-and-motivation](../01-recruiter-and-motivation/ANSWERS.md) |
-| Hiring manager (SE manager) | Past deals, how you work with AEs, sales-process fluency | This file (sales process, behavioral) + [10-behavioral](../10-behavioral/ANSWERS.md) |
-| Technical screen | Product-domain fundamentals (APIs, databases, cloud, observability, payments, LLMs depending on company); sometimes a light coding or SQL exercise | [08-cloud-devops-integration](../08-cloud-devops-integration/ANSWERS.md), [07-data-and-sql](../07-data-and-sql/ANSWERS.md), [02-coding](../02-coding/ANSWERS.md) |
-| Discovery role-play | Questioning, listening, qualification | This file (Discovery) + [09-customer-scenarios](../09-customer-scenarios/ANSWERS.md) |
+| Recruiter screen | Motivation for pre-sales, comfort with variable comp and travel, product interest | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/ANSWERS.md) |
+| Hiring manager (SE manager) | Past deals, how you work with AEs, sales-process fluency | This file (sales process, behavioral) + [10-behavioral](../../topics/10-behavioral/ANSWERS.md) |
+| Technical screen | Product-domain fundamentals (APIs, databases, cloud, observability, payments, LLMs depending on company); sometimes a light coding or SQL exercise | [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/ANSWERS.md), [07-data-and-sql](../../topics/07-data-and-sql/ANSWERS.md), [02-coding](../../topics/02-coding/ANSWERS.md) |
+| Discovery role-play | Questioning, listening, qualification | This file (Discovery) + [09-customer-scenarios](../../topics/09-customer-scenarios/ANSWERS.md) |
 | Demo / presentation round (often the deciding round) | Storytelling, tailoring, handling interruptions and questions; commonly you demo their product after a few days with a trial account, or a product you know | This file (Demo) |
 | Objection handling / panel with AE | Composure, honesty, competitive positioning | This file (Objections, Competitive) |
-| Architecture or POC exercise (some companies) | Designing a customer solution, scoping success criteria | [03-system-design](../03-system-design/ANSWERS.md) + this file (POC) |
-| Values / cross-functional | Collaboration with AE, CS, product | [10-behavioral](../10-behavioral/ANSWERS.md) |
+| Architecture or POC exercise (some companies) | Designing a customer solution, scoping success criteria | [03-system-design](../../topics/03-system-design/ANSWERS.md) + this file (POC) |
+| Values / cross-functional | Collaboration with AE, CS, product | [10-behavioral](../../topics/10-behavioral/ANSWERS.md) |
 
 ## Common rounds — use the shared sections
 
-- [09 Customer scenarios](../09-customer-scenarios/ANSWERS.md): highest priority. Scoping, discovery, "demo breaks", "sales promised something", competitor comparisons, security review blocking. Most of the role-play mechanics are there.
-- [08 Cloud, DevOps & integration](../08-cloud-devops-integration/ANSWERS.md): APIs, auth (OAuth, SSO, SCIM), webhooks, compliance acronyms and security questionnaires come up in every technical deep dive.
-- [01 Recruiter & motivation](../01-recruiter-and-motivation/ANSWERS.md): adapt "why this role" to pre-sales; be ready to say why you want a quota-carrying team.
-- [10 Behavioral](../10-behavioral/ANSWERS.md): influence without authority, conflict, failure stories; reframe them around deals.
-- [06 AI / LLM](../06-ai-llm/ANSWERS.md) and [part 2](../06-ai-llm/ANSWERS-part2.md): essential if you are interviewing at an AI vendor (evals, RAG, safety, pricing by tokens).
-- [07 Data & SQL](../07-data-and-sql/ANSWERS.md): for data-platform vendors (Snowflake, Databricks, MongoDB).
-- [03 System design](../03-system-design/ANSWERS.md): for architecture-style rounds; keep it at reference-architecture depth rather than deep internals.
-- [14 Questions to ask](../14-questions-to-ask/ANSWERS.md): add SE-specific ones (SE:AE ratio, how technical wins are tracked, quota attainment of the team).
+- [09 Customer scenarios](../../topics/09-customer-scenarios/ANSWERS.md): highest priority. Scoping, discovery, "demo breaks", "sales promised something", competitor comparisons, security review blocking. Most of the role-play mechanics are there.
+- [08 Cloud, DevOps & integration](../../topics/08-cloud-devops-integration/ANSWERS.md): APIs, auth (OAuth, SSO, SCIM), webhooks, compliance acronyms and security questionnaires come up in every technical deep dive.
+- [01 Recruiter & motivation](../../topics/01-recruiter-and-motivation/ANSWERS.md): adapt "why this role" to pre-sales; be ready to say why you want a quota-carrying team.
+- [10 Behavioral](../../topics/10-behavioral/ANSWERS.md): influence without authority, conflict, failure stories; reframe them around deals.
+- [06 AI / LLM](../../topics/06-ai-llm/ANSWERS.md) and [part 2](../../topics/06-ai-llm/ANSWERS-part2.md): essential if you are interviewing at an AI vendor (evals, RAG, safety, pricing by tokens).
+- [07 Data & SQL](../../topics/07-data-and-sql/ANSWERS.md): for data-platform vendors (Snowflake, Databricks, MongoDB).
+- [03 System design](../../topics/03-system-design/ANSWERS.md): for architecture-style rounds; keep it at reference-architecture depth rather than deep internals.
+- [14 Questions to ask](../../topics/14-questions-to-ask/ANSWERS.md): add SE-specific ones (SE:AE ratio, how technical wins are tracked, quota attainment of the team).
 
 ## Role-specific questions
 
@@ -292,7 +292,7 @@ When it fails:
 4. **Turn it into credibility if possible:** if it is a real error, briefly show how the product reports and handles errors, which buyers often appreciate.
 5. **Follow up:** offer a live session within a day or two, send a recording, and explain the cause if it relates to the product.
 
-Afterwards, do a short post-mortem and fix the root cause in the demo environment. See also [09 Customer scenarios](../09-customer-scenarios/ANSWERS.md).
+Afterwards, do a short post-mortem and fix the root cause in the demo environment. See also [09 Customer scenarios](../../topics/09-customer-scenarios/ANSWERS.md).
 
 #### How do you demo to a mixed audience of executives and engineers?
 
@@ -421,7 +421,7 @@ def create_payment(order_id, amount_cents, currency="usd"):
     return r.json()
 ```
 
-See [08 Cloud, DevOps & integration](../08-cloud-devops-integration/ANSWERS.md) for retries, idempotency and webhooks.
+See [08 Cloud, DevOps & integration](../../topics/08-cloud-devops-integration/ANSWERS.md) for retries, idempotency and webhooks.
 
 ### Objection handling
 
@@ -569,7 +569,7 @@ Answer only with verified facts, and explain the terms precisely:
 - **GDPR** is a regulation, not a certification. Talk about the Data Processing Agreement (DPA), sub-processor list, lawful transfer mechanisms (e.g., Standard Contractual Clauses), data subject request support, and data residency options.
 - **Data location:** name the regions where data is stored and processed, whether customers can choose a region, where backups and support access happen, and retention and deletion policies.
 
-Point them to the trust centre and offer a session with the security team. Never say "fully compliant" loosely. See also [08 Cloud, DevOps & integration](../08-cloud-devops-integration/ANSWERS.md).
+Point them to the trust centre and offer a session with the security team. Never say "fully compliant" loosely. See also [08 Cloud, DevOps & integration](../../topics/08-cloud-devops-integration/ANSWERS.md).
 
 #### Procurement or legal is stalling a deal after the technical win. What can the solutions engineer do?
 
@@ -649,7 +649,7 @@ The aim is that the customer never has to repeat themselves.
 
 #### How do you handle a prospect's concerns about hallucination, data privacy and training on their data when selling an AI product?
 
-**Hallucination:** be honest that models can produce wrong answers. Explain mitigations: grounding with retrieval (RAG) and citations, constrained outputs, tool use for facts and calculations, human review for high-risk steps, and evaluations on their own data to measure accuracy before launch. Frame it as risk management for a specific use case. See [06 AI / LLM](../06-ai-llm/ANSWERS.md).
+**Hallucination:** be honest that models can produce wrong answers. Explain mitigations: grounding with retrieval (RAG) and citations, constrained outputs, tool use for facts and calculations, human review for high-risk steps, and evaluations on their own data to measure accuracy before launch. Frame it as risk management for a specific use case. See [06 AI / LLM](../../topics/06-ai-llm/ANSWERS.md).
 
 **Data privacy and training:** answer only with the company's actual published policies: whether API or enterprise data is used for training by default, data retention periods, zero-data-retention options if offered, encryption, regions, and certifications. Point to the official terms and trust documentation.
 
@@ -668,7 +668,7 @@ End with: "Let's design an evaluation on your data so you see the accuracy yours
 5. **Measure cost and latency** under realistic load, including caching or batching options.
 6. **Report:** results per metric and per category, failure examples, and the trade-offs.
 
-Be honest if the other model wins on some cases. Recommend the eval set become their regression suite. See [06 AI / LLM evals](../06-ai-llm/ANSWERS-part2.md).
+Be honest if the other model wins on some cases. Recommend the eval set become their regression suite. See [06 AI / LLM evals](../../topics/06-ai-llm/ANSWERS-part2.md).
 
 ### Role-specific behavioral
 
@@ -721,4 +721,4 @@ If you have no sales experience, use an internal "sale": convincing a team to ad
 - [ ] Draft sample POC success criteria and a mutual plan for one use case.
 - [ ] Read the company's trust/security page: certifications, data residency, BAA/DPA position.
 - [ ] Prepare three deal-style stories (win, loss, saying no) using the STAR outlines above; if you lack sales experience, use internal adoption or customer-facing stories.
-- [ ] Prepare questions about SE:AE ratio, compensation split, how technical wins are tracked, and team quota attainment ([14 Questions to ask](../14-questions-to-ask/ANSWERS.md)).
+- [ ] Prepare questions about SE:AE ratio, compensation split, how technical wins are tracked, and team quota attainment ([14 Questions to ask](../../topics/14-questions-to-ask/ANSWERS.md)).

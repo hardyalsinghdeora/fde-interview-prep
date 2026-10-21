@@ -51,25 +51,25 @@ Loops change often; the rounds below are **typical / candidate-reported**, not g
 
 | Round | What it tests | Prepare with |
 |---|---|---|
-| Recruiter screen | Motivation, "why this role and company", travel, background | [01-recruiter-and-motivation](../01-recruiter-and-motivation/README.md), this file |
-| Case / decomposition interviews (often more than one) | Structuring a vague real-world problem, data reasoning, prioritisation | [04-decomposition](../04-decomposition/README.md), this file (cases) |
-| Behavioural / values | Ownership, ambiguity, influence, resilience | [10-behavioral](../10-behavioral/README.md) |
-| Customer role-play or stakeholder scenario (reported at some companies) | Discovery, handling pushback, expectation management | [09-customer-scenarios](../09-customer-scenarios/README.md), this file |
+| Recruiter screen | Motivation, "why this role and company", travel, background | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/README.md), this file |
+| Case / decomposition interviews (often more than one) | Structuring a vague real-world problem, data reasoning, prioritisation | [04-decomposition](../../topics/04-decomposition/README.md), this file (cases) |
+| Behavioural / values | Ownership, ambiguity, influence, resilience | [10-behavioral](../../topics/10-behavioral/README.md) |
+| Customer role-play or stakeholder scenario (reported at some companies) | Discovery, handling pushback, expectation management | [09-customer-scenarios](../../topics/09-customer-scenarios/README.md), this file |
 | Written or presentation exercise (reported at some companies) | Clear writing, synthesis, recommending under uncertainty | This file (writing exercises) |
-| Light data / analytics (sometimes) | Reading a dataset, spotting issues, basic metrics | [07-data-and-sql](../07-data-and-sql/README.md) sections on SQL basics |
-| Hiring manager / final | Fit, mission, judgment | [11-company-specific](../11-company-specific/README.md), [14-questions-to-ask](../14-questions-to-ask/README.md) |
+| Light data / analytics (sometimes) | Reading a dataset, spotting issues, basic metrics | [07-data-and-sql](../../topics/07-data-and-sql/README.md) sections on SQL basics |
+| Hiring manager / final | Fit, mission, judgment | [11-company-specific](../../topics/11-company-specific/README.md), [14-questions-to-ask](../../topics/14-questions-to-ask/README.md) |
 
 Palantir's Deployment Strategist loop is commonly reported to centre on decomposition-style case interviews plus behavioural and "why Palantir" discussion; it does not usually include coding.
 
 ## Common rounds — use the shared sections
 
-- [04 Decomposition](../04-decomposition/ANSWERS.md): the most important shared section. Practise every prompt out loud, focusing on the user, the decision and the data, not the technology.
-- [09 Customer scenarios](../09-customer-scenarios/ANSWERS.md): sections A (scoping), B (difficult situations), C (communication) and E (business acumen) map almost directly to this role.
-- [10 Behavioral](../10-behavioral/ANSWERS.md) and [00 story bank](../00-overview/ANSWERS.md): prepare stories for influence without authority, ambiguity, owning an outcome and handling conflict.
-- [01 Recruiter & motivation](../01-recruiter-and-motivation/ANSWERS.md): adapt "Why FDE?" into "Why a forward deployed business role?".
-- [06 AI / LLM](../06-ai-llm/ANSWERS.md): for AI-company roles, know the concepts (RAG, agents, evals, hallucination) well enough to explain trade-offs to executives; skip implementation detail.
-- [07 Data & SQL](../07-data-and-sql/ANSWERS.md): basic SQL (joins, group by) and data quality concepts are enough.
-- Skip or skim: [02 Coding](../02-coding/README.md), [03 System design](../03-system-design/README.md), [13 CS fundamentals](../13-cs-fundamentals/README.md).
+- [04 Decomposition](../../topics/04-decomposition/ANSWERS.md): the most important shared section. Practise every prompt out loud, focusing on the user, the decision and the data, not the technology.
+- [09 Customer scenarios](../../topics/09-customer-scenarios/ANSWERS.md): sections A (scoping), B (difficult situations), C (communication) and E (business acumen) map almost directly to this role.
+- [10 Behavioral](../../topics/10-behavioral/ANSWERS.md) and [00 story bank](../../topics/00-overview/ANSWERS.md): prepare stories for influence without authority, ambiguity, owning an outcome and handling conflict.
+- [01 Recruiter & motivation](../../topics/01-recruiter-and-motivation/ANSWERS.md): adapt "Why FDE?" into "Why a forward deployed business role?".
+- [06 AI / LLM](../../topics/06-ai-llm/ANSWERS.md): for AI-company roles, know the concepts (RAG, agents, evals, hallucination) well enough to explain trade-offs to executives; skip implementation detail.
+- [07 Data & SQL](../../topics/07-data-and-sql/ANSWERS.md): basic SQL (joins, group by) and data quality concepts are enough.
+- Skip or skim: [02 Coding](../../topics/02-coding/README.md), [03 System design](../../topics/03-system-design/README.md), [13 CS fundamentals](../../topics/13-cs-fundamentals/README.md).
 
 ## Role-specific questions
 
@@ -225,7 +225,7 @@ Use a repeatable sequence and say it aloud so the interviewer can follow:
 5. **Choose a first slice,** say what you would deliver in weeks, not months, and how you would measure it.
 6. **Name risks** (data, adoption, ethics) and next steps.
 
-Signpost often ("I'll look at three areas: demand, process, capacity") and check in with the interviewer. Being structured and explicit matters more than being right first time. See the framework in [00-overview](../00-overview/README.md#decomposition-palantir-style).
+Signpost often ("I'll look at three areas: demand, process, capacity") and check in with the interviewer. Being structured and explicit matters more than being right first time. See the framework in [00-overview](../../topics/00-overview/README.md#decomposition-palantir-style).
 
 #### The customer lists ten problems they want solved. How do you decide which to tackle first?
 Score them on a few explicit criteria with the customer, not alone.
@@ -491,7 +491,7 @@ Then tie it to their problem with one concrete example from their operations.
 - Measure accuracy on your own examples before go-live, and keep monitoring.
 - Use rules and systems for calculations and policy checks, and the model for language.
 
-Close with: "The question is not whether it is perfect but whether staff plus the model are faster and at least as accurate as staff alone, which we can measure in a pilot." See [06-ai-llm](../06-ai-llm/ANSWERS.md) for more detail.
+Close with: "The question is not whether it is perfect but whether staff plus the model are faster and at least as accurate as staff alone, which we can measure in a pilot." See [06-ai-llm](../../topics/06-ai-llm/ANSWERS.md) for more detail.
 
 #### Exercise: you are given a small spreadsheet of orders and shipments. What would you analyse, and what could you conclude?
 **Approach out loud:**
@@ -622,12 +622,12 @@ Avoid reciting features; show you understand why a customer would buy it.
 
 ## Prep checklist
 
-- [ ] Practise six to eight case or decomposition prompts out loud, timed (30–40 minutes each), from [04-decomposition](../04-decomposition/README.md) and the cases above; record yourself and check you clarify before solving.
+- [ ] Practise six to eight case or decomposition prompts out loud, timed (30–40 minutes each), from [04-decomposition](../../topics/04-decomposition/README.md) and the cases above; record yourself and check you clarify before solving.
 - [ ] Prepare two business cases with explicit assumptions and a sensitivity check, and two estimation questions, until the arithmetic is quick and clean.
 - [ ] Write one one-page recommendation memo and one executive update, then cut each by a third.
-- [ ] Prepare stories for influence without authority, conflicting stakeholders, owning an outcome you did not control, delivering bad news, and learning a new domain fast ([story bank](../00-overview/ANSWERS.md)).
+- [ ] Prepare stories for influence without authority, conflicting stakeholders, owning an outcome you did not control, delivering bad news, and learning a new domain fast ([story bank](../../topics/00-overview/ANSWERS.md)).
 - [ ] Do a discovery role-play with a friend playing a skeptical executive; practise listening and closing on a concrete next step.
 - [ ] Build basic data fluency: write simple SQL joins and group-bys, and practise spotting data quality problems in a sample dataset.
 - [ ] Learn the company's platform at a high level from its own website, documentation and published case studies; prepare a two-minute plain-language explanation.
 - [ ] Form a clear, honest view on the company's mission and customers, including any ethical concerns, and be ready to discuss it.
-- [ ] Prepare questions on how strategists and engineers split work, accounts per person, travel, and how success is measured ([14-questions-to-ask](../14-questions-to-ask/README.md)).
+- [ ] Prepare questions on how strategists and engineers split work, accounts per person, travel, and how success is measured ([14-questions-to-ask](../../topics/14-questions-to-ask/README.md)).

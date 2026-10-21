@@ -6,7 +6,7 @@ A customer-facing architect who designs how a customer should build on a platfor
 
 **Day to day.** Architecture sessions with customer engineering teams; whiteboarding reference architectures; Well-Architected or design reviews; migration and modernisation planning; cost-optimisation reviews; building proofs of concept and sample code; presenting recommendations to CTOs and engineering leaders; writing blog posts, reference architectures and workshops; and bringing customer requirements back to product teams. At cloud providers SAs are usually aligned to a set of accounts (by segment or industry) or to a specialty (data, security, networking, AI/ML, migration).
 
-**Common titles.** Solutions Architect (SA), Cloud Solutions Architect (Microsoft), Customer Engineer (Google Cloud's pre-sales role), Partner Solutions Architect (works with consulting and technology partners), Specialist SA (e.g., data/analytics, generative AI), Enterprise Architect (customer-side or consulting), and at AI labs "Solutions Architect, Applied AI" or "Applied AI Engineer". At some vendors "Solutions Architect" means the same job as a pre-sales Solutions Engineer; see [03 Solutions Engineer](03-solutions-engineer.md).
+**Common titles.** Solutions Architect (SA), Cloud Solutions Architect (Microsoft), Customer Engineer (Google Cloud's pre-sales role), Partner Solutions Architect (works with consulting and technology partners), Specialist SA (e.g., data/analytics, generative AI), Enterprise Architect (customer-side or consulting), and at AI labs "Solutions Architect, Applied AI" or "Applied AI Engineer". At some vendors "Solutions Architect" means the same job as a pre-sales Solutions Engineer; see [03 Solutions Engineer](../03-solutions-engineer/README.md).
 
 **Who hires for it.** Cloud providers (AWS, Microsoft Azure, Google Cloud, Oracle Cloud), data and infrastructure vendors (Databricks, Snowflake, MongoDB, Confluent, Elastic, HashiCorp, Stripe), AI labs (OpenAI and Anthropic have posted Solutions Architect / Applied AI roles), consulting firms and systems integrators (Accenture, Deloitte and AWS/Azure/GCP partners), and large enterprises with internal SA teams. Titles change, so read each job description.
 
@@ -41,23 +41,23 @@ Typical reported shape; varies by company and level.
 
 | Round | What it tests | Prepare with |
 |---|---|---|
-| Recruiter screen | Motivation, background, travel, customer exposure | [01-recruiter-and-motivation](../01-recruiter-and-motivation/ANSWERS.md) |
-| Hiring manager / technical phone screen | Breadth of cloud knowledge, a past architecture you designed, leadership-principle style questions | This file + [08-cloud-devops-integration](../08-cloud-devops-integration/ANSWERS.md) |
-| Architecture whiteboard (customer scenario) | Requirements gathering, reference architecture, trade-offs, HA/DR, cost, security | This file + [03-system-design](../03-system-design/ANSWERS.md) |
-| Technical deep dive in a domain | Depth in networking, databases, data analytics, security, containers or AI/ML | [13-cs-fundamentals](../13-cs-fundamentals/ANSWERS.md), [07-data-and-sql](../07-data-and-sql/ANSWERS.md), [06-ai-llm](../06-ai-llm/ANSWERS.md) |
+| Recruiter screen | Motivation, background, travel, customer exposure | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/ANSWERS.md) |
+| Hiring manager / technical phone screen | Breadth of cloud knowledge, a past architecture you designed, leadership-principle style questions | This file + [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/ANSWERS.md) |
+| Architecture whiteboard (customer scenario) | Requirements gathering, reference architecture, trade-offs, HA/DR, cost, security | This file + [03-system-design](../../topics/03-system-design/ANSWERS.md) |
+| Technical deep dive in a domain | Depth in networking, databases, data analytics, security, containers or AI/ML | [13-cs-fundamentals](../../topics/13-cs-fundamentals/ANSWERS.md), [07-data-and-sql](../../topics/07-data-and-sql/ANSWERS.md), [06-ai-llm](../../topics/06-ai-llm/ANSWERS.md) |
 | Presentation round (commonly reported at AWS and others) | Present a past architecture or a prepared topic to a panel acting as a customer; handle challenge questions | This file (Presenting) |
-| Behavioral (at AWS, structured around Leadership Principles; Amazon also includes a "Bar Raiser" interviewer) | Ownership, customer focus, diving deep, disagreement | This file + [10-behavioral](../10-behavioral/ANSWERS.md) |
-| Coding (some companies, especially AI labs) | Practical coding, API use, scripting | [02-coding](../02-coding/ANSWERS.md) |
+| Behavioral (at AWS, structured around Leadership Principles; Amazon also includes a "Bar Raiser" interviewer) | Ownership, customer focus, diving deep, disagreement | This file + [10-behavioral](../../topics/10-behavioral/ANSWERS.md) |
+| Coding (some companies, especially AI labs) | Practical coding, API use, scripting | [02-coding](../../topics/02-coding/ANSWERS.md) |
 
 ## Common rounds — use the shared sections
 
-- [08 Cloud, DevOps & integration](../08-cloud-devops-integration/ANSWERS.md): highest priority. VPC basics, connectivity options, IAM, managed databases, HA/DR, autoscaling, cost, Kubernetes, Terraform. This file goes beyond into multi-account, migration and Well-Architected.
-- [03 System design](../03-system-design/ANSWERS.md): the method for any whiteboard; practise drawing with named managed services.
-- [09 Customer scenarios](../09-customer-scenarios/ANSWERS.md): pushback, explaining trade-offs to executives, competitor comparisons, security reviews.
-- [10 Behavioral](../10-behavioral/ANSWERS.md): prepare at least two stories per leadership principle you expect.
-- [13 CS fundamentals](../13-cs-fundamentals/ANSWERS.md): networking (DNS, TCP, TLS, load balancing), databases, consistency.
-- [06 AI / LLM](../06-ai-llm/ANSWERS.md) and [part 2](../06-ai-llm/ANSWERS-part2.md): required for Applied AI / generative AI SA roles.
-- [07 Data & SQL](../07-data-and-sql/ANSWERS.md): for data/analytics specialist SA roles.
+- [08 Cloud, DevOps & integration](../../topics/08-cloud-devops-integration/ANSWERS.md): highest priority. VPC basics, connectivity options, IAM, managed databases, HA/DR, autoscaling, cost, Kubernetes, Terraform. This file goes beyond into multi-account, migration and Well-Architected.
+- [03 System design](../../topics/03-system-design/ANSWERS.md): the method for any whiteboard; practise drawing with named managed services.
+- [09 Customer scenarios](../../topics/09-customer-scenarios/ANSWERS.md): pushback, explaining trade-offs to executives, competitor comparisons, security reviews.
+- [10 Behavioral](../../topics/10-behavioral/ANSWERS.md): prepare at least two stories per leadership principle you expect.
+- [13 CS fundamentals](../../topics/13-cs-fundamentals/ANSWERS.md): networking (DNS, TCP, TLS, load balancing), databases, consistency.
+- [06 AI / LLM](../../topics/06-ai-llm/ANSWERS.md) and [part 2](../../topics/06-ai-llm/ANSWERS-part2.md): required for Applied AI / generative AI SA roles.
+- [07 Data & SQL](../../topics/07-data-and-sql/ANSWERS.md): for data/analytics specialist SA roles.
 
 ## Role-specific questions
 
@@ -559,7 +559,7 @@ Compliance is shared: the cloud being certified does not make the workload compl
 7. **Operations:** rate limits and retries, fallback models, caching (including prompt caching), cost dashboards, observability with traces of each call.
 8. **Rollout:** pilot with a small group, measure, expand.
 
-Details: [06 AI / LLM](../06-ai-llm/ANSWERS.md) and [part 2](../06-ai-llm/ANSWERS-part2.md).
+Details: [06 AI / LLM](../../topics/06-ai-llm/ANSWERS.md) and [part 2](../../topics/06-ai-llm/ANSWERS-part2.md).
 
 #### How do you help a customer choose between prompting, RAG and fine-tuning?
 
@@ -668,7 +668,7 @@ Write for two audiences: executives read the summary; engineers read the details
 
 **Example (adapt to your own experience):** "A customer reported random timeouts after moving to the cloud. Application logs only showed generic connection errors. I correlated timestamps with load balancer and NAT gateway metrics and saw errors aligned with idle connections being dropped after a timeout. Their connection pool kept idle connections open longer than the network's idle timeout. We set keep-alives and pool idle timeouts below the limit; errors dropped to zero, and I wrote a short guide our team reused for other migrations."
 
-See also [12 Debugging](../12-debugging-troubleshooting/ANSWERS.md).
+See also [12 Debugging](../../topics/12-debugging-troubleshooting/ANSWERS.md).
 
 #### Tell me about a time you disagreed with a decision and then committed to it.
 
@@ -701,7 +701,7 @@ See also [12 Debugging](../12-debugging-troubleshooting/ANSWERS.md).
 - [ ] Learn the multi-account / landing zone reference (AWS Organizations, Control Tower, SCPs, IAM Identity Center, Transit Gateway) and draw it from memory.
 - [ ] Memorise the 7 Rs, the four DR strategies with RTO/RPO, and the pricing models (on-demand, Savings Plans, Reserved, Spot).
 - [ ] Prepare a 15-minute presentation of an architecture you designed, with one diagram, key trade-offs, cost and results; rehearse with someone who interrupts.
-- [ ] For AWS roles, prepare two STAR stories for each Leadership Principle you expect (especially Customer Obsession, Dive Deep, Ownership, Earn Trust, Have Backbone; Disagree and Commit), using [10 Behavioral](../10-behavioral/ANSWERS.md).
+- [ ] For AWS roles, prepare two STAR stories for each Leadership Principle you expect (especially Customer Obsession, Dive Deep, Ownership, Earn Trust, Have Backbone; Disagree and Commit), using [10 Behavioral](../../topics/10-behavioral/ANSWERS.md).
 - [ ] Do a hands-on build in a free-tier account: a multi-AZ web app with IaC, and a serverless pipeline, so your answers come from practice.
 - [ ] Consider a relevant certification as structured study (e.g., AWS Certified Solutions Architect – Associate or Professional, or the Azure or Google Cloud architect equivalents); it is often valued but rarely required.
-- [ ] For Applied AI SA roles, build a small RAG application with an eval set and a cost estimate, and review [06 AI / LLM](../06-ai-llm/ANSWERS.md).
+- [ ] For Applied AI SA roles, build a small RAG application with an eval set and a cost estimate, and review [06 AI / LLM](../../topics/06-ai-llm/ANSWERS.md).

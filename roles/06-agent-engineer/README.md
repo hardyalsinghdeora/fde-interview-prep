@@ -42,25 +42,25 @@ Loops vary and change. Treat this as typical/reported, not guaranteed.
 
 | Round | What it tests | Prepare with |
 |---|---|---|
-| Recruiter / motivation | Why agents, why customer-facing, comfort with travel and live customers | [01-recruiter-and-motivation](../01-recruiter-and-motivation/README.md) |
-| Coding (practical) | Clean code, APIs, JSON handling, incremental requirements | [02-coding](../02-coding/README.md) |
-| Agent design case | Designing an agent for a brand's workflows, tools, guardrails, escalation, metrics | This file; [03-system-design B](../03-system-design/ANSWERS.md) |
-| Live "build an agent" exercise (reported at agent companies) | Building a working agent with tools and tests in a time box | This file, "Live build"; [06-ai-llm D and J](../06-ai-llm/README.md) |
-| Customer role-play / presentation | Launch plan, handling a CX leader, explaining failures | [09-customer-scenarios](../09-customer-scenarios/ANSWERS.md) |
-| Debugging / metrics investigation | Diagnosing a drop in resolution or a misbehaving agent | [12-debugging-troubleshooting C](../12-debugging-troubleshooting/ANSWERS.md) |
-| Hiring manager / values | Ownership, customer obsession, judgment | [10-behavioral](../10-behavioral/ANSWERS.md) |
+| Recruiter / motivation | Why agents, why customer-facing, comfort with travel and live customers | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/README.md) |
+| Coding (practical) | Clean code, APIs, JSON handling, incremental requirements | [02-coding](../../topics/02-coding/README.md) |
+| Agent design case | Designing an agent for a brand's workflows, tools, guardrails, escalation, metrics | This file; [03-system-design B](../../topics/03-system-design/ANSWERS.md) |
+| Live "build an agent" exercise (reported at agent companies) | Building a working agent with tools and tests in a time box | This file, "Live build"; [06-ai-llm D and J](../../topics/06-ai-llm/README.md) |
+| Customer role-play / presentation | Launch plan, handling a CX leader, explaining failures | [09-customer-scenarios](../../topics/09-customer-scenarios/ANSWERS.md) |
+| Debugging / metrics investigation | Diagnosing a drop in resolution or a misbehaving agent | [12-debugging-troubleshooting C](../../topics/12-debugging-troubleshooting/ANSWERS.md) |
+| Hiring manager / values | Ownership, customer obsession, judgment | [10-behavioral](../../topics/10-behavioral/ANSWERS.md) |
 
 ---
 
 ## Common rounds — use the shared sections
 
-- [06-ai-llm](../06-ai-llm/README.md) — prioritise D (agents and tool use), E (evaluation), G (production: latency, rate limits, fallbacks) and H (safety, prompt injection). Section J's support-bot take-home is close to this role.
-- [03-system-design](../03-system-design/README.md) — section B, especially the support chatbot, refund/CRM agent and voice scheduling agent prompts.
-- [08-cloud-devops-integration](../08-cloud-devops-integration/README.md) — APIs, webhooks, auth (OAuth, API keys), idempotency; agents live or die on integrations.
-- [09-customer-scenarios](../09-customer-scenarios/README.md) — difficult situations and communication with non-technical stakeholders.
-- [12-debugging-troubleshooting](../12-debugging-troubleshooting/README.md) — LLM-specific troubleshooting.
-- [11-company-specific](../11-company-specific/README.md) — "Other companies" notes for Sierra, Decagon and Intercom; do the research checklist and try the products.
-- [10-behavioral](../10-behavioral/README.md) and [14-questions-to-ask](../14-questions-to-ask/README.md).
+- [06-ai-llm](../../topics/06-ai-llm/README.md) — prioritise D (agents and tool use), E (evaluation), G (production: latency, rate limits, fallbacks) and H (safety, prompt injection). Section J's support-bot take-home is close to this role.
+- [03-system-design](../../topics/03-system-design/README.md) — section B, especially the support chatbot, refund/CRM agent and voice scheduling agent prompts.
+- [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md) — APIs, webhooks, auth (OAuth, API keys), idempotency; agents live or die on integrations.
+- [09-customer-scenarios](../../topics/09-customer-scenarios/README.md) — difficult situations and communication with non-technical stakeholders.
+- [12-debugging-troubleshooting](../../topics/12-debugging-troubleshooting/README.md) — LLM-specific troubleshooting.
+- [11-company-specific](../../topics/11-company-specific/README.md) — "Other companies" notes for Sierra, Decagon and Intercom; do the research checklist and try the products.
+- [10-behavioral](../../topics/10-behavioral/README.md) and [14-questions-to-ask](../../topics/14-questions-to-ask/README.md).
 
 ---
 
@@ -302,7 +302,7 @@ Choose based on volume, risk and timeline, and document the decision. Launching 
 - **Data minimisation:** return only fields the agent needs; mask sensitive data (full card numbers are never returned; partial addresses where possible).
 - **Network:** allow-listed IPs, TLS, webhook signature verification for inbound events.
 - **Logging and retention:** redact PII in logs per the brand's policy; define retention; respect deletion requests.
-- **Compliance review:** data processing agreement, regions, sub-processors, and the brand's security questionnaire. See [08-cloud-devops-integration](../08-cloud-devops-integration/ANSWERS.md) for auth patterns.
+- **Compliance review:** data processing agreement, regions, sub-processors, and the brand's security questionnaire. See [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/ANSWERS.md) for auth patterns.
 
 ### Guardrails and escalation to humans
 
@@ -357,7 +357,7 @@ Controls:
 - **Red-team before launch** with a library of injection and abuse attempts, and keep them in the regression suite.
 - **Logging and alerts** for blocked attempts; review patterns.
 
-See [06-ai-llm section H](../06-ai-llm/ANSWERS-part2.md) for prompt injection basics.
+See [06-ai-llm section H](../../topics/06-ai-llm/ANSWERS-part2.md) for prompt injection basics.
 
 #### How should the agent handle sensitive situations: self-harm, legal threats, regulated advice, payment card data?
 Define these with the brand's legal and CX teams before launch, then implement as detection plus fixed handling:
@@ -647,5 +647,5 @@ Expect questions like "What if it says something wrong?" — answer with the spe
 5. Learn the metric vocabulary and its pitfalls: resolution, containment/deflection, CSAT, first-contact resolution, average handle time, cost per contact, repeat contact rate.
 6. If the role includes voice, build or try a basic voice agent and measure each stage's latency; read about turn detection and barge-in in your chosen platform's docs.
 7. Read a few public customer-service AI incidents (for example the 2024 Air Canada chatbot ruling) and prepare what controls would have prevented them.
-8. Re-read [06-ai-llm](../06-ai-llm/README.md) sections D, E and H and [03-system-design](../03-system-design/README.md) section B.
-9. Prepare stories for: a production incident, pushing back on a customer, improving a metric through iteration, and working with non-technical stakeholders ([10-behavioral](../10-behavioral/ANSWERS.md)).
+8. Re-read [06-ai-llm](../../topics/06-ai-llm/README.md) sections D, E and H and [03-system-design](../../topics/03-system-design/README.md) section B.
+9. Prepare stories for: a production incident, pushing back on a customer, improving a metric through iteration, and working with non-technical stakeholders ([10-behavioral](../../topics/10-behavioral/ANSWERS.md)).

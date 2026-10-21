@@ -52,25 +52,25 @@ Typical/reported structure; it varies by company and by whether the team sits in
 
 | Round | What it tests | How to prepare |
 |---|---|---|
-| Recruiter screen | Motivation, public presence, travel | [01-recruiter-and-motivation](../01-recruiter-and-motivation/README.md) |
+| Recruiter screen | Motivation, public presence, travel | [01-recruiter-and-motivation](../../topics/01-recruiter-and-motivation/README.md) |
 | Hiring manager | DevRel philosophy, how you measure impact, portfolio overview | Questions below |
 | Portfolio / content review | Quality of past talks, posts, videos, repos | Questions below; [Prep checklist](#prep-checklist) |
-| Technical screen | Coding ability, often practical (build or extend a small app) | [02-coding](../02-coding/README.md) (practical problems) |
+| Technical screen | Coding ability, often practical (build or extend a small app) | [02-coding](../../topics/02-coding/README.md) (practical problems) |
 | Take-home: build and write | Build something with the company's API, write a tutorial or blog post about it | Questions below |
 | Presentation / talk round | 10–30 minute talk to a panel, with Q&A | Questions below |
-| Live demo | Build or show something live while explaining | Questions below; [09 demo-breaks scenario](../09-customer-scenarios/README.md) |
-| DX critique | Review the company's API, SDK or docs and suggest improvements | Questions below; [08 APIs & integration](../08-cloud-devops-integration/README.md) |
-| Cross-functional | Working with PM, engineering, marketing | [10-behavioral](../10-behavioral/README.md) |
+| Live demo | Build or show something live while explaining | Questions below; [09 demo-breaks scenario](../../topics/09-customer-scenarios/README.md) |
+| DX critique | Review the company's API, SDK or docs and suggest improvements | Questions below; [08 APIs & integration](../../topics/08-cloud-devops-integration/README.md) |
+| Cross-functional | Working with PM, engineering, marketing | [10-behavioral](../../topics/10-behavioral/README.md) |
 
 ## Common rounds — use the shared sections
 
-- [05-learning-round](../05-learning-round/README.md) — learning an unfamiliar API fast and explaining it back is the core DevRel skill; practise these prompts.
-- [08-cloud-devops-integration](../08-cloud-devops-integration/README.md) — section A (APIs and integration) and B (auth) for API design and DX critique.
-- [06-ai-llm](../06-ai-llm/README.md) — essential if the company is an AI/LLM platform: fundamentals, prompting, RAG, agents, MCP.
-- [09-customer-scenarios](../09-customer-scenarios/README.md) — section C (communication) and "the demo breaks".
-- [02-coding](../02-coding/README.md) — practical problems; DevRel coding screens are usually practical rather than heavy DS&A.
-- [10-behavioral](../10-behavioral/README.md) — influence without authority, cross-functional work, customer focus.
-- [14-questions-to-ask](../14-questions-to-ask/README.md) — add DevRel-specific ones: where the team reports, how success is measured, content vs. community vs. DX split.
+- [05-learning-round](../../topics/05-learning-round/README.md) — learning an unfamiliar API fast and explaining it back is the core DevRel skill; practise these prompts.
+- [08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md) — section A (APIs and integration) and B (auth) for API design and DX critique.
+- [06-ai-llm](../../topics/06-ai-llm/README.md) — essential if the company is an AI/LLM platform: fundamentals, prompting, RAG, agents, MCP.
+- [09-customer-scenarios](../../topics/09-customer-scenarios/README.md) — section C (communication) and "the demo breaks".
+- [02-coding](../../topics/02-coding/README.md) — practical problems; DevRel coding screens are usually practical rather than heavy DS&A.
+- [10-behavioral](../../topics/10-behavioral/README.md) — influence without authority, cross-functional work, customer focus.
+- [14-questions-to-ask](../../topics/14-questions-to-ask/README.md) — add DevRel-specific ones: where the team reports, how success is measured, content vs. community vs. DX split.
 
 ## Role-specific questions
 
@@ -237,7 +237,7 @@ Keep the scope small. A simple app that works beats an ambitious one that does n
 4. **Keep the message intact:** the point of the demo is the idea, not the live keystrokes.
 5. **Follow up:** post the working code and a short explanation of what broke.
 
-Prevention matters more (see the next question). For the shared customer version of this scenario, see [09-customer-scenarios](../09-customer-scenarios/README.md).
+Prevention matters more (see the next question). For the shared customer version of this scenario, see [09-customer-scenarios](../../topics/09-customer-scenarios/README.md).
 
 #### How do you prepare a demo so that it works reliably?
 
@@ -601,7 +601,7 @@ Specifics compared with a typical API:
 - **Feedback channels:** model behaviour issues (refusals, format errors) need reproducible examples to be useful to research and product teams.
 - **Community:** showcases of production apps, evaluation datasets, open-source integrations with popular frameworks.
 
-Link your answers to the technical material in [06-ai-llm](../06-ai-llm/README.md).
+Link your answers to the technical material in [06-ai-llm](../../topics/06-ai-llm/README.md).
 
 ### Role-specific behavioral
 
@@ -659,9 +659,9 @@ Mention how you handled a heavy period before, briefly and honestly.
 - [ ] Sign up for the company's product, follow the quickstart, build a small app, and keep a timestamped friction log. Turn it into a short DX critique (three strengths, five ranked issues with fixes).
 - [ ] Prepare a 10-minute talk with a live demo and a recorded backup; rehearse it three times with a timer and once in front of someone.
 - [ ] Write a getting-started tutorial for the company's product, tested on a clean machine.
-- [ ] Practise building something live with an unfamiliar API in 20 minutes while narrating (see [05-learning-round](../05-learning-round/README.md)).
-- [ ] Review API design principles: REST resource naming, status codes, pagination, idempotency, versioning, error format ([08-cloud-devops-integration](../08-cloud-devops-integration/README.md)).
+- [ ] Practise building something live with an unfamiliar API in 20 minutes while narrating (see [05-learning-round](../../topics/05-learning-round/README.md)).
+- [ ] Review API design principles: REST resource naming, status codes, pagination, idempotency, versioning, error format ([08-cloud-devops-integration](../../topics/08-cloud-devops-integration/README.md)).
 - [ ] Study the company's current DevRel output: docs, blog, YouTube, Discord/forum, GitHub samples, changelog. Note gaps you could fill.
 - [ ] Prepare a measurement plan for the role: a few metrics across awareness, activation, community and product impact.
 - [ ] Prepare four STAR stories: content that worked, content that failed, feedback that changed a product, handling public criticism.
-- [ ] For AI companies, prepare a demo using their model API with an evaluation step, and review [06-ai-llm](../06-ai-llm/README.md).
+- [ ] For AI companies, prepare a demo using their model API with an evaluation step, and review [06-ai-llm](../../topics/06-ai-llm/README.md).
