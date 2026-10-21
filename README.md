@@ -1,100 +1,99 @@
-# Forward Deployed Engineer (FDE) Interview Prep
+# FDE & Solutions Roles — Interview Prep
 
-A structured question bank for **Forward Deployed Engineer / Forward Deployed Software Engineer (FDSE) / Deployment Strategist-adjacent** interviews at companies such as Palantir, OpenAI, Anthropic, Scale AI, Databricks, Ramp, Sierra, Decagon, Harvey, Glean, Cohere, Mistral, Salesforce (Agentforce), and AI-native startups.
+A complete interview prep kit for **Forward Deployed Engineer (FDE)** and the family of customer-facing technical roles around it: Solutions Engineer, Solutions Architect, Applied AI Engineer, Technical Consultant, Field CTO and more. It covers companies such as Palantir, OpenAI, Anthropic, Scale AI, Databricks, the major cloud providers, consulting firms and AI startups.
 
-The goal is coverage: every base question that can come up in an FDE loop is listed here, grouped by round. Use each file as a checklist. Answer every question out loud and tick it off.
+**What's inside**
+- **17 roles**, each with an overview, the typical interview loop, role-specific questions with model answers, and a 6-week study plan
+- **15 shared topic sections** with more than 900 questions, each with a model answer
+- **A personal prep folder** with my profile, story bank and personalised answers
 
-> Sources: candidate reports (Glassdoor, Blind, 1point3acres), prep guides (Exponent/Aced, IGotAnOffer, Educative, techinterview.org, GSD Council), and the common structure of FDE loops. Interview content changes and is often under NDA, so treat company-specific items as *reported*, not guaranteed.
+> Sources: candidate reports (Glassdoor, Blind, 1point3acres), prep guides (Exponent/Aced, IGotAnOffer, Educative, techinterview.org, GSD Council), and the common structure of these interview loops. Interview content changes and is often under NDA, so company-specific items are marked *reported*, and volatile facts are marked *(verify)*.
 
 ---
 
-## Which role are you applying for?
+## Start here
 
-FDE is one of a family of customer-facing technical roles. **[15-roles](roles/README.md)** covers 11 of them: Forward Deployed Engineer, Deployment Strategist, Solutions Engineer, Solutions Architect, Applied AI Engineer, Agent Engineer, Customer Engineer/TAM, Implementation Engineer, Technical Support Engineer, Developer Relations, and Forward Deployed Data/ML. It includes:
-
-- [Role map](roles/README.md): how the roles differ and which interview rounds each one gets
-- [Common questions](roles/COMMON-QUESTIONS.md): asked in every role, linked to their answers
-- One file per role with role-specific questions and model answers
-
-## What an FDE loop usually looks like
-
-| Stage | What it tests | File |
-|---|---|---|
-| Recruiter / "Why FDE?" screen | Motivation, travel, customer-facing fit | [01-recruiter-and-motivation](topics/01-recruiter-and-motivation/README.md) |
-| Coding screen (LeetCode-style or practical) | DS&A, clean code, changing requirements | [02-coding](topics/02-coding/README.md) |
-| System design (applied) | Architecture under real customer constraints | [03-system-design](topics/03-system-design/README.md) |
-| Decomposition (Palantir, Databricks, many AI labs) | Breaking a vague problem into a plan | [04-decomposition](topics/04-decomposition/README.md) |
-| Learning round (Palantir) | Picking up a new concept/API fast | [05-learning-round](topics/05-learning-round/README.md) |
-| AI / LLM use-case & take-home (OpenAI, Anthropic, Scale, etc.) | RAG, agents, evals, prompting, production LLM | [06-ai-llm](topics/06-ai-llm/README.md) |
-| Data / SQL | Pipelines, modeling, SQL fluency | [07-data-and-sql](topics/07-data-and-sql/README.md) |
-| Cloud / DevOps / Integration | Deploying into a customer's environment | [08-cloud-devops-integration](topics/08-cloud-devops-integration/README.md) |
-| Customer scenario / role-play | Scoping, expectation management, communication | [09-customer-scenarios](topics/09-customer-scenarios/README.md) |
-| Behavioral / Hiring manager / Values | Ownership, ambiguity, conflict, impact | [10-behavioral](topics/10-behavioral/README.md) |
-| Debugging round | Reading unfamiliar code, finding failures | [12-debugging-troubleshooting](topics/12-debugging-troubleshooting/README.md) |
-| CS fundamentals (rapid-fire) | Networking, OS, DBs, concurrency, security | [13-cs-fundamentals](topics/13-cs-fundamentals/README.md) |
-| Your questions for them | Judgment and curiosity | [14-questions-to-ask](topics/14-questions-to-ask/README.md) |
-
-Company-by-company notes: [11-company-specific](topics/11-company-specific/README.md)
-Role overview, frameworks and a study plan: [00-overview](topics/00-overview/README.md)
+1. **Pick your roles:** read the [role map](roles/README.md). It compares all 17 roles and shows which rounds each one gets.
+2. **Master the common questions:** [roles/COMMON-QUESTIONS.md](roles/COMMON-QUESTIONS.md) lists 60 questions asked in every role, each linked to its answer.
+3. **Follow the study plan for your role:** `roles/<role>/STUDY-PLAN.md`. Each plan links to the exact topic files to study, week by week.
+4. **Make it personal:** fill in [my-prep/INPUTS-NEEDED.md](my-prep/INPUTS-NEEDED.md), then practise [my stories](my-prep/STORY-BANK.md) and [my answers](my-prep/MY-ANSWERS.md).
 
 ---
 
 ## Repository structure
 
 ```
-fde-interview-prep/
-├── README.md                          ← you are here
-├── 00-overview/                       ← what an FDE is, answer frameworks, 4-week plan
-│   (every folder: README.md = questions, ANSWERS.md = model answers)
-├── 01-recruiter-and-motivation/       ← "Why FDE not SWE?", resume walk-through
-├── 02-coding/                         ← DS&A by topic + practical/OOP + reported problems
-├── 03-system-design/                  ← classic + applied + AI system design prompts
-├── 04-decomposition/                  ← open-ended problem breakdown prompts
-├── 05-learning-round/                 ← learn-on-the-spot topics
-├── 06-ai-llm/                         ← LLM fundamentals, RAG, agents, evals, MCP, safety
-├── 07-data-and-sql/                   ← SQL, data modeling, pipelines, Spark
-├── 08-cloud-devops-integration/       ← cloud, APIs, auth, deployment, on-prem
-├── 09-customer-scenarios/             ← role-plays and client-situation questions
-├── 10-behavioral/                     ← STAR questions by theme
-├── 11-company-specific/               ← Palantir, OpenAI, Anthropic, Scale, Databricks, ...
-├── 12-debugging-troubleshooting/      ← production triage, debugging prompts
-├── 13-cs-fundamentals/                ← networking, OS, DB, concurrency, security
-├── 14-questions-to-ask/               ← questions for the interviewer
-└── 15-roles/                          ← role map, common questions, role-specific Q&A
+fde-solutions-interview-prep/
+├── README.md                         ← you are here
+├── roles/                            ← WHAT TO APPLY FOR
+│   ├── README.md                     ← role map: 17 roles compared, rounds per role
+│   ├── COMMON-QUESTIONS.md           ← asked in every role, linked to answers
+│   └── NN-<role>/
+│       ├── README.md                 ← overview, loop, role-specific Q&A
+│       └── STUDY-PLAN.md             ← 6-week plan + 2-week crash plan
+├── topics/                           ← SHARED QUESTION BANK (by interview round)
+│   └── NN-<topic>/
+│       ├── README.md                 ← questions (checklist)
+│       └── ANSWERS.md                ← model answers, same order
+└── my-prep/                          ← PERSONAL
+    ├── PROFILE.md                    ← my background, strengths, gaps, role fit
+    ├── STORY-BANK.md                 ← my 12 STAR stories
+    ├── MY-ANSWERS.md                 ← my answers + question-to-story map
+    └── INPUTS-NEEDED.md              ← details only I can fill in
 ```
 
-## Model answers
+---
 
-Every folder has an `ANSWERS.md` next to its `README.md` with a model answer for each question, in the same order. Coding and AI/LLM are split into two answer files each.
+## Roles
 
-| Section | Questions | Answers |
-|---|---|---|
-| 00 Overview (story bank) | [README](topics/00-overview/README.md) | [ANSWERS](topics/00-overview/ANSWERS.md) |
-| 01 Recruiter & motivation | [README](topics/01-recruiter-and-motivation/README.md) | [ANSWERS](topics/01-recruiter-and-motivation/ANSWERS.md) |
-| 02 Coding | [README](topics/02-coding/README.md) | [ANSWERS](topics/02-coding/ANSWERS.md) · [DS&A topics](topics/02-coding/ANSWERS-dsa-topics.md) |
-| 03 System design | [README](topics/03-system-design/README.md) | [ANSWERS](topics/03-system-design/ANSWERS.md) |
-| 04 Decomposition | [README](topics/04-decomposition/README.md) | [ANSWERS](topics/04-decomposition/ANSWERS.md) |
-| 05 Learning round | [README](topics/05-learning-round/README.md) | [ANSWERS](topics/05-learning-round/ANSWERS.md) |
-| 06 AI / LLM | [README](topics/06-ai-llm/README.md) | [ANSWERS (A–E)](topics/06-ai-llm/ANSWERS.md) · [Part 2 (F–J)](topics/06-ai-llm/ANSWERS-part2.md) |
-| 07 Data & SQL | [README](topics/07-data-and-sql/README.md) | [ANSWERS](topics/07-data-and-sql/ANSWERS.md) |
-| 08 Cloud, DevOps & integration | [README](topics/08-cloud-devops-integration/README.md) | [ANSWERS](topics/08-cloud-devops-integration/ANSWERS.md) |
-| 09 Customer scenarios | [README](topics/09-customer-scenarios/README.md) | [ANSWERS](topics/09-customer-scenarios/ANSWERS.md) |
-| 10 Behavioral | [README](topics/10-behavioral/README.md) | [ANSWERS](topics/10-behavioral/ANSWERS.md) |
-| 11 Company-specific | [README](topics/11-company-specific/README.md) | [ANSWERS](topics/11-company-specific/ANSWERS.md) |
-| 12 Debugging | [README](topics/12-debugging-troubleshooting/README.md) | [ANSWERS](topics/12-debugging-troubleshooting/ANSWERS.md) |
-| 13 CS fundamentals | [README](topics/13-cs-fundamentals/README.md) | [ANSWERS](topics/13-cs-fundamentals/ANSWERS.md) |
-| 14 Questions to ask | [README](topics/14-questions-to-ask/README.md) | [ANSWERS](topics/14-questions-to-ask/ANSWERS.md) |
-| 15 Roles | [Role map](roles/README.md) · [Common questions](roles/COMMON-QUESTIONS.md) | Answers inside each role file |
+| # | Role | Q&A | Study plan |
+|---|---|---|---|
+| 01 | Forward Deployed Engineer | [README](roles/01-forward-deployed-engineer/README.md) | [Plan](roles/01-forward-deployed-engineer/STUDY-PLAN.md) |
+| 02 | Deployment Strategist | [README](roles/02-deployment-strategist/README.md) | [Plan](roles/02-deployment-strategist/STUDY-PLAN.md) |
+| 03 | Solutions Engineer (pre-sales) | [README](roles/03-solutions-engineer/README.md) | [Plan](roles/03-solutions-engineer/STUDY-PLAN.md) |
+| 04 | Solutions Architect | [README](roles/04-solutions-architect/README.md) | [Plan](roles/04-solutions-architect/STUDY-PLAN.md) |
+| 05 | Applied AI Engineer | [README](roles/05-applied-ai-engineer/README.md) | [Plan](roles/05-applied-ai-engineer/STUDY-PLAN.md) |
+| 06 | Agent Engineer | [README](roles/06-agent-engineer/README.md) | [Plan](roles/06-agent-engineer/STUDY-PLAN.md) |
+| 07 | Customer Engineer / TAM | [README](roles/07-customer-engineer-tam/README.md) | [Plan](roles/07-customer-engineer-tam/STUDY-PLAN.md) |
+| 08 | Implementation / Integration Engineer | [README](roles/08-implementation-integration-engineer/README.md) | [Plan](roles/08-implementation-integration-engineer/STUDY-PLAN.md) |
+| 09 | Technical Support Engineer | [README](roles/09-technical-support-engineer/README.md) | [Plan](roles/09-technical-support-engineer/STUDY-PLAN.md) |
+| 10 | Developer Relations | [README](roles/10-developer-relations/README.md) | [Plan](roles/10-developer-relations/STUDY-PLAN.md) |
+| 11 | Forward Deployed Data / ML | [README](roles/11-forward-deployed-data-ml/README.md) | [Plan](roles/11-forward-deployed-data-ml/STUDY-PLAN.md) |
+| 12 | Staff / Principal FDE, Field CTO | [README](roles/12-principal-fde-field-cto/README.md) | [Plan](roles/12-principal-fde-field-cto/STUDY-PLAN.md) |
+| 13 | Technology / AI Consultant | [README](roles/13-technical-ai-consultant/README.md) | [Plan](roles/13-technical-ai-consultant/STUDY-PLAN.md) |
+| 14 | Technical Product Manager | [README](roles/14-technical-product-manager/README.md) | [Plan](roles/14-technical-product-manager/STUDY-PLAN.md) |
+| 15 | Technical Delivery Manager | [README](roles/15-technical-delivery-manager/README.md) | [Plan](roles/15-technical-delivery-manager/STUDY-PLAN.md) |
+| 16 | Partner Solutions Engineer | [README](roles/16-partner-solutions-engineer/README.md) | [Plan](roles/16-partner-solutions-engineer/STUDY-PLAN.md) |
+| 17 | Founding / Product Engineer | [README](roles/17-founding-product-engineer/README.md) | [Plan](roles/17-founding-product-engineer/STUDY-PLAN.md) |
 
-Behavioral answers are **templates with labelled examples**, not real stories. Replace them with your own experience.
+## Shared topics (by interview round)
 
-## How to use
+| # | Topic | Questions | Answers |
+|---|---|---|---|
+| 00 | Overview: frameworks, story-bank checklist | [README](topics/00-overview/README.md) | [ANSWERS](topics/00-overview/ANSWERS.md) |
+| 01 | Recruiter screen & motivation | [README](topics/01-recruiter-and-motivation/README.md) | [ANSWERS](topics/01-recruiter-and-motivation/ANSWERS.md) |
+| 02 | Coding | [README](topics/02-coding/README.md) | [ANSWERS](topics/02-coding/ANSWERS.md) · [DS&A topics](topics/02-coding/ANSWERS-dsa-topics.md) |
+| 03 | System design | [README](topics/03-system-design/README.md) | [ANSWERS](topics/03-system-design/ANSWERS.md) |
+| 04 | Decomposition | [README](topics/04-decomposition/README.md) | [ANSWERS](topics/04-decomposition/ANSWERS.md) |
+| 05 | Learning round | [README](topics/05-learning-round/README.md) | [ANSWERS](topics/05-learning-round/ANSWERS.md) |
+| 06 | AI / LLM | [README](topics/06-ai-llm/README.md) | [ANSWERS (A–E)](topics/06-ai-llm/ANSWERS.md) · [Part 2 (F–J)](topics/06-ai-llm/ANSWERS-part2.md) |
+| 07 | Data & SQL | [README](topics/07-data-and-sql/README.md) | [ANSWERS](topics/07-data-and-sql/ANSWERS.md) |
+| 08 | Cloud, DevOps & integration | [README](topics/08-cloud-devops-integration/README.md) | [ANSWERS](topics/08-cloud-devops-integration/ANSWERS.md) |
+| 09 | Customer scenarios | [README](topics/09-customer-scenarios/README.md) | [ANSWERS](topics/09-customer-scenarios/ANSWERS.md) |
+| 10 | Behavioral | [README](topics/10-behavioral/README.md) | [ANSWERS](topics/10-behavioral/ANSWERS.md) |
+| 11 | Company-specific | [README](topics/11-company-specific/README.md) | [ANSWERS](topics/11-company-specific/ANSWERS.md) |
+| 12 | Debugging & troubleshooting | [README](topics/12-debugging-troubleshooting/README.md) | [ANSWERS](topics/12-debugging-troubleshooting/ANSWERS.md) |
+| 13 | CS fundamentals | [README](topics/13-cs-fundamentals/README.md) | [ANSWERS](topics/13-cs-fundamentals/ANSWERS.md) |
+| 14 | Questions to ask | [README](topics/14-questions-to-ask/README.md) | [ANSWERS](topics/14-questions-to-ask/ANSWERS.md) |
 
-1. Read [00-overview](topics/00-overview/README.md) for frameworks (STAR, decomposition, system design).
-2. Go through each folder and answer every question out loud or in writing first, then compare with `ANSWERS.md`.
-3. Mark questions with `- [x]` as you finish them. Fork the repo and keep your own answers in an `answers/` folder.
-4. In the last week, run timed mocks: 1 coding, 1 decomposition, 1 AI design, 1 behavioral per day.
+Behavioral answers in `topics/` are **templates with labelled examples**, not real stories. My real stories are in [my-prep/](my-prep/README.md).
+
+## How to practise
+
+- Answer each question **out loud first**, then compare with the model answer. Tick it off with `- [x]`.
+- In the last two weeks before a loop, run timed mocks daily: one coding, one design or decomposition, one customer role-play, one behavioral.
+- Model answers are references. Adapt them to your own experience and words.
 
 ## Contributing
 
-Heard a new question? Add it to the right file as a `- [ ]` item. If it's company-specific, also add it to that company's section in `11-company-specific`.
+Heard a new question? Add it as a `- [ ]` item in the right topic or role file, with a model answer in the same order.
