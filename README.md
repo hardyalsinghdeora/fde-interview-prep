@@ -37,6 +37,7 @@ Role overview, frameworks and a study plan: [00-overview](00-overview/README.md)
 fde-interview-prep/
 ├── README.md                          ← you are here
 ├── 00-overview/                       ← what an FDE is, answer frameworks, 4-week plan
+│   (every folder: README.md = questions, ANSWERS.md = model answers)
 ├── 01-recruiter-and-motivation/       ← "Why FDE not SWE?", resume walk-through
 ├── 02-coding/                         ← DS&A by topic + practical/OOP + reported problems
 ├── 03-system-design/                  ← classic + applied + AI system design prompts
@@ -53,10 +54,34 @@ fde-interview-prep/
 └── 14-questions-to-ask/               ← questions for the interviewer
 ```
 
+## Model answers
+
+Every folder has an `ANSWERS.md` next to its `README.md` with a model answer for each question, in the same order. Coding and AI/LLM are split into two answer files each.
+
+| Section | Questions | Answers |
+|---|---|---|
+| 00 Overview (story bank) | [README](00-overview/README.md) | [ANSWERS](00-overview/ANSWERS.md) |
+| 01 Recruiter & motivation | [README](01-recruiter-and-motivation/README.md) | [ANSWERS](01-recruiter-and-motivation/ANSWERS.md) |
+| 02 Coding | [README](02-coding/README.md) | [ANSWERS](02-coding/ANSWERS.md) · [DS&A topics](02-coding/ANSWERS-dsa-topics.md) |
+| 03 System design | [README](03-system-design/README.md) | [ANSWERS](03-system-design/ANSWERS.md) |
+| 04 Decomposition | [README](04-decomposition/README.md) | [ANSWERS](04-decomposition/ANSWERS.md) |
+| 05 Learning round | [README](05-learning-round/README.md) | [ANSWERS](05-learning-round/ANSWERS.md) |
+| 06 AI / LLM | [README](06-ai-llm/README.md) | [ANSWERS (A–E)](06-ai-llm/ANSWERS.md) · [Part 2 (F–J)](06-ai-llm/ANSWERS-part2.md) |
+| 07 Data & SQL | [README](07-data-and-sql/README.md) | [ANSWERS](07-data-and-sql/ANSWERS.md) |
+| 08 Cloud, DevOps & integration | [README](08-cloud-devops-integration/README.md) | [ANSWERS](08-cloud-devops-integration/ANSWERS.md) |
+| 09 Customer scenarios | [README](09-customer-scenarios/README.md) | [ANSWERS](09-customer-scenarios/ANSWERS.md) |
+| 10 Behavioral | [README](10-behavioral/README.md) | [ANSWERS](10-behavioral/ANSWERS.md) |
+| 11 Company-specific | [README](11-company-specific/README.md) | [ANSWERS](11-company-specific/ANSWERS.md) |
+| 12 Debugging | [README](12-debugging-troubleshooting/README.md) | [ANSWERS](12-debugging-troubleshooting/ANSWERS.md) |
+| 13 CS fundamentals | [README](13-cs-fundamentals/README.md) | [ANSWERS](13-cs-fundamentals/ANSWERS.md) |
+| 14 Questions to ask | [README](14-questions-to-ask/README.md) | [ANSWERS](14-questions-to-ask/ANSWERS.md) |
+
+Behavioral answers are **templates with labelled examples**, not real stories. Replace them with your own experience.
+
 ## How to use
 
 1. Read [00-overview](00-overview/README.md) for frameworks (STAR, decomposition, system design).
-2. Go through each folder and answer every question out loud or in writing.
+2. Go through each folder and answer every question out loud or in writing first, then compare with `ANSWERS.md`.
 3. Mark questions with `- [x]` as you finish them. Fork the repo and keep your own answers in an `answers/` folder.
 4. In the last week, run timed mocks: 1 coding, 1 decomposition, 1 AI design, 1 behavioral per day.
 
