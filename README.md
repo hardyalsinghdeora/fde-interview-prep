@@ -8,6 +8,14 @@ The goal is coverage: every base question that can come up in an FDE loop is lis
 
 ---
 
+## Which role are you applying for?
+
+FDE is one of a family of customer-facing technical roles. **[15-roles](15-roles/README.md)** covers 11 of them: Forward Deployed Engineer, Deployment Strategist, Solutions Engineer, Solutions Architect, Applied AI Engineer, Agent Engineer, Customer Engineer/TAM, Implementation Engineer, Technical Support Engineer, Developer Relations, and Forward Deployed Data/ML. It includes:
+
+- [Role map](15-roles/README.md): how the roles differ and which interview rounds each one gets
+- [Common questions](15-roles/COMMON-QUESTIONS.md): asked in every role, linked to their answers
+- One file per role with role-specific questions and model answers
+
 ## What an FDE loop usually looks like
 
 | Stage | What it tests | File |
@@ -51,7 +59,8 @@ fde-interview-prep/
 ├── 11-company-specific/               ← Palantir, OpenAI, Anthropic, Scale, Databricks, ...
 ├── 12-debugging-troubleshooting/      ← production triage, debugging prompts
 ├── 13-cs-fundamentals/                ← networking, OS, DB, concurrency, security
-└── 14-questions-to-ask/               ← questions for the interviewer
+├── 14-questions-to-ask/               ← questions for the interviewer
+└── 15-roles/                          ← role map, common questions, role-specific Q&A
 ```
 
 ## Model answers
@@ -75,6 +84,7 @@ Every folder has an `ANSWERS.md` next to its `README.md` with a model answer for
 | 12 Debugging | [README](12-debugging-troubleshooting/README.md) | [ANSWERS](12-debugging-troubleshooting/ANSWERS.md) |
 | 13 CS fundamentals | [README](13-cs-fundamentals/README.md) | [ANSWERS](13-cs-fundamentals/ANSWERS.md) |
 | 14 Questions to ask | [README](14-questions-to-ask/README.md) | [ANSWERS](14-questions-to-ask/ANSWERS.md) |
+| 15 Roles | [Role map](15-roles/README.md) · [Common questions](15-roles/COMMON-QUESTIONS.md) | Answers inside each role file |
 
 Behavioral answers are **templates with labelled examples**, not real stories. Replace them with your own experience.
 
