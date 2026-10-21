@@ -371,7 +371,7 @@ Intake (email, portal, scanner) -> Object store + queue
 
 ### Design an audit-logging system for a regulated customer (immutable, queryable).
 
-**Clarify:** What events (user actions, data access, admin changes)? Volume? Retention (7 years for SOX/FINRA)? Who queries (auditors, security, customers)? Tamper-evidence or tamper-proof required? Real-time alerting?
+**Clarify:** What events (user actions, data access, admin changes)? Volume? Retention (often 6-7 years under SOX/SEC/FINRA rules; confirm with their compliance team)? Who queries (auditors, security, customers)? Tamper-evidence or tamper-proof required? Real-time alerting?
 
 **Requirements:** Every event captured with who/what/when/where/outcome; no loss; immutable and tamper-evident; query by user/resource/time in seconds for recent data; long-term cheap retention; access to logs is itself audited.
 
@@ -493,7 +493,7 @@ Producer data -> Sharing layer:
 ```
 Sources -> ELT (Fivetran/Airbyte) -> Warehouse (Snowflake/BigQuery/Postgres)
   -> dbt models: staging -> marts (documented, tested)
-  -> Semantic layer (dbt metrics/Cube/LookML): certified metrics & dimensions
+  -> Semantic layer (dbt Semantic Layer/MetricFlow, Cube, LookML): certified metrics & dimensions
   -> BI tool (Looker/Power BI/Superset/Metabase) with RLS
   -> Catalog/docs + training ; certified vs sandbox spaces
 ```
@@ -763,7 +763,7 @@ IDE plugin / CLI / PR bot -> Gateway (auth, repo ACLs, logging)
 
 **Deep dives:** Retrieval: combine exact search (symbols, grep) with semantic search; code understanding benefits more from symbol graph than pure embeddings. Agentic changes run in sandboxed containers with tests; output is a PR for human review, never a direct push. Secrets scanning on context and outputs. Incremental re-index on each commit.
 
-**Trade-offs:** Buy (Copilot, Claude Code, Cursor, Sourcegraph Cody) vs build; usually buy and add internal context via MCP/indexes. Self-hosted model (privacy) vs API (quality).
+**Trade-offs:** Buy (e.g. GitHub Copilot, Claude Code, Cursor, Sourcegraph; the market moves fast, so verify current options) vs build; usually buy and add internal context via MCP/indexes. Self-hosted model (privacy) vs API (quality).
 
 **Customer/deployment:** Legal/security review on code egress; enterprise agreements with zero data retention; rollout to pilot teams.
 
@@ -940,7 +940,7 @@ Ticketing system (Zendesk/ServiceNow) webhook -> Queue (SQS/Kafka)
  -> Agent re-routes = labels -> retraining & eval
 ```
 
-**Deep dives:** Cascade: a cheap classifier handles ~70-80% confidently, LLM handles the rest; or distil LLM labels into a small model. Taxonomy in the prompt with clear definitions and examples; constrained output (enum). Use batch APIs for non-urgent tickets (≈50% cheaper) and prompt caching for the static taxonomy prefix. Measure with re-route rate as an implicit label.
+**Deep dives:** Cascade: a cheap classifier handles ~70-80% confidently, LLM handles the rest; or distil LLM labels into a small model. Taxonomy in the prompt with clear definitions and examples; constrained output (enum). Use batch APIs for non-urgent tickets (typically ~50% cheaper; verify current pricing) and prompt caching for the static taxonomy prefix. Measure with re-route rate as an implicit label.
 
 **Trade-offs:** LLM on everything (simple, costly) vs cascade (cheaper, more components). Latency vs batch discounts.
 
@@ -1639,7 +1639,7 @@ Clients (local doc model, apply ops optimistically)
 **Architecture:**
 ```
 Game servers -> Score service (validate, anti-cheat) -> Redis sorted sets
-   ZADD leaderboard:{game}:{period} score user_id ; ZREVRANGE for top N ; ZREVRANK for rank
+   ZADD leaderboard:{game}:{period} score user_id ; ZRANGE ... REV (or ZREVRANGE) for top N ; ZREVRANK for rank
  -> durable store (DB) for scores history ; Kafka for events
 ```
 

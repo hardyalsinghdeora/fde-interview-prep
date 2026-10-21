@@ -302,7 +302,7 @@ Questions: [README.md](README.md)
 >
 > You: "You're right to be frustrated. We committed to the 1st and we missed it, and I understand it's put you in a difficult position with your board. I'm sorry for that. Can I take two minutes to tell you exactly where we are, and then hear what matters most to you?"
 >
-> "The core system is built and passed testing. What's holding go-live is the SSO integration: we found your Azure AD setup needs a configuration change that only your identity team can make, and it took longer than we planned for. I should have raised that risk with you earlier, and that's on me."
+> "The core system is built and passed testing. What's holding go-live is the SSO integration: we found your Entra ID (Azure AD) setup needs a configuration change that only your identity team can make, and it took longer than we planned for. I should have raised that risk with you earlier, and that's on me."
 >
 > "Here's the plan. We go live with the 20-person pilot team on the 15th using temporary accounts, so you have real usage to show. Full rollout follows on the 29th, once SSO is done. I need one thing from you: a named contact in your identity team this week. I'll send you a written status every Tuesday until we're live."
 >
@@ -449,7 +449,7 @@ Questions: [README.md](README.md)
 1. **Contain:** stop the damage. Disable the feature flag, pause the job, roll back the deploy. Don't start by debugging root cause while it's still writing bad data.
 2. **Assess scope:** which data, which customers, since when, how many records. Preserve logs and evidence.
 3. **Escalate internally** following the incident process (on-call, manager, security if data exposure is possible).
-4. **Tell the customer early,** even before you have every answer: what happened, impact, what you've done, next update time. Contracts and regulations (e.g. GDPR 72-hour breach notification) may impose deadlines if personal data is exposed.
+4. **Tell the customer early,** even before you have every answer: what happened, impact, what you've done, next update time. Contracts and regulations may impose deadlines if personal data is exposed (e.g. under GDPR the controller must notify the regulator within 72 hours of becoming aware of a breach, and a processor must inform the controller without undue delay).
 5. **Remediate:** fix the bug, repair or restore affected data (backups, replay from source), verify with the customer.
 6. **Post-incident review:** blameless, root cause, prevention (tests, monitoring, validation), shared with the customer.
 

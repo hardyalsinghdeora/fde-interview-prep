@@ -29,7 +29,7 @@ Walk the data path for a decoder-only LLM:
    - LayerNorm/RMSNorm (pre-norm in modern models)
    - Multi-head causal self-attention
    - Residual connection (add input back)
-   - Norm → **feed-forward network** (MLP, typically 4x width, GELU/SwiGLU) — or an MoE layer
+   - Norm → **feed-forward network** (MLP, ~4x width with GELU; ~8/3x with SwiGLU's three matrices) — or an MoE layer
    - Residual connection
 4. **Final norm → unembedding (LM head):** project to vocabulary size → logits.
 5. **Softmax + sampling** (temperature, top-p) → next token, appended to input; repeat autoregressively, reusing the **KV cache**.
@@ -106,7 +106,7 @@ Why it matters:
 - **Scale:** less human exposure to harmful content, cheaper feedback.
 - **Better trade-off:** aims for models that are harmless *without being evasive* — explaining objections rather than refusing flatly.
 
-Anthropic has since published an updated constitution for Claude describing priorities (broadly safe, broadly ethical, following guidelines, genuinely helpful) and reasoning, not just rules. In an interview, connect it to deployment: it is why Claude tends to explain refusals and why system prompts can shape but not override core safety behaviour.
+Anthropic has since published an updated constitution for Claude (2026; verify current wording) describing priorities (broadly safe, broadly ethical, following guidelines, genuinely helpful) and reasoning, not just rules. In an interview, connect it to deployment: it is why Claude tends to explain refusals and why system prompts can shape but not override core safety behaviour.
 
 ### Encoder-only vs. decoder-only vs. encoder-decoder models — examples and use cases.
 
@@ -150,14 +150,14 @@ During autoregressive generation, each new token attends to all previous tokens.
 
 Prompt caching stores the processed (KV) state of a prompt **prefix** so later requests that start with the exact same prefix skip recomputing it.
 
-- **Anthropic:** you mark breakpoints with `cache_control`; cache writes cost more than base input (about 1.25x for the 5-minute TTL, 2x for 1-hour), cache reads are about 0.1x base input price. **OpenAI:** automatic for prompts over ~1024 tokens, discounted cached input. **Gemini:** implicit and explicit context caching.
+- **Anthropic:** you mark breakpoints with `cache_control`; cache writes cost more than base input (about 1.25x for the 5-minute TTL, 2x for 1-hour), cache reads are about 0.1x base input price (lower on some newer models); caches are isolated per workspace/org, never shared across customers. **OpenAI:** automatic for prompts over ~1024 tokens, discounted cached input. **Gemini:** implicit and explicit context caching. (Multipliers and minimums change — verify.)
 - Also cuts **time-to-first-token** substantially for long prefixes.
 
 Saves money when:
 - A large, **stable prefix** is reused often within the TTL: long system prompts, tool definitions, few-shot examples, a big document users ask many questions about, agent loops (the growing conversation is re-sent every turn), multi-turn chat.
 - Order matters: put static content first (tools → system → documents → history), dynamic content last. Any change in the prefix (even a timestamp in the system prompt) invalidates everything after it.
 
-Doesn't help: short prompts below the minimum cacheable length, unique prompts, low traffic where the cache expires between calls (then you pay the write premium for nothing). Check `cache_read_input_tokens` in usage to confirm hits.
+Doesn't help: short prompts below the minimum cacheable length (model-dependent, from a few hundred to a few thousand tokens), unique prompts, low traffic where the cache expires between calls (then you pay the write premium for nothing). Check `cache_read_input_tokens` in usage to confirm hits.
 
 ```python
 client.messages.create(
@@ -315,8 +315,8 @@ Combining is common: few-shot examples that include the reasoning. Decide using 
 In order of reliability:
 
 1. **Native structured outputs / constrained decoding:** provide a JSON Schema and the API guarantees schema-valid output (OpenAI `response_format` with `json_schema` + `strict: true`; Anthropic structured outputs / strict tool use; Gemini `response_schema`; vLLM/Outlines guided decoding for self-hosted).
-2. **Tool calling as a schema:** define a tool whose `input_schema` is your output and force it with `tool_choice`.
-3. **Prompting + validation:** describe the schema, give an example, prefill the assistant turn with `{` where supported, then **validate with Pydantic** and retry with the error message on failure.
+2. **Tool calling as a schema:** define a tool whose `input_schema` is your output (with `strict: true` where offered) and force it with `tool_choice` — note some newer models reject forced `tool_choice`, so check the docs (verify).
+3. **Prompting + validation:** describe the schema, give an example, then **validate with Pydantic** and retry with the error message on failure. (Prefilling the assistant turn with `{` used to be a common trick; newer Claude models reject assistant prefill, so prefer native structured outputs — verify per model.)
 
 ```python
 from pydantic import BaseModel, Field
@@ -763,7 +763,7 @@ while True:
     messages.append({"role": "user", "content": results})
 ```
 
-**How it decides:** tool definitions are injected into the context (as a special system section); the model was fine-tuned on tool-use data to emit calls when a tool's description matches the need. So the decision relies on **names, descriptions, and the system prompt** — that's where you steer it. You can also control it with `tool_choice` (auto / any / a specific tool / none), and models can make parallel tool calls.
+**How it decides:** tool definitions are injected into the context (as a special system section); the model was fine-tuned on tool-use data to emit calls when a tool's description matches the need. So the decision relies on **names, descriptions, and the system prompt** — that's where you steer it. You can also control it with `tool_choice` (auto / any / a specific tool / none — some newer models accept only auto/none; verify), and models can make parallel tool calls.
 
 ### How do you design good tool definitions (names, descriptions, schemas)?
 
@@ -895,7 +895,7 @@ Infrastructure: a **sandboxed, resettable environment** with mocked or staging A
 You can't make LLMs fully deterministic, so constrain where variability matters:
 
 - **Reduce agency:** encode known business processes as workflows/state machines (e.g. LangGraph, explicit code), and use the LLM only for fuzzy steps (understanding, drafting, choosing among a few options).
-- **Constrain outputs:** structured outputs, enums, strict tool schemas, `tool_choice` to force specific steps.
+- **Constrain outputs:** structured outputs, enums, strict tool schemas, `tool_choice` to force specific steps where the model supports it (otherwise make that step a plain workflow call).
 - **Deterministic guards:** validation and business rules in code; policy checks before actions; approvals for high-risk steps.
 - **Low temperature, pinned model snapshots**, versioned prompts and tools.
 - **Idempotent, transactional tools** so retries are safe.
@@ -922,7 +922,7 @@ The model sees screenshots (or DOM/accessibility tree) and outputs mouse/keyboar
 
 ### What's MCP (Model Context Protocol)? What problem does it solve? Tools vs. resources vs. prompts.
 
-MCP is an open protocol (introduced by Anthropic in late 2024, now widely adopted across OpenAI, Google, Microsoft and many tools) that standardises how AI applications connect to external tools and data.
+MCP is an open protocol (introduced by Anthropic in late 2024, since donated to the Linux Foundation's Agentic AI Foundation — verify; widely adopted across OpenAI, Google, Microsoft and many tools) that standardises how AI applications connect to external tools and data.
 
 **Problem:** the M×N integration problem — every AI app (Claude, ChatGPT, IDEs, custom agents) needed custom integrations with every system (GitHub, Slack, Postgres, internal APIs). MCP makes it M+N: build one MCP server for a system, and any MCP client can use it. "USB-C for AI apps."
 
@@ -968,7 +968,7 @@ if __name__ == "__main__":
 
 ### OpenAI Assistants/Responses API, Agents SDK, Claude Agent SDK — what do they give you?
 
-- **OpenAI Assistants API:** earlier stateful API (threads, runs, hosted file search and code interpreter). Being **deprecated in favour of the Responses API** (sunset announced for 2026) — mention it as legacy.
+- **OpenAI Assistants API:** earlier stateful API (threads, runs, hosted file search and code interpreter). **Deprecated in favour of the Responses API**, with shutdown scheduled for August 2026 (verify whether it is already gone) — mention it as legacy.
 - **OpenAI Responses API:** the current primitive. Single endpoint combining chat with **built-in tools** (web search, file search over vector stores, code interpreter, computer use, image generation, remote MCP), server-side conversation state (`previous_response_id` / conversations), reasoning-item handling, structured outputs, streaming events.
 - **OpenAI Agents SDK** (Python/TS): lightweight framework on top — `Agent` (instructions + tools + model), runner loop, **handoffs** between agents, **guardrails** (input/output validation running in parallel), sessions for memory, built-in **tracing**, MCP support.
 - **Claude Agent SDK** (formerly Claude Code SDK; Python/TS): the agent harness that powers Claude Code, as a library. Gives the agent loop, built-in tools (file read/write/edit, bash, grep/glob, web search/fetch), automatic **context compaction**, **subagents**, **hooks** (run code before/after tool use for validation, logging, blocking), fine-grained **permissions**, MCP integration, skills, and session management. Good for building agents that work on files, code, or computers.
@@ -1108,7 +1108,7 @@ def run_suite(cases, system, baseline):
 
 **How big:**
 - Start with **30–100** carefully chosen cases to iterate quickly; this catches big problems.
-- Grow to **200–1,000+** for decisions requiring statistical confidence: detecting a 5-point change in pass rate needs a few hundred examples (standard error ≈ √(p(1-p)/n) — at n=400, p=0.8, SE ≈ 2%).
+- Grow to **200–1,000+** for decisions requiring statistical confidence: detecting a 5-point change in pass rate needs a few hundred examples (standard error ≈ √(p(1-p)/n) — at n=400, p=0.8, SE ≈ 2%, so the difference between two independent runs has SE ≈ 2.8% and 5 points is only borderline significant; paired comparisons on the same cases help).
 - Coverage matters more than raw size: every important category, language, edge case, and known failure mode should be represented.
 
 **How to build:**

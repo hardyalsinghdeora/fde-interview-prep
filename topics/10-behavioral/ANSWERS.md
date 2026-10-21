@@ -317,7 +317,7 @@ Questions: [README.md](README.md)
 - **L:** [What you do proactively now]
 
 **Example (adapt to your own experience):**
-"After a sales demo, a customer expected our LLM extraction tool to be 99% accurate on their contracts from day one. On their real documents our first test was about 80%. Rather than hoping it would improve, I shared the evaluation results in week one, broke the errors down by type, and laid out a plan: we could reach about 92% in a month with fine-tuned prompts and their feedback, and route low-confidence extractions to human review to make the end-to-end process reliable. I put the targets and dates in writing. They were disappointed at first but appreciated the transparency, and we hit 93% with human review on the remaining cases. They signed the annual contract."
+"After a sales demo, a customer expected our LLM extraction tool to be 99% accurate on their contracts from day one. On their real documents our first test was about 80%. Rather than hoping it would improve, I shared the evaluation results in week one, broke the errors down by type, and laid out a plan: we could reach about 92% in a month with better prompts, worked examples and their feedback, and route low-confidence extractions to human review to make the end-to-end process reliable. I put the targets and dates in writing. They were disappointed at first but appreciated the transparency, and we hit 93% with human review on the remaining cases. They signed the annual contract."
 
 **Pitfalls:**
 - Waiting until the deadline to share bad news.
@@ -1073,7 +1073,7 @@ Questions: [README.md](README.md)
 
 ### How would your manager / peers describe you?
 
-**What they're looking for:** Self-awareness, and consistency with what references will say. Back-channel references are common in FDE hiring, so be accurate.
+**What they're looking for:** Self-awareness, and consistency with what references will say. Reference checks (and informal back-channels) are common, especially at startups, so be accurate.
 
 **Framework:** Use real feedback — quote performance reviews or specific comments where possible. Give 2–3 traits, and include one growth area to show honesty.
 

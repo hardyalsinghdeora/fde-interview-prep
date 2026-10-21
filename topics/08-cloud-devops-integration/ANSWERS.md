@@ -155,10 +155,12 @@ def call(url, attempts=5, base=0.5, cap=20):
         try:
             r = requests.get(url, timeout=(3, 10))
             if r.status_code not in RETRYABLE: return r
-            wait = float(r.headers.get("Retry-After", 0)) or min(cap, base * 2**i)
+            ra = r.headers.get("Retry-After", "")
+            if ra.isdigit():                 # seconds form; honour it, don't jitter below it
+                time.sleep(int(ra)); continue
         except (requests.ConnectionError, requests.Timeout):
-            wait = min(cap, base * 2**i)
-        time.sleep(random.uniform(0, wait))  # full jitter
+            pass
+        time.sleep(random.uniform(0, min(cap, base * 2**i)))  # exponential backoff, full jitter
     raise RuntimeError(f"gave up on {url}")
 ```
 In production use a library (`tenacity`, `pybreaker`, Resilience4j, or the service mesh).
@@ -254,7 +256,7 @@ Always: build a connector abstraction, store sync state (cursors/watermarks), ha
 3. Map attributes/claims: email, name, stable user ID (`sub`/NameID — don't key on email alone), **groups** for role mapping.
 4. Decide JIT provisioning vs. SCIM; enforce SSO for the domain; keep a break-glass admin.
 5. Test with a pilot group; handle cert rotation (SAML signing certs expire); IdP-initiated vs. SP-initiated login.
-- Common gotchas: clock skew, wrong ACS/redirect URL, Entra group overage (>200 groups returns a link instead of the list), missing group claims config.
+- Common gotchas: clock skew, wrong ACS/redirect URL, Entra group overage (more than ~200 groups in a JWT, or 150 in SAML, returns a link to fetch them instead of the list), missing group claims config.
 
 ### JWTs — structure, validation, risks.
 
@@ -335,7 +337,7 @@ Common enterprise issue: corporate TLS-inspecting proxies re-sign traffic — yo
 
 ### OWASP Top 10 (injection, XSS, CSRF, SSRF, broken access control...).
 
-OWASP Top 10 (2021) is the standard list of web-app risks. Key ones and fixes:
+The OWASP Top 10 is the standard list of web-app risks. The categories below follow the 2021 edition; a 2025 edition has since been published (verify the final list) that keeps broken access control at #1, folds SSRF into it, and adds software supply chain failures and mishandling of exceptional conditions. Key ones and fixes:
 - **Broken access control (#1):** IDOR (`/invoices/124` showing another tenant's data), missing function-level checks. Fix: server-side authZ on every request, tenant scoping in queries, deny by default, tests.
 - **Cryptographic failures:** plaintext data, weak algorithms. Fix: TLS everywhere, strong hashing for passwords (bcrypt/argon2), KMS.
 - **Injection (SQL, command, LDAP):** untrusted input concatenated into queries. Fix: parameterised queries/ORM, no `shell=True`, input validation. (LLM-era cousin: **prompt injection** — treat model output as untrusted.)
@@ -430,7 +432,7 @@ Typical FDE default stack: containers on managed Kubernetes or Cloud Run/Fargate
 
 - **VPC peering:** private routing between two VPCs (same or cross-account/region). Simple, no bandwidth bottleneck. Cons: non-transitive, CIDRs must not overlap, opens network-level reachability both ways (customer security teams dislike this). Transit Gateway scales it to many VPCs.
 - **PrivateLink (AWS) / Private Endpoint (Azure) / Private Service Connect (GCP):** exposes **one service** (behind an NLB) to another VPC as a private endpoint. One-directional, consumer-initiated, overlapping CIDRs fine, no wider network exposure. **Best fit for SaaS-to-customer connectivity.**
-- **Site-to-site VPN:** IPsec tunnel over the internet between cloud and on-prem/another cloud. Quick to set up (hours), cheap, encrypted; bandwidth ~1.25 Gbps per tunnel and internet-dependent latency.
+- **Site-to-site VPN:** IPsec tunnel over the internet between cloud and on-prem/another cloud. Quick to set up (hours), cheap, encrypted; limited bandwidth per tunnel (about 1.25 Gbps for a standard AWS tunnel; verify current limits) and internet-dependent latency.
 - **Direct Connect (AWS) / ExpressRoute (Azure) / Cloud Interconnect (GCP):** dedicated private circuit from the customer's data centre to the cloud. Predictable latency, high bandwidth, doesn't traverse the public internet; takes weeks to provision, costs more. Usually already exists at large enterprises — you ride on it.
 - Rule of thumb: SaaS service to customer VPC → PrivateLink; customer on-prem → VPN (or their existing Direct Connect); full network merge between your own VPCs → peering/Transit Gateway.
 
@@ -601,7 +603,7 @@ CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
 - **Pod:** smallest deployable unit — one or more containers sharing network namespace (localhost) and volumes. Ephemeral; you rarely create them directly.
 - **Deployment:** manages a ReplicaSet to keep N identical, stateless pods running; handles rolling updates and rollbacks.
 - **Service:** stable virtual IP + DNS name (`api.ns.svc.cluster.local`) that load-balances across pods matched by label selector. Types: ClusterIP (internal), NodePort, LoadBalancer (cloud LB), headless.
-- **Ingress:** HTTP(S) routing from outside the cluster to services by host/path, with TLS termination; needs an ingress controller (NGINX, ALB, Traefik). The Gateway API is the newer successor.
+- **Ingress:** HTTP(S) routing from outside the cluster to services by host/path, with TLS termination; needs an ingress controller (NGINX, ALB, Traefik). The Gateway API is the newer successor, and the community ingress-nginx controller has been announced for retirement (verify status), so new installs should lean towards Gateway API.
 - **ConfigMap:** non-secret config as key-values or files, injected as env vars or mounted volumes.
 - **Secret:** same for sensitive values — only base64-encoded by default; enable etcd encryption, restrict RBAC, or sync from Vault/cloud secret managers.
 - **StatefulSet:** for stateful apps (databases, Kafka, vector DBs): stable pod names (`db-0`, `db-1`), ordered startup/shutdown, a persistent volume per pod that follows it.
@@ -714,7 +716,8 @@ spec:
 # Connected side
 skopeo copy docker://registry.example.com/app:2.4.1 oci-archive:app-2.4.1.tar
 sha256sum *.tar > SHA256SUMS && cosign sign-blob --key cosign.key SHA256SUMS > SHA256SUMS.sig
-# Air-gapped side
+# Air-gapped side: verify signature and checksums before importing
+cosign verify-blob --key cosign.pub --signature SHA256SUMS.sig SHA256SUMS   # flags vary by cosign version
 sha256sum -c SHA256SUMS
 skopeo copy oci-archive:app-2.4.1.tar docker://harbor.internal/app:2.4.1
 ```

@@ -19,7 +19,7 @@ Questions: [README.md](README.md)
 
 **Example bug and fix:**
 ```python
-# Bug: discount applied as integer division, and empty cart crashes
+# Bug: average uses integer (floor) division, and an empty list crashes
 def average_price(items):
     return sum(i["price"] for i in items) // len(items)
 
@@ -106,7 +106,7 @@ Tools: reproduce with the same input; `python -X faulthandler`, `pdb`/`breakpoin
 
 ### Find the memory leak / performance bottleneck in this code.
 
-**Common leak patterns:** unbounded caches/dicts, global lists that keep appending, listeners/callbacks never deregistered, closures capturing large objects, `lru_cache` on methods (holds `self`), unclosed files/connections, reference cycles with `__del__`.
+**Common leak patterns:** unbounded caches/dicts, global lists that keep appending, listeners/callbacks never deregistered, closures capturing large objects, `lru_cache` on methods (holds `self`), unclosed files/connections, large reference cycles (freed only when the cyclic GC runs, never if `gc` is disabled).
 
 ```python
 _cache = {}
@@ -115,7 +115,7 @@ def get_user(uid):
         _cache[uid] = db.fetch(uid)
     return _cache[uid]
 
-# Fix: bounded cache with eviction (and a TTL if data changes)
+# Fix: bounded cache with eviction (use e.g. cachetools.TTLCache if data changes; lru_cache has no TTL)
 from functools import lru_cache
 @lru_cache(maxsize=10_000)
 def get_user(uid):
@@ -141,7 +141,9 @@ class Account:
 
 acct = Account()
 threads = [threading.Thread(target=lambda: [acct.deposit(1) for _ in range(100_000)]) for _ in range(4)]
-# Expected 400_000, often less: lost updates
+for t in threads: t.start()
+for t in threads: t.join()
+print(acct.balance)   # expected 400_000, can be less: lost updates
 ```
 **Fix:** make the read-modify-write atomic.
 ```python
@@ -380,7 +382,7 @@ Find what the failing users have in common: IdP group, email domain, account age
 
 **Hypotheses:**
 1. **Attribute/claim mapping:** missing email or `NameID`, different format (UPN vs email), uppercase vs lowercase email mismatch with your user table, users without the required group claim. Capture the SAML assertion (SAML-tracer browser extension) or decode the OIDC ID token (`jwt.io` or `base64 -d`) for a failing and a working user and diff them.
-2. **Group/role assignment:** user not assigned to the app in Okta/Entra ID, or too many groups (Entra ID drops groups claims over 200 and sends an overage link instead; SAML header size limits).
+2. **Group/role assignment:** user not assigned to the app in Okta/Entra ID, or too many groups (Entra ID omits the groups claim above a limit, 150 groups in SAML and 200 in JWTs, and sends an overage indicator instead; cookie/header size limits).
 3. **Clock skew** on a server: assertions "not yet valid" or expired (`NotBefore`/`NotOnOrAfter`); fix NTP.
 4. **Multiple IdPs / domains:** users from an acquired company in a different tenant; home realm discovery routing wrong.
 5. **Just-in-time provisioning** fails for new users (duplicate username, required field null); existing users fine.
@@ -780,7 +782,7 @@ git bisect good                # or: git bisect bad
 git bisect reset               # return to where you started
 ```
 
-**Automate it** with a script that exits 0 for good, 1-127 for bad, and 125 to skip an untestable commit:
+**Automate it** with a command that exits 0 for good, 125 to skip an untestable commit, and any other code from 1 to 127 for bad:
 ```bash
 git bisect run pytest -x tests/test_invoice.py::test_total
 ```

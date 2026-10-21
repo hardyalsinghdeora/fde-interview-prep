@@ -10,7 +10,7 @@ Questions: [README.md](README.md)
 
 ### Decomposition: reduce 911 response times (call, traffic, ambulance GPS data).
 
-**Clarify:** Which part of response time — call answer, call processing (triage), dispatch, travel, or on-scene? Which agency (police/fire/EMS)? What target (e.g., NFPA 1710 suggests ~8 min for ALS arrival on 90% of calls)? Who is the user — dispatchers, EMS ops managers, city planners?
+**Clarify:** Which part of response time — call answer, call processing (triage), dispatch, travel, or on-scene? Which agency (police/fire/EMS)? What target (e.g., NFPA 1710 sets a 480-second *travel time* for ALS units on 90% of calls, on top of call-processing and turnout targets)? Who is the user — dispatchers, EMS ops managers, city planners?
 
 **Break the timeline down** (measure each segment first; you can't improve what isn't split):
 1. Call received → answered (staffing, queueing).
@@ -131,7 +131,7 @@ print(is_palindrome("A man, a plan, a canal: Panama"))       # True
 print(shortest_path(["..#", ".##", "..."], (0, 0), (2, 2)))   # 4
 ```
 
-Variants to expect: longest palindromic substring (expand around centre, O(n²)); "can delete one char" palindrome; grid with weighted cells (Dijkstra) or "can break k walls" (BFS over state (r, c, k)). No AI tools in Palantir rounds — practise writing these by hand, narrating, and testing on edge cases (empty input, start == end, unreachable). More: [../02-coding/ANSWERS.md](../02-coding/ANSWERS.md).
+Variants to expect: longest palindromic substring (expand around centre, O(n²)); "can delete one char" palindrome; grid with weighted cells (Dijkstra) or "can break k walls" (BFS over state (r, c, k)). Candidates report that AI tools are not allowed in Palantir rounds — practise writing these by hand, narrating, and testing on edge cases (empty input, start == end, unreachable). More: [../02-coding/ANSWERS.md](../02-coding/ANSWERS.md).
 
 ### Re-engineering / debugging: fix and improve a piece of buggy code.
 
@@ -146,7 +146,7 @@ Full checklist: [../12-debugging-troubleshooting/ANSWERS.md](../12-debugging-tro
 
 ### Learning: learn a concept/API in 60 minutes and apply it.
 
-Palantir weights this heavily for FDSE. They score learning behaviour: targeted questions, playing back your understanding ("so if I understand correctly..."), applying it, staying calm, and admitting gaps. Use the interviewer as a resource. Primers on likely topics (Bloom filters, consistent hashing, Raft, double-entry bookkeeping, ontologies, Git internals) and a full playbook: [../05-learning-round/ANSWERS.md](../05-learning-round/ANSWERS.md).
+Candidates report Palantir weights this heavily for FDSE. Interviewers look at learning behaviour: targeted questions, playing back your understanding ("so if I understand correctly..."), applying it, staying calm, and admitting gaps. Use the interviewer as a resource. Primers on likely topics (Bloom filters, consistent hashing, Raft, double-entry bookkeeping, ontologies, Git internals) and a full playbook: [../05-learning-round/ANSWERS.md](../05-learning-round/ANSWERS.md).
 
 ### Why Palantir? Are you comfortable with government/defense work?
 
@@ -221,7 +221,7 @@ More: [../01-recruiter-and-motivation/ANSWERS.md](../01-recruiter-and-motivation
 - **Production touches:** config for model names, retries with backoff, structured outputs (JSON schema), logging of prompts/latency/tokens/cost, basic tests, a one-command run (`make run` / Docker).
 - **README:** design decisions, trade-offs, what you'd do with more time, eval results with honest failure cases.
 
-Typical stack: OpenAI Responses API (or Chat Completions), `text-embedding-3-small/large` for embeddings, a vector store (pgvector, FAISS, or OpenAI's hosted file search), FastAPI or a simple CLI. For agents: the Agents SDK with function tools, guardrails and tracing. Check the current API docs — model names and recommended APIs change (OpenAI has said the Assistants API is being deprecated in favour of the Responses API) *(verify)*.
+Typical stack: OpenAI Responses API (or Chat Completions), `text-embedding-3-small/large` for embeddings, a vector store (pgvector, FAISS, or OpenAI's hosted file search), FastAPI or a simple CLI. For agents: the Agents SDK with function tools, guardrails and tracing. Check the current API docs — model names and recommended APIs change (in 2025 OpenAI announced the Assistants API would be deprecated in favour of the Responses API, with a 2026 sunset) *(verify)*.
 
 Details on RAG, agents and evals: [../06-ai-llm/ANSWERS.md](../06-ai-llm/ANSWERS.md).
 
@@ -279,7 +279,7 @@ Code for a retry wrapper and rate limiter: [../06-ai-llm/ANSWERS.md](../06-ai-ll
    - Retrieval over internal docs (hosted file search or own vector DB), structured outputs for anything downstream systems consume.
    - Guardrails: input/output moderation, PII redaction, allow-listed actions, human approval for high-risk actions (refunds, emails to customers).
    - Ops: evals in CI, tracing and logging, rate-limit handling, cost dashboards, fallbacks.
-   - Note: the Assistants API is being replaced by the Responses API; new builds should use Responses/Agents SDK *(verify current status)*.
+   - Note: OpenAI announced the Assistants API's deprecation in favour of the Responses API (sunset planned for 2026); new builds should use Responses/Agents SDK *(verify current status)*.
 
 **Rollout:** pilot group → measure against baseline → expand; security review and DPIA up front. Metrics: weekly active users, tasks automated, time saved, CSAT, cost per task.
 
@@ -401,14 +401,14 @@ O(1) per call; O(U) memory for U users. Follow-ups to expect: inject the clock f
 
 ### Coding: progressive/incremental problem with changing requirements (e.g., in-memory DB, bank system).
 
-**How these rounds work:** several levels (e.g., level 1 basic CRUD → level 2 filtering/scans → level 3 TTL/timestamps → level 4 history/rollback or merges). Unit tests unlock the next level. They score working code under time pressure and how well your design absorbs new requirements.
+**How these rounds reportedly work:** several levels (e.g., level 1 basic CRUD → level 2 filtering/scans → level 3 TTL/timestamps → level 4 history/rollback or merges). Unit tests unlock the next level. They score working code under time pressure and how well your design absorbs new requirements.
 
 **Strategy:**
 - Read all of the current level's spec carefully; pass the tests before polishing.
 - Keep a clean core data model and small methods so later levels slot in (e.g., store `timestamp` from the start if any method takes one).
 - Don't over-engineer level 1 for imagined level 4 — but avoid choices that are expensive to change (put all state behind one class).
 - Handle edge cases the spec mentions explicitly (missing keys return `""`/`None`, etc.); return types exactly as specified.
-- Use Claude if allowed in that round, but you must understand and verify everything.
+- If AI assistance is allowed in that round (policies vary and change — ask the recruiter), you must still understand and verify everything.
 
 **Sketch (in-memory DB with TTL):**
 
@@ -421,7 +421,7 @@ class InMemoryDB:
         return rec[1] is None or ts < rec[1]
 
     def set(self, ts: int, key: str, field: str, value: str, ttl: int | None = None) -> None:
-        self.data.setdefault(key, {})[field] = (value, ts + ttl if ttl else None)
+        self.data.setdefault(key, {})[field] = (value, ts + ttl if ttl is not None else None)
 
     def get(self, ts: int, key: str, field: str) -> str | None:
         rec = self.data.get(key, {}).get(field)
@@ -522,7 +522,7 @@ Benefits: scalable oversight (less human exposure to harmful content), **transpa
 - Core idea: **if-then commitments** — as models reach certain dangerous **capability thresholds**, stronger safeguards must be in place before training further or deploying.
 - **AI Safety Levels (ASL-1, 2, 3, 4...)**, modelled loosely on biosafety levels. Each level has **deployment standards** (preventing misuse, e.g., classifiers against CBRN weapons uplift) and **security standards** (protecting model weights from theft).
 - Thresholds focus on areas like **CBRN weapons** (chemical, biological, radiological, nuclear) uplift and **autonomous AI R&D**; models are evaluated before and after deployment.
-- **May 2025:** Anthropic activated **ASL-3** protections with the launch of Claude Opus 4 as a precaution.
+- **May 2025:** Anthropic activated **ASL-3** protections with the launch of Claude Opus 4 as a precautionary measure (later models and RSP revisions may have changed this — verify).
 - Governance: a Responsible Scaling Officer, internal and external review, published capability and safeguards reports.
 - Discussion points: strengths (concrete, testable commitments; influenced other labs' frontier safety frameworks and policy); critiques (self-governance, thresholds and evaluations are hard to define, commercial pressure). Having a balanced view is better than reciting.
 
@@ -623,9 +623,9 @@ More: [../03-system-design/ANSWERS.md](../03-system-design/ANSWERS.md).
 
 ### Credo questions: Scale values; government/defense customers.
 
-**Facts (verify on scale.com before the interview — values wording changes):** Scale AI provides data for AI (labelling, RLHF and evaluation data through its Data Engine and contributor platforms such as Remotasks/Outlier), evaluation and safety work (including public leaderboards via its research lab, SEAL), and AI applications for enterprise and government (e.g., the **Scale Donovan** platform and defense programs such as **Thunderforge** with the US DoD) *(verify)*. In June 2025 **Meta invested about $14 billion for a ~49% non-voting stake**; founder Alexandr Wang left to lead Meta's superintelligence effort, and **Jason Droege** became CEO. Several AI-lab customers reportedly reduced work with Scale afterwards, so government and enterprise matter even more.
+**Facts (verify on scale.com before the interview — values wording changes):** Scale AI provides data for AI (labelling, RLHF and evaluation data through its Data Engine and contributor platforms such as Remotasks/Outlier), evaluation and safety work (including public leaderboards via its research lab, SEAL), and AI applications for enterprise and government (e.g., the **Scale Donovan** platform and defense programs such as **Thunderforge** with the US DoD) *(verify)*. In June 2025 **Meta reportedly invested about $14 billion for a ~49% non-voting stake**; founder Alexandr Wang left to lead Meta's superintelligence effort, and **Jason Droege** became (initially interim) CEO *(verify current leadership)*. Several AI-lab customers reportedly reduced work with Scale afterwards, so government and enterprise matter even more.
 
-**Values:** Scale publishes a short list of company values; candidates report themes like **ambition**, **ownership**, **quality / attention to detail**, **customer obsession / urgency**, and a 2025 hiring principle Wang called **"MEI" (merit, excellence, intelligence)** *(exact current wording uncertain — check the careers page)*. Prepare one story per value.
+**Values:** Scale publishes a short list of company values; candidates report themes like **ambition**, **ownership**, **quality / attention to detail**, **customer obsession / urgency**, and a 2024 hiring principle Wang called **"MEI" (merit, excellence, intelligence)** *(exact current wording uncertain — check the careers page)*. Prepare one story per value.
 
 **Defense question:** Scale is openly pro-national-security (it has worked with the DoD and argues the US must lead in AI). Answer honestly and specifically, e.g., "Yes — I think it's important that democratic governments have reliable, well-evaluated AI, and data quality and evaluation are exactly where safety is decided. I'd want to understand the guardrails and the human-in-the-loop design on any program."
 
@@ -704,7 +704,7 @@ See: [../06-ai-llm/ANSWERS.md](../06-ai-llm/ANSWERS.md).
 - **MLflow:** experiment tracking (params, metrics, artifacts), model registry (in Unity Catalog, with aliases like `@champion`), model packaging and serving.
 - Feature engineering with feature tables (online/offline consistency, point-in-time joins to avoid leakage).
 - CI/CD for ML: code in git, Databricks Asset Bundles for deployment, dev/staging/prod workspaces, automated tests and validation gates.
-- Monitoring: data drift, prediction drift, model quality (Lakehouse Monitoring), retraining triggers.
+- Monitoring: data drift, prediction drift, model quality (Lakehouse Monitoring; product names change — verify), retraining triggers.
 
 **Spark:**
 - Lazy evaluation; **transformations** (narrow: `map`, `filter`; wide: `groupBy`, `join` cause a **shuffle**) vs **actions** (`count`, `write`) that trigger jobs → stages → tasks.
@@ -753,7 +753,7 @@ Write a one-paragraph answer you could say in 30 seconds: **product** (what it d
 ### What does an FDE there actually ship?
 
 Find out what "forward deployed" means at that company, because it varies:
-- **Palantir:** configures and builds on Foundry/AIP for a customer — pipelines, ontology, Workshop apps, AIP workflows — usually on-site, end to end.
+- **Palantir:** configures and builds on Foundry/AIP for a customer — pipelines, ontology, Workshop apps, AIP workflows — often on-site, end to end.
 - **OpenAI / Anthropic:** custom deployments of models for strategic customers — agents, RAG, evals, integrations, prompt/tool design — and feedback into product and research.
 - **Scale:** data and eval programs for labs and government customers, plus GenAI applications.
 - **Databricks:** customer lakehouse and GenAI solutions on the platform.

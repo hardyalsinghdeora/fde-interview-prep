@@ -18,6 +18,7 @@ SELECT salary
 FROM (
   SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS rnk
   FROM employees
+  WHERE salary IS NOT NULL   -- DESC puts NULLs first in Postgres; they would take rank 1
 ) t
 WHERE rnk = 2
 LIMIT 1;
@@ -25,6 +26,7 @@ LIMIT 1;
 -- Alternative without window functions
 SELECT DISTINCT salary
 FROM employees
+WHERE salary IS NOT NULL
 ORDER BY salary DESC
 OFFSET 1 LIMIT 1;          -- OFFSET N-1
 
@@ -35,7 +37,7 @@ WHERE salary < (SELECT MAX(salary) FROM employees);
 ```
 
 - Use `DENSE_RANK` so ties at the top don't push the real second value out (with `ROW_NUMBER`, two people on 100k would make 100k the "second highest").
-- Clarify: distinct salary or second person? Per department? (add `PARTITION BY department_id`). NULL salaries: `ORDER BY ... DESC` puts NULLs first in Postgres, so filter `WHERE salary IS NOT NULL` or use `DESC NULLS LAST`.
+- Clarify: distinct salary or second person? Per department? (add `PARTITION BY department_id`). NULL salaries: without the `IS NOT NULL` filter (or `DESC NULLS LAST`), a NULL would rank first and the top salary would come back as "second highest". `MAX` ignores NULLs, so the third version is safe.
 
 ### Find duplicate rows / emails.
 
@@ -533,7 +535,7 @@ ALTER TABLE bookings ADD CONSTRAINT no_overlap
 ```
 
 - Two intervals overlap iff `start1 < end2 AND start2 < end1`. Use `<=` if touching endpoints count as overlap.
-- The self-join is O(n^2) per room; for large data, sort by start and compare with `LAG(MAX(end_ts))` (a running max of end), which is O(n log n).
+- The self-join is O(n^2) per room in the worst case. For large data, sort by start and compare each booking's `start_ts` with the running max of `end_ts` over the earlier bookings (`MAX(end_ts) OVER (PARTITION BY room_id ORDER BY start_ts ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING)`). This flags every booking that overlaps an earlier one in O(n log n), but it does not list every pair.
 
 ## B. SQL concepts
 
@@ -1283,9 +1285,8 @@ df = pd.read_csv("customers.csv", dtype=str, keep_default_na=True,
 # Normalise column names
 df.columns = df.columns.str.strip().str.lower().str.replace(r"\W+", "_", regex=True)
 
-# Trim whitespace in string columns
-str_cols = df.select_dtypes("object").columns
-df[str_cols] = df[str_cols].apply(lambda s: s.str.strip())
+# Trim whitespace (every column is a string at this point)
+df = df.apply(lambda s: s.str.strip())
 
 # Fix types; invalid values become NaN/NaT instead of crashing
 df["amount"] = pd.to_numeric(df["amount"].str.replace(r"[$,]", "", regex=True), errors="coerce")
@@ -1298,7 +1299,7 @@ df = df.dropna(subset=["customer_id"])
 df["country"] = df["country"].fillna("UNKNOWN")
 
 # Deduplicate: keep most recent per key
-df = (df.sort_values("signup_date")
+df = (df.sort_values("signup_date", na_position="first")   # NaT must not count as "latest"
         .drop_duplicates(subset=["customer_id"], keep="last"))
 
 df = df.astype({"customer_id": "string", "country": "category"})
@@ -1340,8 +1341,8 @@ top3 = df.sort_values("amount", ascending=False).groupby("region").head(3)
 pt = pd.pivot_table(df, index="region", columns="month", values="amount",
                     aggfunc="sum", fill_value=0, margins=True)
 
-# Unpivot (wide -> long)
-long = pt.reset_index().melt(id_vars="region", var_name="month", value_name="revenue")
+# Unpivot (wide -> long); drop the "All" margins first or they become fake rows
+long = pt.drop(index="All", columns="All").reset_index().melt(id_vars="region", var_name="month", value_name="revenue")
 ```
 
 - `pivot` requires unique index/column pairs (errors on duplicates); `pivot_table` aggregates them. `groupby` drops NaN keys by default — use `dropna=False` to keep them. `agg` vs `transform` vs `apply`: aggregate reduces, transform keeps shape, apply is flexible but slow.

@@ -112,7 +112,7 @@ Questions: [README.md](README.md)
 
 **Red flags:** FDEs routinely get handed scope sales promised without technical input; blurred ownership and lots of blame when things slip.
 
-**When to ask:** hiring manager or an FDE. At Palantir, specifically ask about the Deployment Strategist pairing.
+**When to ask:** hiring manager or an FDE. At Palantir, where engineers typically work alongside Deployment Strategists, ask specifically how that pairing works.
 
 ### What does the FDE team's on-call or escalation process look like?
 

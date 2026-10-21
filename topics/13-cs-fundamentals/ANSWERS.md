@@ -212,7 +212,7 @@ def cpu(n): return sum(i*i for i in range(n))
 # ThreadPoolExecutor(4).map(cpu, [10**7]*4)   -> ~same time as serial
 # ProcessPoolExecutor(4).map(cpu, [10**7]*4)  -> ~4x faster on 4 cores
 ```
-For CPU parallelism use `multiprocessing`/`ProcessPoolExecutor`. Note: Python 3.13+ has an experimental free-threaded build (PEP 703) without the GIL.
+For CPU parallelism use `multiprocessing`/`ProcessPoolExecutor`. Note: Python 3.13 added an experimental free-threaded build without the GIL (PEP 703), and 3.14 made it officially supported, though still an optional separate build (verify current status). The default CPython build still has the GIL, and some C extensions are not yet free-threading safe.
 
 ### async/await vs. threads vs. multiprocessing — when to use each.
 - **asyncio (async/await)** — single thread, cooperative multitasking on an event loop. Best for **high-concurrency I/O** (thousands of HTTP calls, websockets, LLM API fan-out). Very cheap per task. Pitfall: any blocking call (`requests`, `time.sleep`, CPU work) stalls everything — use async libs (`httpx`, `asyncpg`) or `asyncio.to_thread`.
@@ -370,7 +370,7 @@ In-memory data-structure server, single-threaded command execution (atomic ops),
 - **Queues / streams** — lists (`LPUSH`/`BRPOP`), Redis Streams with consumer groups; backs Celery/RQ/Sidekiq.
 - **Pub/Sub** — fan-out for websockets across servers.
 - **Leaderboards** — sorted sets (`ZADD`, `ZRANGE`).
-- **Counters, sets, HyperLogLog** (unique counts), geospatial, and vector search (Redis Stack).
+- **Counters, sets, HyperLogLog** (unique counts), geospatial, and vector search (Redis Stack, built into Redis 8+).
 
 Not a primary system of record for critical data unless persistence and replication are configured deliberately.
 

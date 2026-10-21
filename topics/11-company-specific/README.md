@@ -5,7 +5,7 @@
 ---
 
 ## Palantir — Forward Deployed Software Engineer (FDSE)
-**Reported loop:** recruiter call → online HackerRank / technical phone screen (coding + sometimes decomposition) → onsite drawn from: coding, decomposition, learning, re-engineering/debugging, system design → hiring manager. Decomposition and learning are weighted heavily for FDSE. AI tool use is not allowed.
+**Reported loop:** recruiter call → online HackerRank / technical phone screen (coding + sometimes decomposition) → onsite drawn from: coding, decomposition, learning, re-engineering/debugging, system design → hiring manager. Decomposition and learning are reportedly weighted heavily for FDSE, and AI tool use is reportedly not allowed.
 
 - [ ] Decomposition: reduce 911 response times (call, traffic, ambulance GPS data).
 - [ ] Decomposition: pipeline that ingests hospital records and flags readmission risk.

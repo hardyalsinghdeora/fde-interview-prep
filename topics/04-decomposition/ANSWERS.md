@@ -242,7 +242,7 @@ A habit that works in every prompt: **say what decision you are improving before
 - Decision: which returns to audit, given limited auditor hours, and which segment (self-employed, cash businesses, high net worth) to focus on.
 - Success: additional tax assessed per audit hour, the "no-change" audit rate (audits that find nothing, which waste time and burden honest taxpayers), and voluntary compliance (deterrence).
 
-**Scope.** Third-party information mismatch for one segment, e.g. self-employed income vs payment-card (1099-K) and bank data. Cash and gig work is where most of the tax gap is.
+**Scope.** Third-party information mismatch for one segment, e.g. self-employed income vs payment-card (1099-K) and bank data. Income with little or no third-party reporting (cash, self-employment, gig work) has by far the highest misreporting rate in IRS tax-gap estimates.
 
 **MECE breakdown.** (1) Income visibility: third-party reported vs not. (2) Matching: reported vs third-party data. (3) Risk scoring for income not covered by third-party reports (lifestyle and industry norms). (4) Audit selection and workflow. (5) Feedback from audit outcomes.
 
@@ -497,9 +497,9 @@ A habit that works in every prompt: **say what decision you are improving before
 **Clarify**
 - Users: clinical operations (site selection and feasibility), site coordinators (screen patients), and the study team.
 - Decision: which sites to open, which patients to approach, which protocol criteria to relax.
-- Success: time to first patient in and to last patient in, screen-fail rate, enrolment per site per month, and diversity of enrolled patients (FDA diversity action plans).
+- Success: time to first patient in and to last patient in, screen-fail rate, enrolment per site per month, and diversity of enrolled patients (FDA diversity action plan requirements; verify current guidance status).
 
-**Scope.** Site selection for one upcoming trial in one indication: about 80% of trials miss enrolment timelines, often because of poor sites.
+**Scope.** Site selection for one upcoming trial in one indication: an often-cited industry figure is that about 80% of trials miss enrolment timelines, frequently because of poorly chosen sites.
 
 **MECE breakdown.** (1) Protocol feasibility: are the criteria too strict? (2) Site selection. (3) Patient identification at sites. (4) Patient engagement and retention. (5) Operational monitoring.
 
@@ -597,11 +597,11 @@ A habit that works in every prompt: **say what decision you are improving before
 ### Help doctors spend less time on documentation.
 
 **Clarify**
-- Users: physicians in a specific setting (primary care is the biggest pain: about 2 hours of EHR work per hour of patient care, plus "pajama time" charting at night), plus nurses and coders downstream.
+- Users: physicians in a specific setting (primary care is the biggest pain: one widely cited time-motion study (Sinsky et al., 2016) found nearly 2 hours of EHR and desk work per hour of direct patient time, plus "pajama time" charting at night), plus nurses and coders downstream.
 - Which documentation: visit notes, in-basket messages, prior auth letters, discharge summaries?
 - Success: time in notes per visit and after-hours EHR time (from EHR audit logs, e.g. Epic Signal), note quality, burnout scores, patient experience.
 
-**Scope.** Ambient AI scribe for outpatient visits in one specialty clinic, about 20 physician volunteers. The market has proven it (Nuance DAX / Microsoft Dragon Copilot, Abridge, Ambience).
+**Scope.** Ambient AI scribe for outpatient visits in one specialty clinic, about 20 physician volunteers. Vendors already sell this (e.g. Microsoft Dragon Copilot / DAX, Abridge, Ambience; the landscape changes quickly, so verify).
 
 **MECE breakdown.** (1) Capture: audio, consent. (2) Generation: transcript to structured note (SOAP / HPI). (3) Review and edit by the physician. (4) EHR integration: note, orders, codes. (5) Downstream: coding, patient instructions, in-basket replies.
 
@@ -726,7 +726,7 @@ A habit that works in every prompt: **say what decision you are improving before
 - Decision: route (weather routing), speed (slow steaming), trim and hull cleaning timing, bunkering port.
 - Success: fuel consumption per nautical mile at a given speed, $ fuel per voyage, on-time arrival, CO2 intensity (IMO CII rating, EU ETS costs).
 
-**Scope.** Speed optimisation on one trade lane: fuel use rises roughly with the cube of speed, so arriving "just in time" rather than sailing fast and waiting at anchor saves the most.
+**Scope.** Speed optimisation on one trade lane: fuel burn per hour rises roughly with the cube of speed (per nautical mile, roughly the square), so arriving "just in time" rather than sailing fast and waiting at anchor saves the most.
 
 **MECE breakdown.** (1) Voyage planning: route, speed, ETA. (2) Vessel efficiency: hull fouling, trim, engine. (3) Port operations: waiting time, berth scheduling. (4) Fuel procurement: where and when to bunker. (5) Emissions compliance.
 
@@ -1523,9 +1523,9 @@ Plus cross-cutting: permissions, audit trail, exception handling, human approval
 **Estimate (top-down via the fleet)**
 - Population about 39M; roughly 0.75 registered light-duty vehicles per person, so about 30M vehicles.
 - New car sales about 1.8M per year. EV share of new sales roughly 5% around 2018, rising to about 20–25% recently.
-- Sum EV sales over the last ~10 years: about 0.1 + 0.15 + 0.15 + 0.15 + 0.25 + 0.35 + 0.4 + 0.4 + 0.4 + 0.4 ≈ 2.75M, minus scrappage and cars moved out of state (say 15–20%), giving **about 2.2–2.4M**, or about 7–8% of the fleet.
+- Sum EV sales over the last ~10 years: about 0.1 + 0.1 + 0.15 + 0.15 + 0.15 + 0.25 + 0.35 + 0.4 + 0.4 + 0.4 ≈ 2.45M cumulative sales. Subtract scrappage and cars that leave the state (many off-lease EVs are resold elsewhere; say 25–35%), giving **about 1.6–1.8M**, or about 5–6% of the fleet.
 
-**Sanity check (bottom-up).** About 13M households, about 15% have an EV, some own two → about 2.2M. Both methods agree. California's own Energy Commission data reports cumulative ZEV sales in the low millions, consistent with this.
+**Sanity check (bottom-up).** About 13M households, about 10–12% have an EV, some own two → about 1.5–1.7M. Both methods land in the same range. Then name a real check: California Energy Commission data shows cumulative ZEV sales of roughly 2M by the mid-2020s and a noticeably smaller on-road count, which is why the out-of-state adjustment matters (verify current figures).
 
 **Tool to track it**
 - **Users:** state energy planners, utilities (grid load), charging-network planners.
@@ -1539,7 +1539,7 @@ The interviewer is checking structure, sensible assumptions and sanity checks, n
 
 ## F. Typical interviewer follow-ups / push-backs
 
-Push-backs are a test of how you adapt, not proof that you are wrong. A good pattern: **acknowledge → restate what changed → adjust the plan out loud → say the trade-off.** The examples below use the hospital readmissions prompt (B) as a running case, so you can see how one plan bends under each push-back.
+Push-backs are a test of how you adapt, not proof that you are wrong. A good pattern: **acknowledge → restate what changed → adjust the plan out loud → say the trade-off.** The examples below use the hospital readmissions prompt (B) as a running case, so you can see how one plan bends under each push-back. They are illustrative, not real engagements: adapt them to your own experience.
 
 ### Who is the actual user, and what does their day look like?
 
@@ -1639,7 +1639,7 @@ Plus **guardrails** that must not get worse: ED revisits, mortality, length of s
 4. **Let them override and capture why** (override reasons are your best feedback data).
 5. **Start where the model clearly helps** (a decision support aid, not a replacement) and keep the human in charge.
 
-**Example:** "A nurse said the list flags patients she already knows are high risk. That's useful: the value is then in the patients she wouldn't have expected, so I'd highlight those, and add 'why flagged' reasons."
+**Example (adapt to your own experience):** "A nurse said the list flags patients she already knows are high risk. That's useful: the value is then in the patients she wouldn't have expected, so I'd highlight those, and add 'why flagged' reasons."
 
 ### The stakeholder disagrees with your priority. How do you handle it?
 
@@ -1696,7 +1696,7 @@ Plus **guardrails** that must not get worse: ED revisits, mortality, length of s
 
 The test: **has a second customer needed it?** Build it the first time, notice it the second, productise it the third. Feed back to the product team with evidence (how many customers, how much time it would save).
 
-**Example:** "The Epic connector and the worklist UI were reused at the next two hospitals with only configuration, so those went to product. The specific nurse-call script stayed bespoke."
+**Example (adapt to your own experience):** "The Epic connector and the worklist UI were reused at the next two hospitals with only configuration, so those went to product. The specific nurse-call script stayed bespoke."
 
 ### Now add a constraint: no internet / no cloud / legacy mainframe. What changes?
 
@@ -1723,4 +1723,4 @@ The test: **has a second customer needed it?** Build it the first time, notice i
 7. **Align incentives with leadership:** make sure managers measure what the tool helps, and don't use it to punish.
 8. **Measure adoption** (weekly active users, % of recommendations acted on) and follow up on non-users personally.
 
-**Example:** "The crew chiefs ignored the fleet status board because they still had to email the morning report. Once the board generated the morning report automatically, everyone used it within two weeks."
+**Example (adapt to your own experience):** "The crew chiefs ignored the fleet status board because they still had to email the morning report. Once the board generated the morning report automatically, everyone used it within two weeks."

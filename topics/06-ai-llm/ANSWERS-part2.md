@@ -175,7 +175,7 @@ def call_with_backoff(max_attempts=6, base=1.0, cap=60.0, **kwargs):
             retry_after = None
             resp = getattr(e, "response", None)
             if resp is not None and resp.headers.get("retry-after"):
-                retry_after = float(resp.headers["retry-after"])
+                retry_after = min(cap, float(resp.headers["retry-after"]))
             # "full jitter": random in [0, min(cap, base * 2^attempt)]
             delay = retry_after or random.uniform(0, min(cap, base * 2 ** attempt))
             time.sleep(delay)
@@ -204,11 +204,11 @@ First measure: **TTFT** (time to first token, dominated by prefill/queueing) vs.
 Start with a **cost breakdown by feature/step** (input vs. output tokens per call) — usually a few prompts drive most spend.
 
 - **Model routing/cascading:** cheap model by default, escalate to a large model on low confidence or hard classifications. Often 50–80% of traffic can go to the small model with no quality loss — prove it with evals.
-- **Prompt caching:** long, stable prefixes (system prompt, tool definitions, documents) placed first; cached reads are billed at a fraction (e.g. ~10% on Anthropic) of normal input price.
+- **Prompt caching:** long, stable prefixes (system prompt, tool definitions, documents) placed first; cached reads are billed at a fraction (e.g. ~10% or less on Anthropic, depending on model — verify) of normal input price.
 - **Response caching:** exact-match cache (hash of prompt + params) and semantic cache (embedding similarity) for FAQs — careful with personalised or time-sensitive answers.
 - **Batch APIs:** ~50% discount for async jobs completed within 24h — use for evals, backfills, nightly classification, enrichment.
 - **Prompt compression:** trim instructions, fewer few-shot examples (or fine-tune them in), retrieve fewer/shorter chunks, summarise conversation history, strip HTML/boilerplate.
-- **Output control:** output tokens cost 3–5x input; ask for terse outputs and JSON.
+- **Output control:** output tokens typically cost ~4–8x input (verify current pricing); ask for terse outputs and JSON.
 - **Fine-tune/distil** a small model for high-volume narrow tasks.
 - **Avoid LLMs where unnecessary:** regex, classifiers, embeddings + rules.
 - **Governance:** per-tenant budgets, cost dashboards, alerts on anomalies (a looping agent can burn thousands).
@@ -256,7 +256,7 @@ Start with a **cost breakdown by feature/step** (input vs. output tokens per cal
 - **Two timeouts:** a connect/TTFT timeout (e.g. 10–30s) and an **idle timeout between chunks** (e.g. 15–30s with no tokens = stalled), plus an overall deadline. Don't use one short total timeout for long generations.
 - **Retry before first token:** if nothing was sent to the user, retry transparently (with backoff, or fall back to another model/region).
 - **After partial output:**
-  - For chat UIs: keep what was shown, show "response interrupted — retry", and retry the whole request (simplest and correct). Or request a continuation by sending the partial text as a prefilled assistant message, where supported.
+  - For chat UIs: keep what was shown, show "response interrupted — retry", and retry the whole request (simplest and correct). Or request a continuation by sending the partial text as a prefilled assistant message, where the model still supports prefill (many newer models don't — verify).
   - For structured output (JSON) or tool calls: never act on partial output — buffer, validate the complete object, and retry the whole call if it is incomplete.
 - **Check the stop reason:** `max_tokens` means truncated — increase the budget or continue; don't treat as complete.
 - **Idempotency:** if the stream triggers side effects (tool calls), make them idempotent with request IDs so a retry doesn't double-execute.
@@ -423,7 +423,7 @@ The LLM is not a security boundary — **enforce isolation in deterministic code
 - **Tools act as the user:** pass the end user's identity/OAuth token to downstream APIs so existing permissions apply; no shared super-user service account.
 - **Caches:** include tenant ID (and user ID where answers are personal) in cache keys — semantic caches are a classic leak.
 - **Conversation memory:** scoped per user; long-term memory stores keyed and access-controlled.
-- **Prompt caching:** provider caches are org-scoped, but don't build shared prefixes containing tenant data.
+- **Prompt caching:** provider caches are isolated per org/workspace (not shared across provider customers), but within your own account don't build shared prefixes containing tenant data.
 - **Fine-tuning:** never fine-tune a shared model on multiple tenants' private data — the model can regurgitate it. Per-tenant adapters if needed.
 - **Logs/traces/evals:** access-controlled, tenant-tagged; don't use one tenant's data in another's evals.
 - **Output checks:** scan for other tenants' identifiers/PII as a backstop.
@@ -803,7 +803,7 @@ def evaluate(cases, run_fn, graders, config):
 
 Could build on promptfoo, Braintrust, LangSmith, or Inspect — mention you'd use one in production but built a thin harness to show understanding.
 
-**Defending choices:** why these graders (deterministic wherever possible, judge only for subjective qualities), how you validated the judge, dataset size vs. statistical power (with 100 cases, a 5-point difference is roughly the noise floor), and how failures flow back into the dataset.
+**Defending choices:** why these graders (deterministic wherever possible, judge only for subjective qualities), how you validated the judge, dataset size vs. statistical power (with 100 cases, a 5-point difference is within noise — SE ≈ 4 points per run), and how failures flow back into the dataset.
 
 ### Build a customer-support bot prototype and present it as if to the customer.
 
@@ -818,7 +818,7 @@ Could build on promptfoo, Braintrust, LangSmith, or Inspect — mention you'd us
 **Presenting to the customer (15–20 min):**
 1. **Their problem in their numbers:** "You handle ~X tickets/month; ~40% are order-status and returns questions."
 2. **Live demo** of 3–4 real scenarios: a clean answer with citation, an action (order lookup), a graceful handoff, and a refusal/out-of-scope case — showing failure handling builds trust.
-3. **Results:** eval table — "Correctly resolved 82% of in-scope test tickets; escalated correctly in 95% of cases needing a human; 0 policy fabrications in 100 tests."
+3. **Results:** eval table (illustrative numbers) — "Correctly resolved 82% of in-scope test tickets; escalated correctly in 95% of cases needing a human; 0 policy fabrications in 100 tests."
 4. **Limitations, honestly:** what it can't do yet and the known failure modes.
 5. **Business case:** projected deflection, cost per conversation vs. human handling, CSAT impact to measure.
 6. **Rollout plan:** internal pilot with agents → agent-assist mode → small % of live traffic → expand intents; success metrics and the decisions you need from them (data access, owners, brand guidelines, escalation rules).
@@ -857,7 +857,7 @@ What interviewers want: that your decisions were **deliberate and evidence-based
 
 **Why this chunking strategy?**
 - Tie it to the corpus: "The docs are structured with headings, so I chunked by section with a ~600-token cap and ~10% overlap — answers are usually self-contained in a section."
-- Show the alternatives you considered: fixed-size, sentence-based, semantic chunking, parent-child (small chunks for retrieval, return the parent section), contextual retrieval (prepend a doc-level summary to each chunk).
+- Show the alternatives you considered: fixed-size, sentence-based, semantic chunking, parent-child (small chunks for retrieval, return the parent section), contextual retrieval (prepend LLM-generated, chunk-specific context to each chunk before embedding and BM25).
 - Show evidence: "I compared 300 vs. 800 tokens; recall@5 was X vs. Y." If you didn't test, say so and say how you would.
 
 **Why not another retrieval method?**

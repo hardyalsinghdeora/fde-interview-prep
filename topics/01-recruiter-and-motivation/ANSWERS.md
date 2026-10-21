@@ -207,7 +207,7 @@ Answer factually; never overstate.
 - **If not, but eligible:** "I don't currently hold one, but I'm a [citizen of X] and [have no issues that would prevent me getting one]. I'm willing to go through the process."
 - **If not eligible:** be upfront, and ask whether there are non-cleared customer teams.
 
-Clearance eligibility typically depends on citizenship, background, finances and foreign contacts. Many US government roles require US citizenship.
+Clearance eligibility typically depends on citizenship, background, finances and foreign contacts. US clearances generally require US citizenship; UK and other countries have their own nationality and residency rules (verify for the role).
 
 ### Work authorisation / visa sponsorship?
 
@@ -227,8 +227,8 @@ State the facts in one or two sentences:
 **Goal:** don't anchor low; get the band first; stay collaborative.
 
 **Approach:**
-1. **Deflect politely first:** "I'd like to understand the role and level better first. Could you share the band for this position?" In many US states and some countries, the range must be disclosed in the posting.
-2. **If pressed, give a researched range** (levels.fyi, posted ranges, peers) based on total compensation, with your target near the bottom: "Based on my research for FDE roles at this level in [location], I'm looking at total compensation in the range of [X–Y], depending on the equity and level."
+1. **Deflect politely first:** "I'd like to understand the role and level better first. Could you share the band for this position?" Several US states and some countries require the range to be disclosed in the posting (check your location).
+2. **If pressed, give a researched range** (levels.fyi, posted ranges, peers) based on total compensation, with the bottom of the range at or above your real target (you'll usually be offered near the bottom): "Based on my research for FDE roles at this level in [location], I'm looking at total compensation in the range of [X–Y], depending on the equity and level."
 3. **Keep it open:** "I'm flexible on the mix of base and equity — the role matters most."
 
 **Pitfalls:** stating your current salary (not required, and illegal to ask in some places); a single number; apologising.
