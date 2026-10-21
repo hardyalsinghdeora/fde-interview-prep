@@ -1383,7 +1383,7 @@ def letter_combinations(digits):
     return res
 ```
 
-- Generate parentheses: O(4ⁿ/√n) results (Catalan number), each of length 2n.
+- Generate parentheses: the number of results is the nth Catalan number, ~4ⁿ/(n√n); each has length 2n, so total time and output space are O(4ⁿ/√n).
 - Letter combinations: O(4ⁿ·n) time and output space. The iterative version shown is equivalent to backtracking.
 
 ## Dynamic programming

@@ -1,8 +1,8 @@
 # 02 — Coding Questions
 
 FDE coding rounds come in three flavours:
-1. **Classic DS&A** (LeetCode easy–medium, sometimes hard). Common at Palantir, Scale, Databricks.
-2. **Practical / incremental**: one problem that grows in stages as requirements change (Anthropic, OpenAI, Ramp, CodeSignal "progressive" format).
+1. **Classic DS&A** (LeetCode easy–medium, sometimes hard). Reportedly common at Palantir, Scale, Databricks.
+2. **Practical / incremental**: one problem that grows in stages as requirements change (reported at Anthropic, OpenAI, Ramp; CodeSignal "progressive" format). Formats change, so confirm with your recruiter.
 3. **Applied / API coding**: call an API, parse JSON, handle errors and pagination, build a small service.
 
 Languages: Python is the safe default. Know one of Java/TypeScript/Go as well.

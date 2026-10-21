@@ -61,7 +61,7 @@ def shortest_path(grid, k=0):
     if not grid or not grid[0]:
         return -1
     R, C = len(grid), len(grid[0])
-    if k >= R + C - 2:                      # can walk straight through anything
+    if k >= R + C - 1:                      # enough to clear every cell on a shortest path
         return R + C - 2
     start_k = k - grid[0][0]
     if start_k < 0:
@@ -320,7 +320,7 @@ This is the classic CodeSignal "progressive" format: each level adds requirement
 - Level 1: create, deposit, transfer (validate existence, distinct accounts, funds).
 - Level 2: top-n spenders by outgoing total, ties by id: sort, or a heap for O(A log n).
 - Level 3: scheduled payments in a min-heap keyed by `(execute_at, seq)`; process due ones at the start of every operation; cancel by marking.
-- Level 4: merge accounts: move balance, outgoing totals and pending payments; record the merge so history queries still work.
+- Level 4: merge accounts: move balance, outgoing totals and pending payments. If `balance_at` must still answer for the absorbed account's past, keep its history (e.g. a `merged_into` map plus the merge timestamp) instead of deleting it; the code below simply drops it.
 
 ```python
 import heapq
@@ -973,8 +973,9 @@ def evaluate(s: str):
             return t
         if t == "(":
             v = expr()
-            if take() != ")":
+            if peek() != ")":
                 raise SyntaxError("expected )")
+            take()
             return v
         if t in ("+", "-"):
             v = factor()
@@ -1412,8 +1413,8 @@ def chunk(text, max_tokens=200, overlap_tokens=40):
             keep, kt = [], 0                            # carry trailing sentences as overlap
             for prev in reversed(cur):
                 pt = count_tokens(prev)
-                if kt + pt > overlap_tokens:
-                    break
+                if kt + pt > overlap_tokens or kt + pt + t > max_tokens:
+                    break                                # overlap must leave room for s
                 keep.insert(0, prev); kt += pt
             cur, cur_tok = keep, kt
         cur.append(s); cur_tok += t
@@ -1550,7 +1551,7 @@ def parse_tool_call(text: str, tools: dict):
 def message_tokens(msg) -> int:
     # Approximation (~4 chars/token in English). In production, use the provider's
     # token counting endpoint (e.g. Anthropic messages.count_tokens) or its tokenizer.
-    return len(msg["content"]) // 4 + 4               # + per-message overhead
+    return len(msg.get("content") or "") // 4 + 4     # + per-message overhead
 
 def truncate_history(system, messages, context_window, max_output, margin=500):
     budget = context_window - max_output - margin - message_tokens({"content": system})
@@ -1738,6 +1739,11 @@ class CircuitBreaker:
         except self.expected:
             self._on_failure()
             raise
+        except BaseException:
+            with self.lock:                          # not a dependency failure: free the trial slot
+                if self.state == "half_open":
+                    self.trials -= 1
+            raise
         self._on_success()
         return result
 ```
@@ -1812,6 +1818,8 @@ import os, re, sys, time
 from collections import deque
 
 def last_lines(path, n=10, block=4096):
+    if n <= 0:
+        return []
     with open(path, "rb") as f:
         f.seek(0, os.SEEK_END)
         pos, data = f.tell(), b""
@@ -2052,7 +2060,7 @@ class Elevator:
         self.down_stops: set[int] = set()
 
     def add_stop(self, floor: int):
-        if floor == self.floor and self.dir == Dir.IDLE:
+        if floor == self.floor:                         # already here: doors open now
             return
         (self.up_stops if floor > self.floor else self.down_stops).add(floor)
 
@@ -2642,7 +2650,7 @@ class PricingStrategy:
     def price(self, room: Room, start: date, end: date) -> float:
         total, d = 0.0, start
         while d < end:
-            total += room.base_rate * (1.2 if d.weekday() >= 4 else 1.0)   # Fri/Sat uplift
+            total += room.base_rate * (1.2 if d.weekday() in (4, 5) else 1.0)   # Fri/Sat nights uplift
             d += timedelta(days=1)
         return round(total, 2)
 
@@ -3139,7 +3147,7 @@ class ThreadSafeLRU:
 
 ### Now the requirement changed to X — how do you extend your code?
 
-**What they want:** to see that your code was structured for change and that you can modify it calmly without breaking what works (this is the core of the "progressive" format at Anthropic, OpenAI, Ramp and CodeSignal-style rounds).
+**What they want:** to see that your code was structured for change and that you can modify it calmly without breaking what works (this is the core of the "progressive" format reportedly used at Anthropic, OpenAI and Ramp, and of CodeSignal-style rounds).
 
 **How to handle it live:**
 1. **Restate the new requirement and clarify** its interaction with existing behaviour ("Should scheduled payments count towards top spenders?").
