@@ -80,6 +80,7 @@ Loops vary by company and change often. The table shows a typical/reported shape
 - [ ] How do you write an LLM-as-judge rubric that the customer's domain experts trust?
 - [ ] How do you turn a customer's vague success criteria into numbers both sides sign off on?
 - [ ] Eval scores look good but the customer's end users are unhappy. What is going on?
+- [ ] The customer needs the same use case in eight languages. How do you evaluate and tune quality across languages?
 
 ### Model selection and migration
 - [ ] A customer asks which model they should use. Walk through how you decide.
@@ -247,6 +248,15 @@ The eval is measuring something different from what users experience. Check:
 - **Expectation gap:** users were promised more than the system was designed to do.
 
 Actions: read 50 real complaints and conversations, label them, add the failures to the eval set, and add user-facing metrics (thumbs-down rate, escalations, task completion) to the dashboard alongside offline scores.
+
+#### The customer needs the same use case in eight languages. How do you evaluate and tune quality across languages?
+- **Do not assume English results transfer.** Quality, refusal behaviour, tone and token counts (and so cost and latency) all vary by language.
+- **Build a per-language eval slice:** real inputs from each market where possible; translated English cases only as a stopgap, because translation removes local phrasing, names, formats (dates, addresses, currency) and code-switching.
+- **Native-speaker labels and review** for each language, at least for a calibration sample. Validate any LLM judge per language, not only in English.
+- **Report per language** against the same thresholds; a good average can hide one weak market.
+- **Decide prompt strategy by evals:** usually one English system prompt with "reply in the user's language" works well; add language-specific examples or terminology lists (product names, legal terms) where a language underperforms.
+- **Check the full pipeline:** retrieval and embeddings in each language (or cross-language retrieval), OCR or speech recognition quality, and whether source documents exist in that language.
+- **Plan the rollout by language,** starting where quality and volume are highest, with a human fallback in weaker languages.
 
 ### Model selection and migration
 
@@ -456,11 +466,11 @@ def ask(question, max_steps=5):
         for b in r.content:
             if b.type == "tool_use":
                 try:
-                    out = HANDLERS[b.name](**b.input)
-                except Exception as e:
-                    out = {"error": str(e)}
+                    out, err = HANDLERS[b.name](**b.input), False
+                except Exception as e:                   # unknown tool or bad arguments
+                    out, err = {"error": str(e)}, True
                 results.append({"type": "tool_result", "tool_use_id": b.id,
-                                "content": json.dumps(out)})
+                                "content": json.dumps(out), "is_error": err})
         messages.append({"role": "user", "content": results})
     return "Sorry, I could not complete that."
 
@@ -484,7 +494,7 @@ async def run_one(name, item, sem):
         t = time.perf_counter()
         r = await client.messages.create(model=MODEL, max_tokens=300, system=PROMPTS[name],
                                          messages=[{"role": "user", "content": item["input"]}])
-        out = r.content[0].text
+        out = "".join(b.text for b in r.content if b.type == "text")
         return {"prompt": name, "score": score(out, item["expected"]),
                 "latency": time.perf_counter() - t, "out_tokens": r.usage.output_tokens}
 
@@ -498,7 +508,7 @@ async def main():
               f"avg_out_tokens={statistics.mean(x['out_tokens'] for x in rs):.0f}")
 asyncio.run(main())
 ```
-Extensions to offer: save every output to a file for review, run each item several times to measure variance, add per-category breakdowns, and a paired comparison listing items where A and B disagree.
+Extensions to offer: catch per-item API errors (as in the classification example) so one failure does not abort `gather`, save every output to a file for review, run each item several times to measure variance, add per-category breakdowns, and a paired comparison listing items where A and B disagree.
 
 #### Live: stream a response to a user and handle a failure mid-stream.
 ```python

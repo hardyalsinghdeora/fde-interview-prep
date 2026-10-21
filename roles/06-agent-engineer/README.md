@@ -73,6 +73,7 @@ Loops vary and change. Treat this as typical/reported, not guaranteed.
 - [ ] One general agent or several specialised agents/journeys for a support workflow: how do you decide?
 - [ ] How do you capture the brand's voice and tone, and test that the agent keeps it?
 - [ ] How should the agent verify a customer's identity before account-specific actions?
+- [ ] A customer contacts the brand again the next day, on a different channel. How should the agent use context from earlier conversations?
 
 ### Conversation design
 - [ ] Design the conversation flow for a refund request that requires policy checks.
@@ -80,6 +81,7 @@ Loops vary and change. Treat this as typical/reported, not guaranteed.
 - [ ] How should the agent handle an angry customer, or one who keeps asking for a human?
 - [ ] How do you balance asking clarifying questions against making assumptions?
 - [ ] How does conversation design differ between chat, email and voice?
+- [ ] How do you support customers in several languages?
 
 ### Tool and API integration with customer systems
 - [ ] Design the tools the agent needs to work with a commerce platform, a CRM and a ticketing system.
@@ -193,6 +195,16 @@ Rules:
 - Limit attempts; escalate after failures.
 - Never read back full personal data; confirm partially ("ending in 42").
 
+#### A customer contacts the brand again the next day, on a different channel. How should the agent use context from earlier conversations?
+Use enough history to avoid making the customer repeat themselves, without leaking data or acting on stale facts.
+
+- **Link conversations to the verified customer,** not to a device or channel; until identity is verified, show nothing from past conversations.
+- **Load a short structured summary,** not full transcripts: open issues and tickets, actions taken (return created, refund issued, reference numbers), promises made, and the last outcome. The helpdesk or CRM is the source of truth; the agent reads it through tools.
+- **Re-check live state:** order and ticket status may have changed since yesterday; fetch it again rather than trusting the summary.
+- **Acknowledge continuity naturally:** "I can see you contacted us yesterday about the damaged blender; the return label was sent. Is this about the same order?"
+- **Respect privacy and retention:** keep only what policy allows, for as long as allowed; never mention sensitive details on a channel where others might hear or see them (for example voice on speakerphone).
+- **Test it:** regression scenarios for returning customers, including one where the earlier issue is already resolved and one where the customer has two open issues.
+
 ### Conversation design
 
 #### Design the conversation flow for a refund request that requires policy checks.
@@ -246,6 +258,16 @@ Evaluate with test conversations that measure both errors from wrong assumptions
 - **Voice:** no visual channel and real-time. Very short sentences, one question at a time, no lists, URLs or markdown. Read numbers in a speakable way; confirm critical details by reading them back. Latency, interruptions and speech recognition errors dominate the experience.
 
 Same policies and tools across channels; different response styles and length limits per channel, set in the instructions and tested separately.
+
+#### How do you support customers in several languages?
+- **Detect and follow the customer's language** (from the message or account settings) and keep replying in it, including after a handoff, where possible routing to a human queue that speaks it.
+- **Policies and tools stay language-independent:** eligibility, limits and tool calls are the same; only the wording changes. Keep tool outputs and internal reasoning in one language if that is more reliable, and generate the reply in the customer's.
+- **Localise, not just translate:** brand voice, formality (for example formal and informal "you"), date, address and currency formats, and help-centre content in each language. Get the brand's local teams to review tone.
+- **Knowledge retrieval:** use localised articles where they exist; if only English sources exist, retrieve in English and answer in the customer's language, and test that policy details survive translation.
+- **Evaluate per language:** regression tests and simulated customers in each launch language, native-speaker review of samples, and resolution and CSAT reported per language.
+- **Voice:** speech recognition and text-to-speech quality varies by language and accent; test each one before launch.
+
+Launch languages in order of volume and measured quality, with a clear human fallback for the rest.
 
 ### Tool and API integration with customer systems
 
@@ -542,6 +564,13 @@ SYSTEM = ("You are the support agent for an online shop. Help with order status 
           "Use tools for all facts; never guess order details or policy. "
           "Confirm with the customer before creating a return. Be brief and friendly.")
 
+def run_tool(ctx, b):
+    ctx.setdefault("calls", []).append(b.name)
+    try:
+        return FUNCS[b.name](ctx, **b.input)
+    except Exception as e:                    # bad args or unknown tool: tell the model
+        return {"error": f"{type(e).__name__}: {e}"}
+
 def agent_turn(ctx, messages, max_steps=6):
     for _ in range(max_steps):
         r = client.messages.create(model=MODEL, max_tokens=800, system=SYSTEM,
@@ -550,11 +579,10 @@ def agent_turn(ctx, messages, max_steps=6):
         if r.stop_reason != "tool_use":
             return "".join(b.text for b in r.content if b.type == "text")
         results = [{"type": "tool_result", "tool_use_id": b.id,
-                    "content": json.dumps(FUNCS[b.name](ctx, **b.input))}
+                    "content": json.dumps(run_tool(ctx, b))}
                    for b in r.content if b.type == "tool_use"]
-        ctx.setdefault("calls", []).extend(b.name for b in r.content if b.type == "tool_use")
         messages.append({"role": "user", "content": results})
-    return "Let me connect you with a teammate."
+    return "Let me connect you with a teammate."   # real version: also call the handoff
 ```
 Then demo a status question, a return with confirmation, and an out-of-window return. Points to mention: identity scope and policy are in code, tool errors go back to the model, the loop has a step cap, and state lives outside the model.
 
@@ -591,11 +619,11 @@ def test_out_of_scope_escalates():
 
 def test_status_does_not_escalate():
     _, ctx = run("What's the status of order A1?")
-    assert "handoff" not in ctx and "lookup_order" in ctx["calls"]
+    assert "handoff" not in ctx and "lookup_order" in ctx.get("calls", [])
 
 def test_cannot_see_other_customers_order():
-    reply, ctx = run("Return order A1, wrong item", customer="c2")
-    assert ORDERS["A1"]["returned"] is False
+    run("Return order A1, wrong item", customer="c2")
+    assert ORDERS["A1"]["returned"] is False   # reset ORDERS between tests in a real suite
 ```
 Also mention: a deterministic fallback that escalates after repeated tool failures or after the step cap, and checking the summary quality with a judge.
 

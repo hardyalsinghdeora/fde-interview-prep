@@ -72,6 +72,7 @@ Typical reported shape; varies by company and level.
 - [ ] Whiteboard: design a cloud analytics platform for a customer leaving an on-premises Hadoop cluster.
 - [ ] Whiteboard: design a multi-tenant SaaS architecture and explain silo, pool and bridge models.
 - [ ] Whiteboard: design hybrid connectivity between a customer's data centres and the cloud.
+- [ ] When would you recommend Kubernetes over a managed container service or serverless?
 
 ### Well-Architected and architecture reviews
 - [ ] Name the six pillars of the AWS Well-Architected Framework and give a design principle for each.
@@ -106,6 +107,7 @@ Typical reported shape; varies by company and level.
 ### Security and compliance
 - [ ] Explain the shared responsibility model and how you would design a HIPAA or PCI DSS workload in the cloud.
 - [ ] Design encryption and key management for a regulated workload.
+- [ ] A customer must keep EU personal data in the EU. How does that shape the architecture?
 
 ### Applied AI solutions architecture
 - [ ] A customer wants to put an LLM application into production. Which architecture and decisions do you walk them through?
@@ -231,6 +233,16 @@ Options (AWS names; Azure ExpressRoute and Google Cloud Interconnect are equival
 - **DNS:** Route 53 Resolver inbound and outbound endpoints so on-premises and cloud names resolve both ways.
 - **Inspection:** centralised inspection VPC with firewall appliances or AWS Network Firewall if required.
 
+#### When would you recommend Kubernetes over a managed container service or serverless?
+
+Choose the simplest platform that meets the requirements; Kubernetes is powerful but the customer pays for it in operations and skills.
+
+- **Serverless functions (AWS Lambda, Azure Functions, Cloud Run functions):** event-driven or spiky workloads, small teams, fast time to market. Limits: execution time, cold starts, less control over the runtime.
+- **Managed container service (ECS/Fargate, Cloud Run, Azure Container Apps):** long-running containerised services without managing a cluster's control plane, add-ons and upgrades. A good default for many web and API workloads.
+- **Kubernetes (EKS, GKE, AKS):** when the customer needs portability across clouds or on-premises, already has Kubernetes skills and tooling, runs many services that benefit from its ecosystem (operators, service mesh, GitOps), needs fine-grained scheduling (GPUs, batch, mixed instance types), or is building an internal platform for many teams.
+
+Questions to ask: team size and existing skills, number of services, portability or on-premises requirements, compliance, and who will run upgrades and security patching. A common recommendation is managed containers or serverless for most workloads, with Kubernetes only where its benefits are needed, and a managed Kubernetes service rather than self-managed clusters.
+
 ### Well-Architected and architecture reviews
 
 #### Name the six pillars of the AWS Well-Architected Framework and give a design principle for each.
@@ -266,7 +278,7 @@ All three cover the same core concerns with slightly different structure:
 
 - **AWS Well-Architected Framework:** six pillars (operational excellence, security, reliability, performance efficiency, cost optimisation, sustainability), plus workload lenses and the Well-Architected Tool.
 - **Microsoft Azure Well-Architected Framework:** five pillars (reliability, security, cost optimisation, operational excellence, performance efficiency), with an assessment tool and Azure Advisor recommendations. It sits alongside the Cloud Adoption Framework (CAF), which covers strategy, governance and landing zones.
-- **Google Cloud Well-Architected Framework** (previously called the Architecture Framework): pillars covering operational excellence; security, privacy and compliance; reliability; cost optimisation; and performance optimisation, with additional guidance areas such as sustainability and AI/ML perspectives.
+- **Google Cloud Well-Architected Framework** (previously called the Architecture Framework): pillars covering operational excellence; security, privacy and compliance; reliability; cost optimisation; performance optimisation; and sustainability, plus cross-pillar "perspectives" for areas such as AI/ML (verify the current pillar list).
 
 In an interview, say they are broadly equivalent: use the framework of the platform the customer runs on, and the principles (automation, least privilege, design for failure, measure cost) transfer. Check the current versions before the interview, as these frameworks are revised regularly.
 
@@ -294,7 +306,7 @@ Present as: what we found, the risk in business terms, the fix, effort. Start wi
 - **Retire:** switch off applications nobody needs (discovery often finds a meaningful share).
 - **Retain:** keep on-premises for now (recent hardware investment, compliance, hard dependency).
 - **Rehost (lift and shift):** move VMs as they are, e.g., with AWS Application Migration Service. Fastest; little optimisation.
-- **Relocate:** move a whole platform without changes, e.g., VMware workloads to VMware Cloud on AWS.
+- **Relocate:** move a whole platform without changes, e.g., VMware workloads to a VMware-based cloud offering (check which are currently sold, as these changed after Broadcom's VMware acquisition).
 - **Repurchase:** replace with SaaS (e.g., an on-premises CRM to a SaaS CRM).
 - **Replatform (lift, tinker and shift):** small changes for managed benefits, e.g., database to RDS, app to containers on a managed service.
 - **Refactor / re-architect:** redesign for cloud-native (microservices, serverless). Highest effort and benefit; reserve for business-critical apps that need agility or scale.
@@ -498,7 +510,7 @@ A DR plan that has never been tested should be treated as not working.
 #### Compare Savings Plans, Reserved Instances and Spot Instances, and say when you would use each.
 
 - **Savings Plans:** commit to a constant spend per hour (e.g., $10/hour) for 1 or 3 years in exchange for lower rates. **Compute Savings Plans** apply flexibly across EC2 instance families, regions, Fargate and Lambda; **EC2 Instance Savings Plans** give a deeper discount but are tied to an instance family in a region. Use for the steady baseline of compute.
-- **Reserved Instances (RIs):** commitment to a specific instance configuration (Standard or Convertible) for 1 or 3 years. For EC2, Savings Plans are generally recommended now for flexibility, but RIs (or reserved capacity/nodes) remain the main option for services like RDS, ElastiCache, Redshift and OpenSearch. Zonal RIs also reserve capacity.
+- **Reserved Instances (RIs):** commitment to a specific instance configuration (Standard or Convertible) for 1 or 3 years. For EC2, Savings Plans are generally recommended now for flexibility. RIs (or reserved nodes) are still offered for services like RDS, ElastiCache, Redshift and OpenSearch, and AWS has added Savings Plans for some managed databases too (verify current coverage before advising). Zonal RIs also reserve capacity.
 - **Spot Instances:** spare capacity at a large discount, but can be reclaimed with a two-minute warning. Use for fault-tolerant, stateless or flexible workloads: batch, CI, big data, containers with mixed instance types, some training jobs. Diversify instance types and use capacity-optimised allocation.
 - **On-demand:** for spiky, short-lived or unknown workloads.
 
@@ -546,6 +558,21 @@ Compliance is shared: the cloud being certified does not make the workload compl
 - **In transit:** TLS 1.2+ everywhere, ACM for certificates, mTLS for service-to-service where required.
 - **Application-level:** envelope encryption or field-level encryption for highly sensitive fields (e.g., card numbers, national IDs), or tokenisation.
 
+#### A customer must keep EU personal data in the EU. How does that shape the architecture?
+
+Clarify the requirement first with their legal or privacy team: is it a legal obligation, a contract term or a preference; which data counts (personal data, backups, logs, support access); and whether access from outside the EU (for example by support staff) is allowed.
+
+Architecture choices:
+- **Region selection:** deploy workloads, databases and backups only in EU regions; enforce with preventive controls (for example an SCP or Azure Policy restricting regions) and detect drift.
+- **Data flows:** map every place data goes: logs, monitoring, analytics, CDN caches, email and SaaS sub-processors, AI model endpoints. Each must be EU-hosted or receive only non-personal data.
+- **Global services:** identity, DNS, CDN and some management services are global; check what data they store and where.
+- **Encryption and keys:** customer-managed keys held in the EU; for stronger sovereignty requirements, external or customer-held keys, or sovereign-cloud offerings.
+- **Access:** restrict operator and support access by location and role, with audit logs.
+- **Multi-region users:** separate regional stacks (EU and non-EU) with data partitioned by user's home region, rather than one global database.
+- **Contracts:** data processing agreements, sub-processor lists and transfer mechanisms (for example Standard Contractual Clauses) where any transfer happens.
+
+Mention that residency (where data is stored) is not the same as sovereignty (who can be compelled to access it); the second may need sovereign-cloud options and legal advice.
+
 ### Applied AI solutions architecture
 
 #### A customer wants to put an LLM application into production. Which architecture and decisions do you walk them through?
@@ -573,7 +600,7 @@ They combine: RAG plus a well-designed prompt covers most enterprise cases; fine
 
 #### How do you estimate and control token cost and latency for an LLM workload?
 
-**Estimate cost:** requests per day × (input tokens × input price + output tokens × output price). Example: 100,000 requests/day, 3,000 input tokens (system prompt plus retrieved context) and 300 output tokens each; multiply by the provider's current per-million-token prices. Include retries, agent loops (multiple calls per task), embeddings and evaluation runs.
+**Estimate cost:** requests per day × (input tokens × input price + output tokens × output price). Example: 100,000 requests/day, 3,000 input tokens (system prompt plus retrieved context) and 300 output tokens each = 300M input and 30M output tokens a day (about 9B and 0.9B a month); multiply by the provider's current per-million-token prices. Include retries, agent loops (multiple calls per task), embeddings and evaluation runs.
 
 **Control cost:**
 - Use the smallest model that passes the evals; route by difficulty.

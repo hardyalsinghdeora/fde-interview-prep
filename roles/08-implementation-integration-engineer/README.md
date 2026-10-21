@@ -88,6 +88,8 @@ Loops vary by company and level. The rounds below are typical or reported, not g
 - [ ] Fixed-price vs. time-and-materials engagements: how does each change the way you work?
 - [ ] How do you track risks, assumptions, issues and dependencies on an implementation?
 - [ ] Exercise: write a one-page weekly status report for an implementation that is two weeks behind.
+- [ ] You are running five implementations at once. How do you keep each on track without dropping anything?
+- [ ] How would you reduce the average time to go-live across the implementation team?
 
 ### Requirements and solution design
 
@@ -290,6 +292,32 @@ Budget: 62% of hours used, 55% of scope delivered. Forecast: within budget with 
 
 Key points: status colour changes honestly, one-sentence summary, cause stated without blame, options with a decision deadline.
 
+#### You are running five implementations at once. How do you keep each on track without dropping anything?
+
+Concurrent projects are normal in this role; the skill is a system, not heroics.
+
+- **One view of everything:** a portfolio tracker with each project's phase, next milestone, go-live date, RAG status and the top blocker. I review it every Monday and plan the week from it.
+- **Know where each project is in its life cycle.** Projects in discovery or cutover need intense attention; projects waiting on customer data need a nudge and little else. Stagger go-lives so two cutovers never land in the same week if I can influence it.
+- **Fixed rhythms per project:** a standing weekly status call and a weekly written report, so each customer knows when they will hear from me and I am not reacting to every message.
+- **Batch and template:** reuse kickoff decks, mapping templates, test scripts and runbooks; block focus time for build work instead of fragmenting it between calls.
+- **Push work to the right owner:** customer tasks tracked in the RAID log with dates; partners or colleagues for specialist work.
+- **Raise capacity problems early:** if two projects hit critical phases at once, I tell my manager with dates and options (move a milestone, add help) before quality slips.
+
+Interviewers often follow up with "what did you drop?". Have an honest example ready of something you deprioritised and how you told the customer.
+
+#### How would you reduce the average time to go-live across the implementation team?
+
+Treat it as a measurable process problem: find where time goes across many projects, then remove the biggest delays.
+
+1. **Measure:** time in each phase across recent projects (contract signed → kickoff → design sign-off → first data load → UAT → go-live), plus waiting time on customer dependencies. Usually most of the delay is waiting, not building.
+2. **Fix the start:** a better sales-to-implementation handoff, a pre-kickoff questionnaire, and requesting access, data extracts and SSO setup before kickoff, since those are the longest customer dependencies.
+3. **Standardise:** packaged implementation templates per segment or industry (pre-built configuration, standard integrations, mapping templates, test scripts), so each project starts from about 80% done.
+4. **Tooling:** reusable migration scripts and validation reports, connectors for the most common ERPs and HRIS, a self-service data-load tool for simple customers.
+5. **Scope discipline:** a smaller phase 1 that goes live sooner, with the rest in phase 2.
+6. **Feed product:** the configuration and customizations that every project repeats are candidates for product features or defaults.
+
+Track the result (median time to go-live, and time to first value) per quarter, and watch quality too: faster go-lives with more hypercare issues are not a win.
+
 ### Requirements and solution design
 
 #### How do you run a requirements or design workshop for a SaaS implementation?
@@ -491,7 +519,7 @@ WHERE t.external_id IS NULL;
 -- 2. Records that migrated but key values differ
 --    IS DISTINCT FROM treats NULLs correctly (PostgreSQL, Snowflake, BigQuery and others)
 SELECT s.source_id,
-       s.status AS source_status, t.status AS target_status,
+       s.mapped_status AS source_status, t.status AS target_status,
        s.credit_limit AS source_limit, t.credit_limit AS target_limit
 FROM stg_source_customers s
 JOIN stg_target_customers t
@@ -507,6 +535,7 @@ FULL OUTER JOIN
      (SELECT region, SUM(open_balance) AS total FROM stg_target_customers GROUP BY region) t
   ON s.region = t.region
 WHERE s.total IS DISTINCT FROM t.total;
+-- NULL regions never match with '='; COALESCE(region, '(none)') in both subqueries keeps them comparable.
 ```
 
 Points to mention: compare against the **mapped** value (after transformation), not the raw source value; normalise types and trimming before comparing; and also check the reverse direction (records in the target that have no source, which suggests duplicates or test data).
@@ -555,7 +584,7 @@ Open transactions also need a clear rule at cutover, for example "orders created
 
 **Design:**
 - **Scope per field:** for each object (Account, Contact, Opportunity) decide which system owns each field. Two-way sync should mean "some fields flow each way", rarely "both systems can edit everything".
-- **Authentication:** a dedicated integration user with a least-privilege profile or permission set, connected through OAuth (for server-to-server, the JWT bearer flow or client credentials through a connected app).
+- **Authentication:** a dedicated integration user with a least-privilege profile or permission set, connected through OAuth (for server-to-server, the JWT bearer flow or client credentials through a connected app; Salesforce is moving new integrations to External Client Apps, so check current guidance (verify)).
 - **Salesforce to us:** Change Data Capture or Platform Events for near-real-time changes, or polling with `SystemModstamp` for simpler setups.
 - **Us to Salesforce:** REST API upserts using an **External ID** field holding our ID, so retries do not create duplicates; Bulk API 2.0 for large loads and the initial sync.
 - **ID cross-reference:** store the Salesforce ID in our product and our ID in Salesforce.
@@ -602,13 +631,13 @@ Practical points:
 NetSuite offers several integration methods; the choice depends on volume, latency and what the customer's NetSuite admins support.
 
 - **SuiteTalk REST web services:** record operations and **SuiteQL** queries over REST. Good default for new integrations.
-- **SuiteTalk SOAP web services:** older, very complete, still widely used by existing connectors.
+- **SuiteTalk SOAP web services:** older and very complete, still used by many existing connectors, but Oracle has announced its retirement (verify the current timeline), so avoid it for new builds.
 - **RESTlets:** custom REST endpoints written in SuiteScript and deployed in the customer's account. Useful when you need custom logic or to combine several operations in one call.
 - **CSV import** and saved searches exported on a schedule, for simple batch needs or initial migrations.
 - **iPaaS connectors** (for example Celigo, Boomi, Workato) that many NetSuite customers already use.
 
 Practical points:
-- **Authentication:** token-based authentication (TBA) or OAuth 2.0, with a dedicated integration role that has only the permissions needed.
+- **Authentication:** OAuth 2.0 (preferred for new integrations) or token-based authentication (TBA), which Oracle is phasing out for new integrations (verify), with a dedicated integration role that has only the permissions needed.
 - **Concurrency limits:** NetSuite limits concurrent requests per account; design for queuing and retries.
 - **Customizations:** customers often have custom fields, records and scripts (user event scripts can change or reject records you send); test against their sandbox.
 - **Subsidiaries, currencies and accounting periods** matter for financial records; closed periods will reject postings.
@@ -670,6 +699,7 @@ import requests
 API = "https://api.example.com/v1/customers"
 HEADERS = {"Authorization": "Bearer <token-from-secret-store>",
            "Content-Type": "application/json"}
+RETRYABLE = {429, 500, 502, 503, 504}
 
 def transform(row):
     return {
@@ -678,17 +708,25 @@ def transform(row):
         "status": {"A": "active", "I": "inactive"}[row["STATUS"].strip()],
     }
 
+def backoff(resp, attempt):
+    try:
+        return int(resp.headers.get("Retry-After", ""))  # seconds form only
+    except (AttributeError, ValueError):
+        return min(2 ** attempt, 60)
+
 def upsert(record, session, max_retries=5):
     # PUT to a resource keyed by external_id = create or replace, safe to repeat
     url = f"{API}/by-external-id/{record['external_id']}"
+    resp = None
     for attempt in range(max_retries):
-        resp = session.put(url, json=record, headers=HEADERS, timeout=30)
-        if resp.status_code in (429, 500, 502, 503, 504):
-            wait = int(resp.headers.get("Retry-After", 2 ** attempt))
-            time.sleep(wait)
-            continue
-        return resp
-    return resp
+        try:
+            resp = session.put(url, json=record, headers=HEADERS, timeout=30)
+        except (requests.ConnectionError, requests.Timeout):
+            resp = None                      # network blip: retry
+        if resp is not None and resp.status_code not in RETRYABLE:
+            return resp
+        time.sleep(backoff(resp, attempt))
+    return resp                              # last response, or None if never reached
 
 def main(path):
     ok, failed = 0, []
@@ -696,14 +734,16 @@ def main(path):
         for line_no, row in enumerate(csv.DictReader(f), start=2):
             try:
                 record = transform(row)
-                resp = upsert(record, s)
-                if resp.status_code in (200, 201, 204):
-                    ok += 1
-                else:
-                    failed.append({"line": line_no, "row": row,
-                                   "status": resp.status_code, "error": resp.text[:500]})
-            except (KeyError, ValueError) as e:
-                failed.append({"line": line_no, "row": row, "error": f"transform: {e}"})
+            except (KeyError, ValueError, AttributeError) as e:
+                failed.append({"line": line_no, "row": row, "error": f"transform: {e!r}"})
+                continue
+            resp = upsert(record, s)
+            if resp is not None and resp.status_code in (200, 201, 204):
+                ok += 1
+            else:
+                failed.append({"line": line_no, "row": row,
+                               "status": getattr(resp, "status_code", None),
+                               "error": resp.text[:500] if resp is not None else "no response"})
     with open("failed_rows.json", "w") as out:
         json.dump(failed, out, indent=2)
     print(f"loaded={ok} failed={len(failed)} (see failed_rows.json)")
@@ -712,7 +752,7 @@ if __name__ == "__main__":
     main(sys.argv[1])
 ```
 
-Points to mention: if the API only offers POST, look up by external ID first or send an idempotency key; use a bulk endpoint for large files; never hard-code secrets; add a dry-run mode; respect rate limits; and produce a reconciliation count at the end.
+Points to mention: if the API only offers POST, look up by external ID first or send an idempotency key; use a bulk endpoint for large files; never hard-code secrets; add a dry-run mode; respect rate limits; produce a reconciliation count at the end; and treat `failed_rows.json` as sensitive, since it holds raw customer rows.
 
 ### Testing, go-live, hypercare and handoff
 

@@ -17,7 +17,7 @@ The technical owner of a customer relationship: keeps accounts healthy, drives a
 
 **Titles and aliases.** Technical Account Manager, Customer Success Engineer, Customer Success Architect, Customer Engineer, Enterprise Support TAM, Customer Success Account Manager (Microsoft), Success Architect. Titles vary: read the job description.
 
-> **Note on "Customer Engineer" at Google Cloud.** At Google Cloud, "Customer Engineer" (CE) is mainly a **pre-sales** technical role that works alongside sales on new workloads and opportunities, closer to a Solutions Engineer. Google Cloud also has **Technical Account Managers** who work post-sale with Premium Support customers. This file focuses on the post-sale account-ownership work; if you are interviewing for a pre-sales CE role, also prepare [03-solutions-engineer.md](../03-solutions-engineer/README.md) and [04-solutions-architect.md](../04-solutions-architect/README.md).
+> **Note on "Customer Engineer" at Google Cloud.** At Google Cloud, "Customer Engineer" (CE) is mainly a **pre-sales** technical role that works alongside sales on new workloads and opportunities, closer to a Solutions Engineer. Google Cloud also has **Technical Account Managers** who work post-sale with Premium Support customers. This file focuses on the post-sale account-ownership work; if you are interviewing for a pre-sales CE role, also prepare [03-solutions-engineer](../03-solutions-engineer/README.md) and [04-solutions-architect](../04-solutions-architect/README.md).
 
 **Who hires (examples, titles vary).** AWS (TAMs in Enterprise Support), Google Cloud (Customer Engineers, TAMs), Microsoft (Customer Success Account Managers, Cloud Solution Architects), and many SaaS and infrastructure companies with post-sale technical teams, such as Datadog, Okta, Cloudflare, MongoDB and Atlassian.
 
@@ -121,6 +121,7 @@ Loops vary by company and level. The rounds below are typical or reported, not g
 - [ ] A customer asks for a discount at renewal because they are under-using the product. How do you respond?
 - [ ] A customer is evaluating a competitor for a new workload. What do you do?
 - [ ] A customer asks you to commit to a date for a roadmap feature. How do you handle it?
+- [ ] What is the difference between gross revenue retention and net revenue retention, and how does a TAM influence each?
 
 ### Managing a book of business
 
@@ -130,6 +131,7 @@ Loops vary by company and level. The rounds below are typical or reported, not g
 - [ ] What tools and data do you use to run a book of business?
 - [ ] How do you write a feature request that a product manager will actually act on?
 - [ ] Exercise: you inherit an account whose previous TAM left no notes. Run the first call.
+- [ ] A customer treats you as their first-line support and contacts you directly about every issue. How do you handle it?
 
 ### Googleyness, values and behavioral (role-specific)
 
@@ -390,10 +392,13 @@ SELECT user_email,
 FROM `region-us`.INFORMATION_SCHEMA.JOBS
 WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY)
   AND job_type = 'QUERY'
+  AND IFNULL(statement_type, '') != 'SCRIPT'  -- script parent jobs repeat their children's bytes
 GROUP BY user_email
 ORDER BY tib_billed DESC
 LIMIT 20;
 ```
+
+Replace `region-us` with the region where the data lives; `JOBS` views are per region and per project (use `JOBS_BY_ORGANIZATION` for an org-wide view, if permitted).
 
 3. **Typical causes:** a new dashboard refreshing every few minutes, `SELECT *` on wide tables, queries on unpartitioned tables, a scheduled query or pipeline accidentally running more often.
 4. **Fixes:** partition and cluster large tables, require partition filters, select only needed columns, materialise or cache common results, fix the schedule.
@@ -530,6 +535,21 @@ How I respond:
 
 If a contract depends on the feature, that becomes a formal commercial commitment for the AE, legal and product leadership to decide, not a TAM promise.
 
+#### What is the difference between gross revenue retention and net revenue retention, and how does a TAM influence each?
+
+Both measure how much recurring revenue you keep from existing customers over a period (usually 12 months), excluding new customers.
+
+- **Gross revenue retention (GRR)** = (starting ARR − churn − downgrades) ÷ starting ARR. It ignores expansion, so it can never exceed 100%. It shows how well you keep what you have.
+- **Net revenue retention (NRR or NDR)** = (starting ARR − churn − downgrades + expansion) ÷ starting ARR. It can exceed 100% when expansion outweighs losses.
+
+Example: start the year at 10.0M ARR across your book; 0.6M churns, 0.4M downgrades, 1.5M expansion. GRR = 9.0 / 10.0 = 90%; NRR = 10.5 / 10.0 = 105%.
+
+How a TAM influences them:
+- **GRR (the TAM's main lever):** early risk detection, fast escalation handling, adoption of what was bought, and multi-threaded relationships all reduce churn and downgrades.
+- **NRR:** spotting expansion signals (new teams, new workloads, usage near limits) and passing them to the AE with technical validation. The AE owns the deal.
+
+Benchmarks vary widely by segment and business model (treat any single "good" number as a rough guide). In an interview, say which one you were measured on and give a real example of a churn you prevented or an expansion you surfaced.
+
 ### Managing a book of business
 
 #### You own 15 accounts. How do you decide where to spend your week?
@@ -612,6 +632,18 @@ What they are testing: structured discovery, humility, and turning a weak handof
 6. **Working model:** how often to meet, preferred channels, escalation path.
 
 **After the call:** send a summary with what I heard, open actions with owners and dates, and a proposed cadence. Within 30 days: a draft success plan and a health assessment shared with the AE. Never blame the previous TAM in front of the customer.
+
+#### A customer treats you as their first-line support and contacts you directly about every issue. How do you handle it?
+
+It usually means they trust me, which is good, but if I become a private support channel, issues bypass severity rules, SLAs and on-call engineers, nothing gets tracked, and they suffer when I am on leave.
+
+1. **Never leave them stuck in the moment:** if it is urgent, I open the case for them (or get them to) and make sure the right priority is set.
+2. **Explain why the formal path helps them:** 24x7 coverage, response-time commitments, the right specialist, and a record that shows patterns. Frame it as protecting them, not protecting my time.
+3. **Make the path easy:** share the support portal, severity definitions and escalation contacts; run a short session for their team on writing a good case (IDs, timestamps, impact).
+4. **Stay in the loop, not in the middle:** ask them to cc me on Sev1/Sev2 cases and review open cases in our cadence calls. I step in when a case is stuck or the impact is high.
+5. **Look for the root cause:** if they bypass support because responses were slow or poor, that is feedback for the support team, and I raise it with data.
+
+Then I watch the result: case quality, fewer direct pings, and their satisfaction with support.
 
 ### Googleyness, values and behavioral (role-specific)
 

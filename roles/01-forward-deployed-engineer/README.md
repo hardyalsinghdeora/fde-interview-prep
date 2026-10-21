@@ -22,7 +22,7 @@ Travel varies by company and account: some FDEs spend multiple days a week on-si
 |---|---|
 | Core SWE | Builds one product for many users; rarely owns a specific customer outcome. FDE builds for a specific customer, then generalises. |
 | Solutions / Sales Engineer | Mostly pre-sale demos and technical validation. FDE writes production code and stays after the contract is signed. |
-| Deployment Strategist | Business/problem owner on the same account; usually does not ship production code. See [02-deployment-strategist.md](../02-deployment-strategist/README.md). |
+| Deployment Strategist | Business/problem owner on the same account; usually does not ship production code. See [02 Deployment Strategist](../02-deployment-strategist/README.md). |
 | Consultant | Bills hours on client-owned systems. FDE builds on and improves their own company's platform. |
 
 **Who it suits:** engineers who like seeing users use what they built, are comfortable with ambiguity and messy data, enjoy learning new domains quickly, can write production code without a large team around them, and can hold a room with a customer executive.
@@ -59,7 +59,7 @@ Loops vary by company and change often; the rounds below are **typical / candida
 ## Common rounds — use the shared sections
 
 - [01 Recruiter & motivation](../../topics/01-recruiter-and-motivation/ANSWERS.md): nail the 60-second "Why FDE?" and the travel answer first; this screen rejects many strong engineers.
-- [02 Coding](../../topics/02-coding/ANSWERS.md): prioritise practical/incremental and API-style problems over hard DS&A, unless you are interviewing at Palantir or Scale.
+- [02 Coding](../../topics/02-coding/ANSWERS.md): prioritise practical/incremental and API-style problems over hard DS&A, unless the company is reported to use hard DS&A rounds (often said of Palantir and Scale; confirm with the recruiter).
 - [03 System design](../../topics/03-system-design/ANSWERS.md): focus on section A (applied, customer-context prompts): legacy systems, on-prem, regulated data.
 - [04 Decomposition](../../topics/04-decomposition/ANSWERS.md): essential for Palantir FDSE; useful everywhere for the "vague customer ask" round.
 - [06 AI / LLM](../../topics/06-ai-llm/ANSWERS.md) and [part 2](../../topics/06-ai-llm/ANSWERS-part2.md): essential for AI-lab FDE roles; evals and production reliability matter most.
@@ -410,7 +410,7 @@ Example: an agent that drafts responses to insurance claim queries.
 
 1. **Scope and risk:** which decisions the agent may make versus only suggest; human review required for anything binding; data classification and residency; the customer's compliance requirements (audit, retention, model risk).
 2. **Eval set first:** 100–300 real, anonymised cases with expected outcomes and graded criteria (correct policy cited, no invented facts, tone). Agree pass thresholds with the business.
-3. **Prototype:** a system prompt with policy, tools defined with JSON schemas (look up policy, fetch claim, draft letter), structured outputs, retrieval over policy documents with citations. With Claude, tools can be exposed via MCP.
+3. **Prototype:** a system prompt with policy, tools defined with JSON schemas (look up policy, fetch claim, draft letter), structured outputs, retrieval over policy documents with citations. Both providers' APIs also support tools exposed through MCP servers (verify current SDK support).
 4. **Iterate on evals:** prompt changes, retrieval tuning, model choice; track accuracy, refusal, latency and cost per case.
 5. **Guardrails:** input and output checks, PII handling, restricted tool permissions, maximum steps, escalation to a human when uncertain.
 6. **Production:** retries and rate-limit handling, prompt caching for long shared context, logging of every prompt, tool call and output for audit, version pinning of models and prompts, monitoring and sampled human review.

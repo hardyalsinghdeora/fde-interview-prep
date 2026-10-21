@@ -104,6 +104,7 @@ Typical/reported shape; varies by company.
 - [ ] The customer's domain expert says the model is wrong because it contradicts their experience. What do you do?
 - [ ] How do you communicate forecast uncertainty to executives?
 - [ ] When would you choose an interpretable model over a more accurate black-box model?
+- [ ] How do you check a customer's model for bias or unfair outcomes across groups?
 
 ### Experiment design and proving value
 
@@ -111,6 +112,7 @@ Typical/reported shape; varies by company.
 - [ ] The customer cannot run a randomised experiment. How else do you measure impact?
 - [ ] How do you estimate sample size and test duration for a pilot?
 - [ ] The pilot shows a lift, but the operations team chose which cases to use the model on. What do you do?
+- [ ] How would you scope a six-week pilot with a customer so that it ends with a clear go/no-go decision?
 
 ### Deployment, monitoring and MLOps handover
 
@@ -417,7 +419,7 @@ Then show a small table:
 | Medium | 300 | 20% | 75% |
 | Low | 800 | 9% | 90% |
 
-"Your team can handle about 300 a day, so the medium cut-off catches three quarters of fraud value. Do you want to discuss staffing or keep the cut-off there?" Then let them choose; the threshold is a business decision.
+"Your team can handle about 300 a day, so the medium cut-off catches three quarters of fraud cases. Do you want to discuss staffing or keep the cut-off there?" Then let them choose; the threshold is a business decision.
 
 #### The customer's domain expert says the model is wrong because it contradicts their experience. What do you do?
 
@@ -462,6 +464,19 @@ Choose an interpretable model (logistic regression, small decision tree, scoreca
 Choose the more complex model when the extra accuracy has clear business value and post-hoc explanations (for example SHAP) plus monitoring are acceptable to stakeholders and regulators.
 
 A practical approach: build both, show the customer the difference in value, and decide together. Often the simple model goes first and the complex one later once trust exists.
+
+#### How do you check a customer's model for bias or unfair outcomes across groups?
+
+Agree the scope with the customer's legal, compliance or risk team first: which groups matter (protected characteristics under the laws that apply to them), which decisions the model affects, and which fairness definition they will use. Then:
+
+1. **Get group data responsibly.** Protected attributes are often not stored or not allowed as features. You may still need them, under controls, to measure fairness; otherwise use approved proxies and state the limits.
+2. **Measure performance per group,** not only overall: selection rate, precision, recall (true positive rate), false positive rate, and calibration for each group, with sample sizes and confidence intervals.
+3. **Compare against a chosen definition:** for example demographic parity (similar selection rates; the "four-fifths rule" is one common screening heuristic in US employment contexts), equal opportunity (similar recall), or calibration within groups. These definitions can conflict, so the choice is a policy decision for the customer, not a technical default.
+4. **Look for causes:** unrepresentative training data, labels that encode past human bias (for example past approval decisions), and proxy features such as postcode.
+5. **Mitigate:** fix data and labels, remove or constrain proxy features, reweight training data, or set thresholds per decision policy where lawful; re-measure overall and per-group value after each change.
+6. **Document and monitor:** results in the model card, per-group metrics on the monitoring dashboard, and a review when data or policy changes.
+
+Do not promise a model is "unbiased"; say what was measured, against which definition, and what remains uncertain.
 
 ### Experiment design and proving value
 
@@ -528,6 +543,24 @@ The result is probably biased: selection bias. The team may have used the model 
 5. **Involve the operations team** in the redesign so they understand why it matters.
 
 Do not blame the team; the experiment design did not account for how they work.
+
+#### How would you scope a six-week pilot with a customer so that it ends with a clear go/no-go decision?
+
+Work backwards from the decision the sponsor must make at week six, and agree everything that decides it before any modelling.
+
+**Agree in writing up front:**
+- **The decision and decision-maker:** "Roll out to all regions, extend the pilot, or stop", decided by the named sponsor.
+- **Success criteria:** one primary business metric with a threshold (for example "at least 15% more fraud value caught at the same review volume"), plus guardrails (review time, complaints). Include a minimum offline bar the model must pass before going live.
+- **Scope:** one use case, one team or region, a fixed data window. Everything else goes to a "later" list.
+- **Customer commitments:** data access by week 1, a named domain expert, and an operations team that will use the output.
+
+**Plan (illustrative):**
+- **Week 1:** access, data profiling, baseline from the current process.
+- **Weeks 2–3:** features and model; offline backtest against the baseline; checkpoint with the sponsor to confirm the pilot is worth running.
+- **Weeks 4–5:** live or shadow use in the chosen team, with a control group or holdout where possible, and weekly results.
+- **Week 6:** readout with results against the agreed criteria, cost to scale, risks, and a clear recommendation.
+
+Six weeks is often too short to see slow outcomes such as churn; agree a leading indicator in advance, and say so plainly rather than stretching weak evidence. If week 1 shows the data cannot support the use case, stop or re-scope then, not at week six.
 
 ### Deployment, monitoring and MLOps handover
 

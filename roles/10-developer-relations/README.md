@@ -117,12 +117,14 @@ Typical/reported structure; it varies by company and by whether the team sits in
 - [ ] How do you measure the impact of developer relations?
 - [ ] Your VP asks you to prove DevRel's return on investment. What do you show?
 - [ ] With limited time, how do you choose between a conference talk, a blog post, a sample app and a docs fix?
+- [ ] Where should DevRel sit in the organisation: engineering, product or marketing?
 
 ### Feedback to product
 
 - [ ] How do you collect developer feedback and get the product team to act on it?
 - [ ] Developers strongly want a feature that product has decided not to build. How do you handle it with the community?
 - [ ] How do you balance advocating for developers with advocating for the company?
+- [ ] The company is deprecating an API version that thousands of developers use. How do you run the developer communication?
 
 ### DevRel for AI and AI-assisted developers
 
@@ -248,7 +250,7 @@ Prevention matters more (see the next question). For the shared customer version
 - **Use checkpoints:** git branches or tags for each step, so you can jump ahead.
 - **Record a backup video** of the full demo.
 - **Make it readable:** large font, high-contrast theme, notifications off, clean desktop, close other apps.
-- **For LLM demos:** outputs are non-deterministic. Use low temperature, test the prompts many times, and choose examples that work reliably. Be honest if an output differs.
+- **For LLM demos:** outputs are non-deterministic. Use a low temperature where the model supports it, test the prompts many times, and choose examples that work reliably. Be honest if an output differs.
 - **Have a checklist** you run 30 minutes before.
 
 ### Docs and tutorials
@@ -322,6 +324,7 @@ No single metric works; combine several:
 - **Quality checks:** broken links, failing samples, stale "last reviewed" dates.
 
 Page views alone are a weak measure: a page may get many views because the product is confusing.
+
 ### Developer experience and API critique
 
 #### Sign up for our product, build something small, and critique the developer experience.
@@ -527,6 +530,21 @@ Compare expected impact per hour, against current goals:
 - **Conference talk:** high effort (writing, rehearsing, travel), reaches one room plus the recording; best for awareness in a target audience, partnerships and credibility.
 
 A practical rule: fix blockers first (docs, errors), then build reusable assets (samples), then turn them into derived content (post, talk, video). One good sample app can become a tutorial, a talk demo and a workshop. Say you would confirm priorities with your manager against the team's goals for the quarter.
+
+#### Where should DevRel sit in the organisation: engineering, product or marketing?
+
+There is no single right answer; each placement shapes what the team is measured on, and interviewers want to see you know the trade-offs.
+
+| Reports into | Strengths | Risks |
+|---|---|---|
+| Engineering | Technical credibility, access to engineers, DX and SDK work gets done | Content and community may be undervalued; little budget for events |
+| Product | Feedback loop to roadmap is short; launches are well supported | Pulled into product-management work; reach and community may slip |
+| Marketing | Budget, distribution, events, launch planning | Pressure toward lead generation and vanity metrics; developers distrust sales-flavoured content |
+
+A common pattern is DevRel reporting to engineering or product, with a close partnership with marketing for distribution. Whatever the reporting line, agree goals and metrics with leadership up front (activation, community health, product feedback), so the team is not judged on the wrong measures.
+
+In the interview, ask where this team reports and how it is measured; it tells you what the job will really be.
+
 ### Feedback to product
 
 #### How do you collect developer feedback and get the product team to act on it?
@@ -574,6 +592,20 @@ How to handle it:
 - **Hold a personal line:** if you would not recommend something to a friend, do not promote it; say so internally.
 
 A useful phrase: "I work for the company, on behalf of developers." Credibility with developers is the main asset of the role, and the company benefits from protecting it.
+
+#### The company is deprecating an API version that thousands of developers use. How do you run the developer communication?
+
+The goal is that almost nobody is surprised and almost nobody breaks. Plan it as a campaign with product and engineering, not a single announcement.
+
+1. **Know who is affected:** usage data on which accounts and apps still call the old version, at what volume, and with which SDK versions.
+2. **Push for a fair timeline** internally: long enough for real migrations (often 6–12 months for widely used APIs), with dates for deprecation, brownouts if used, and shutdown.
+3. **Make migration easy before announcing:** a migration guide with before/after code for each change, updated SDKs and samples, a changelog, and automated help where possible (codemods, a compatibility checker, clear deprecation warnings in responses or headers).
+4. **Announce in many places:** changelog, blog, email to affected account owners, dashboard banners, forum and Discord, docs banners on old pages. Explain why the change is happening.
+5. **Remind on a schedule** (for example at 90, 30 and 7 days) and contact the largest remaining users directly, together with account teams.
+6. **Support the migration:** office hours, a dedicated forum thread, FAQ updated from real questions.
+7. **Track progress:** share of traffic still on the old version; extend or add help if a key segment is stuck.
+
+After shutdown, keep the error response helpful (link to the migration guide) and write up lessons for the next deprecation.
 
 ### DevRel for AI and AI-assisted developers
 

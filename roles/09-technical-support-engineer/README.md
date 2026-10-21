@@ -93,6 +93,7 @@ Rounds vary by company; this is the typical/reported shape, not a guarantee.
 - [ ] Which command-line tools do you use most in support work, and for what?
 - [ ] How do you follow one customer request across several services to find where it failed?
 - [ ] A customer says performance got worse after upgrading to the new version. How do you investigate?
+- [ ] Users at one customer suddenly cannot log in through SAML single sign-on. How do you troubleshoot it?
 
 ### Escalating to engineering
 
@@ -120,12 +121,14 @@ Rounds vary by company; this is the typical/reported shape, not a guarantee.
 - [ ] Which support metrics matter, and how can they mislead?
 - [ ] How do you write a handoff note for the next shift in a follow-the-sun team?
 - [ ] A customer pastes credentials or personal data into a ticket. What do you do?
+- [ ] How do you use AI tools in support work, and where do you not trust them?
 
 ### Role-specific behavioral
 
 - [ ] Tell me about a time you solved a hard technical problem for a customer.
 - [ ] Tell me about a time you turned a recurring support issue into a product or docs fix.
 - [ ] Tell me about a time you made a mistake in a customer communication.
+- [ ] Tell me about a time you turned an angry customer around.
 - [ ] Why support engineering, and where do you want it to lead?
 
 ## Model answers
@@ -280,7 +283,7 @@ Intermittent 401 means some requests are authenticated and some are not. Look fo
    - Several keys in use: one server or one environment has an old or revoked key.
    - Load-balanced client fleet: one instance has a stale config.
    - Clock skew: signed requests or JWTs rejected because the client clock is off.
-   - Rate of rotation: key rotated without updating all services.
+   - Key rotation: key rotated without updating all services.
    - Wrong environment: test key sent to production endpoint.
    - Proxy stripping the `Authorization` header on some paths.
 3. **Check our side:** auth service errors, recent deploys, regional issues.
@@ -328,6 +331,7 @@ The point to make: pick the tool that gives you evidence quickly, and share the 
 6. **If there is no trace ID,** narrow by account, endpoint and a tight time window, then line up timestamps (watch for timezone and clock differences).
 
 If correlation is hard, note it as feedback: propagating a request ID end to end is a cheap, high-value fix for support.
+
 #### A customer says performance got worse after upgrading to the new version. How do you investigate?
 
 1. **Quantify it.** Which operations, how much slower (p50 vs. p95/p99), since when exactly? Get before/after numbers or request IDs.
@@ -340,6 +344,23 @@ If correlation is hard, note it as feedback: propagating a request ID end to end
 8. **Escalate as a regression** with before/after numbers, version numbers and a repro. Regressions usually get high priority.
 
 Keep the customer updated with the facts you have, and do not promise a rollback that the product cannot support.
+
+#### Users at one customer suddenly cannot log in through SAML single sign-on. How do you troubleshoot it?
+
+"Suddenly" and "all users at one customer" point to something that changed in the SSO configuration, usually on one side of the trust.
+
+1. **Scope:** all users or some? IdP-initiated, SP-initiated or both? Since when? Did anything change (certificate, IdP app, domain, our release)?
+2. **Get the exact error** from our side (SSO logs for that account) and from the user's browser. A SAML tracer extension or a HAR file captures the SAML response; decode it (Base64) to read the assertion.
+3. **Check the usual causes:**
+   - **Expired or rotated signing certificate:** the IdP (Okta, Entra ID) rolled its certificate and our side still has the old one. This is the most common "suddenly, everyone" cause.
+   - **Clock skew:** assertion `NotBefore` / `NotOnOrAfter` outside the allowed window.
+   - **Audience or ACS URL mismatch:** entity ID or reply URL changed, for example after a domain change.
+   - **NameID or attribute change:** the IdP now sends a different identifier (email vs. employee ID), so users no longer match existing accounts.
+   - **Users not assigned** to the app in the IdP, or a conditional access policy now blocks them.
+4. **Unblock while you fix:** if the product allows it, a break-glass admin login (password or backup method) so the customer's admin can update settings.
+5. **Reply with evidence:** "The assertion is signed with a certificate that expired at 00:00 UTC; please upload the new certificate in Settings > SSO."
+
+Afterwards suggest prevention: certificate-expiry reminders, metadata URL auto-refresh if supported, and a KB article.
 
 ### Escalating to engineering
 
@@ -560,6 +581,7 @@ Move to a call when:
 Stay in writing when the answer is clear and documented, when the customer prefers async or is in a far timezone, or when an exact written record matters.
 
 During a call: have an agenda, ask for screen-share, take notes, avoid making changes on their system yourself unless policy allows it, and afterwards **summarise in the ticket**: what you saw, what was changed, next steps and owners. The written record is what the next engineer and the customer will rely on.
+
 ### Knowledge base, metrics and process
 
 #### Write a knowledge-base article for a common issue. What structure do you use?
@@ -670,6 +692,25 @@ Include: current status, what was tried, what was promised and when, next action
 
 Show that you know secrets in tickets are a real security incident, not a formality.
 
+#### How do you use AI tools in support work, and where do you not trust them?
+
+Use them to speed up the routine parts, and keep a human accountable for anything sent to a customer or changed in a system.
+
+**Where they help:**
+- Summarising long ticket threads and drafting handoff notes.
+- Searching KB, docs and past tickets for similar issues.
+- Drafting replies, which I then check for accuracy and tone.
+- Explaining unfamiliar stack traces or code, and writing small scripts (log parsers, `jq` filters).
+- Tagging tickets and spotting clusters for trend reports.
+
+**Where I do not trust them blindly:**
+- **Facts about our product:** they can invent settings, API fields or limits. Every technical claim is checked against docs, code or a test.
+- **Commitments:** dates, SLAs, refunds or roadmap statements are never sent from an AI draft without a human decision.
+- **Sensitive data:** only approved tools, and no customer secrets or personal data pasted into tools the company has not approved.
+- **Root cause:** a plausible explanation is a hypothesis to test, not a conclusion.
+
+If the company has an AI support agent for customers, I would watch its escalations and wrong answers, and turn them into KB fixes and evaluation cases.
+
 ### Role-specific behavioral
 
 #### Tell me about a time you solved a hard technical problem for a customer.
@@ -707,6 +748,18 @@ Show that you know secrets in tickets are a real security incident, not a formal
 - **Result:** [customer reaction, what you changed: checklist, template, review step].
 
 **Example (adapt to your own experience):** I told a customer a bug fix would ship "in Thursday's release" based on a comment in the engineering ticket. The fix was pulled from the release after a failed test. I emailed the customer on Thursday morning before they noticed, explained the change, gave the workaround again and the new target. They appreciated the early warning. Since then I only share release dates once the fix is merged and tagged for a release, and I phrase them as targets.
+
+#### Tell me about a time you turned an angry customer around.
+
+**What they are looking for:** empathy under pressure, ownership of the next step, clear communication, and a result you can point to, not just "they calmed down".
+
+**STAR outline:**
+- **Situation:** [the customer, why they were angry (outage, repeated issue, slow responses), how it showed (escalation to management, threat to churn)].
+- **Task:** [your role: own the ticket, restore trust].
+- **Action:** [how you acknowledged the impact, what facts you gathered, the plan and update cadence you committed to, who you involved, and how you kept every promise].
+- **Result:** [issue outcome, the customer's reaction, any lasting change such as a KB article or a process fix].
+
+**Example (adapt to your own experience):** A customer's admin opened his fourth ticket in two weeks about failed scheduled reports, writing in capitals and copying his VP. Each earlier ticket had been closed with a workaround by a different engineer. I took ownership of all four, called him to apologise for the repeated back-and-forth, and promised a daily update. I found that the failures matched a timeout on large reports, got engineering to confirm it as a bug, and set up a temporary schedule split that worked. The fix shipped ten days later; he replied to the closing ticket thanking us, and later agreed to be a beta tester. Since then I check a customer's ticket history before replying, so repeat issues get one owner.
 
 #### Why support engineering, and where do you want it to lead?
 

@@ -85,6 +85,7 @@ Palantir's Deployment Strategist loop is commonly reported to centre on decompos
 - [ ] How do you structure an ambiguous problem when you only have a few minutes to think?
 - [ ] The customer lists ten problems they want solved. How do you decide which to tackle first?
 - [ ] How do you know you have found the root problem rather than a symptom?
+- [ ] You are staffed on a customer in an industry you know nothing about and will be on-site in two weeks. How do you get up to speed?
 
 ### Stakeholder management
 - [ ] How do you build a stakeholder map for a new account, and what do you do with it?
@@ -124,6 +125,7 @@ Palantir's Deployment Strategist loop is commonly reported to centre on decompos
 - [ ] How do you measure whether a deployment is succeeding, beyond "it is live"?
 - [ ] The deployment is behind schedule because the customer's own team is not delivering. How do you handle it?
 - [ ] Tell me about a time you owned an outcome you did not fully control.
+- [ ] When would you recommend stopping a use case or walking away from a deployment?
 
 ### Company and mission
 - [ ] Palantir works with defence, intelligence and government customers. How do you think about the ethics of that work?
@@ -248,6 +250,17 @@ Use several checks:
 - **Ask the counterfactual:** "If we fixed this perfectly, would the outcome metric move enough?" If not, it is not the main cause.
 
 Root cause is often organisational (incentives, ownership, information flow) rather than technical; say so if the evidence points there.
+
+#### You are staffed on a customer in an industry you know nothing about and will be on-site in two weeks. How do you get up to speed?
+Aim to understand how the customer makes money (or delivers its mission), its key operational metrics and its vocabulary, not to become an expert.
+
+- **Days 1–3, structure:** read the customer's annual report or budget documents, two or three industry primers, and recent news. Write a one-page "how this business works": value chain, main costs, regulators, the metrics leaders are judged on.
+- **Days 3–7, people:** talk to colleagues who have worked with similar customers, read past account plans and deployment write-ups, and ask the sponsor for a short call with someone who can explain their operations.
+- **Days 7–10, data and vocabulary:** look at any sample data or reports the customer can share; build a glossary of their terms and acronyms.
+- **Before arriving:** write down your hypotheses and the questions you need answered, so the first week on-site is spent testing them.
+- **On-site:** shadow frontline work early; it fills the gaps no document covers.
+
+Be open with the customer that you are new to their industry and confident about the method; they value someone who asks good questions over someone who pretends.
 
 ### Stakeholder management
 
@@ -501,13 +514,18 @@ Close with: "The question is not whether it is perfect but whether staff plus th
 4. **Segment:** by customer, product, warehouse, carrier, month. Problems are usually concentrated.
 5. **Look for drivers:** do late orders correlate with a warehouse, carrier, large orders, or end-of-month peaks?
 
-In SQL terms, a typical first query:
+In SQL terms, a typical first query (one order can have several shipments, so take the last delivery per order first; orders with no delivery count as not on time):
 ```sql
+WITH last_delivery AS (
+  SELECT order_id, MAX(delivered_date) AS delivered_date
+  FROM shipments
+  GROUP BY order_id
+)
 SELECT o.warehouse,
        COUNT(*) AS orders,
-       AVG(CASE WHEN s.delivered_date <= o.promised_date THEN 1.0 ELSE 0 END) AS on_time_rate
+       AVG(CASE WHEN d.delivered_date <= o.promised_date THEN 1.0 ELSE 0 END) AS on_time_rate
 FROM orders o
-LEFT JOIN shipments s ON s.order_id = o.order_id
+LEFT JOIN last_delivery d ON d.order_id = o.order_id
 GROUP BY o.warehouse
 ORDER BY on_time_rate;
 ```
@@ -596,6 +614,17 @@ Meanwhile, keep our team productive on work not blocked by the dependency.
 - **Learning:** [what you would do differently].
 
 **Example (adapt to your own experience):** "I was responsible for launching a new supplier onboarding process across three regions, but each regional procurement team reported to a different director. I agreed a shared timeline with each director, set up a weekly 20-minute check-in, and created a tracker showing each region's status. When one region fell behind because of a staffing gap, I trained two of their analysts myself and moved their go-live by two weeks with the sponsor's agreement. All three regions went live within a month of plan, and onboarding time fell from 21 days to 9. I learned to agree escalation rules up front."
+
+#### When would you recommend stopping a use case or walking away from a deployment?
+When continuing costs the customer (and your team) more than it is likely to return, and you have already tried the reasonable fixes.
+
+Signals:
+- **No owner:** nobody at the customer is accountable for the outcome or will make users change how they work.
+- **No path to value:** the data does not exist or cannot be accessed within a reasonable time, or the pilot metric has not moved after a fair test.
+- **Mis-scoped problem:** the real issue is organisational or policy-related, and software will not change it.
+- **Unacceptable risk:** ethical, legal or safety concerns that controls cannot address.
+
+How to do it: bring evidence and options to your own team first, then to the sponsor ("narrow to the part that worked, pause until X is in place, or stop"); write down what was learned; and redirect the effort to a better use case on the account where possible. Stopping a weak use case early protects trust and frees the team for one that works, which is usually better for the account than letting a failing project drag on.
 
 ### Company and mission
 

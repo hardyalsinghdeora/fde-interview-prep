@@ -117,10 +117,12 @@ Loops vary by company; this is the typical reported shape, not a guarantee.
 - [ ] The account executive wants to promise a roadmap feature that is not committed. What do you do?
 - [ ] How do you hand over a closed deal to post-sales?
 - [ ] How do you get field feedback turned into product changes?
+- [ ] How do you build a business value or ROI case that the economic buyer will accept?
 
 ### AI vendor specifics
 - [ ] How do you handle a prospect's concerns about hallucination, data privacy and training on their data when selling an AI product?
 - [ ] How would you run a bake-off where a prospect compares our LLM API against another provider?
+- [ ] A prospect asks what our LLM API will cost them per month. How do you estimate it?
 
 ### Role-specific behavioral
 - [ ] Tell me about a deal where your technical work made the difference.
@@ -645,6 +647,19 @@ The aim is that the customer never has to repeat themselves.
 - **Propose, don't only complain:** suggest the smallest version that would unblock deals.
 - **Close the loop** with the customer and your team when something ships.
 
+#### How do you build a business value or ROI case that the economic buyer will accept?
+
+Build it with the champion, from the customer's own numbers, so it is their case rather than your pitch.
+
+1. **Start from the pain found in discovery** and the metric the economic buyer is measured on (cost, revenue, risk, time to market).
+2. **Quantify the current cost:** for example, engineer hours lost per incident × incidents per month × loaded hourly cost, plus revenue lost per hour of downtime. Use their figures; mark every assumption.
+3. **Estimate the improvement conservatively,** grounded in POC results or published case studies, not best-case marketing claims.
+4. **Include total cost:** subscription, implementation, training, internal staff time, and any tools retired (which may offset cost).
+5. **Show a range and payback period** (conservative, expected), and which assumption matters most.
+6. **Have the champion validate it** with finance before it reaches the economic buyer, and keep it to one page plus a backup spreadsheet.
+
+Pricing and discounts stay with the AE; the SE owns the credibility of the numbers. An inflated case is easy for finance to dismiss and damages trust in the rest of the evaluation.
+
 ### AI vendor specifics
 
 #### How do you handle a prospect's concerns about hallucination, data privacy and training on their data when selling an AI product?
@@ -669,6 +684,18 @@ End with: "Let's design an evaluation on your data so you see the accuracy yours
 6. **Report:** results per metric and per category, failure examples, and the trade-offs.
 
 Be honest if the other model wins on some cases. Recommend the eval set become their regression suite. See [06 AI / LLM evals](../../topics/06-ai-llm/ANSWERS-part2.md).
+
+#### A prospect asks what our LLM API will cost them per month. How do you estimate it?
+
+Give a range built from their workload, not a guess, and say what would change it.
+
+1. **Get the workload shape:** requests per day (average and peak), input tokens per request (system prompt, retrieved context, conversation history), output tokens per request, and how many model calls each user task makes (agents and multi-step chains multiply this).
+2. **Compute:** monthly requests × (input tokens × input price + output tokens × output price) ÷ 1,000,000, using the current published prices for the candidate model(s).
+3. **Apply the levers that fit:** prompt caching on repeated prefixes, batch processing for non-urgent work, a smaller model for easy steps.
+4. **Present baseline, optimised and growth scenarios,** plus cost per business unit (per ticket, per document), which is what buyers compare with today's cost.
+5. **Validate in the POC:** measure real token counts, since early estimates are often off by a large factor.
+
+Leave pricing agreements and discounts to the AE. See [05 Applied AI Engineer](../05-applied-ai-engineer/README.md) for a worked cost template.
 
 ### Role-specific behavioral
 
