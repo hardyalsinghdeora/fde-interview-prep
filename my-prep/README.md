@@ -5,7 +5,7 @@ This folder turns the generic question bank into **my** answers, using my real c
 | File | What it is |
 |---|---|
 | [PROFILE.md](PROFILE.md) | My background, strengths, gaps, and which roles fit me best |
-| [STORY-BANK.md](STORY-BANK.md) | My 10 core interview stories in STAR form, ready to adapt to any behavioral question |
+| [STORY-BANK.md](STORY-BANK.md) | My 12 core interview stories in STAR form, ready to adapt to any behavioral question |
 | [MY-ANSWERS.md](MY-ANSWERS.md) | My personalised answers to the most-asked questions, plus a map from every behavioral question to the story to use |
 | [INPUTS-NEEDED.md](INPUTS-NEEDED.md) | What only I can fill in: missing details, numbers and stories. **Fill this first** |
 

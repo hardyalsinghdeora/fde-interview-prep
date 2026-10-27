@@ -1,6 +1,6 @@
 # My Answers
 
-Personalised answers built from [STORY-BANK.md](STORY-BANK.md) and [PROFILE.md](PROFILE.md). Part 1 has full answers to the questions asked in almost every loop. Part 2 maps every behavioral question in the repo to the story to use.
+Personalised answers built from [STORY-BANK.md](STORY-BANK.md) and [PROFILE.md](PROFILE.md). Part 1 has full answers to the Tier 1 questions in [COMMON-QUESTIONS.md](../roles/COMMON-QUESTIONS.md), which are asked in almost every loop. Part 2 maps every behavioral question in the repo to the story to use.
 
 `[I-xx]` = fill in from [INPUTS-NEEDED.md](INPUTS-NEEDED.md) before using.
 
@@ -27,6 +27,56 @@ Personalised answers built from [STORY-BANK.md](STORY-BANK.md) and [PROFILE.md](
 > [I-15: your honest reason, framed positively.] Suggested framing: "I've done the work I set out to do: the commercial platform and the migration design are in place. I want to apply the same skills directly with external customers and in AI, where the demand for engineers who can integrate with messy real businesses is growing fastest. That's hard to do from an internal platform team."
 
 Never criticise your employer, colleagues or manager.
+
+### Why this company? Why now?
+
+Build this per company from the [research checklist](../topics/11-company-specific/ANSWERS.md#company-research-checklist-do-for-every-company). Use three beats: **what they do that I care about**, **why my record fits their deployments**, **why now**.
+
+> [Company] sells [product] into [customer type], and what makes a deployment hard there is integrating with the customer's existing systems and data. That's the part I'm best at: I designed the bridge between a legacy estate and a new platform while both stayed live (S1), and I integrated our CRM and accounting systems (S3). Why now: I've finished the platform and migration work I set out to do, and I want to do it with external customers, on [the launch or product area I'm excited about]. [I-39: target companies and the one launch I have a view on.]
+
+*Template for AI companies:* "The models are good enough. Deployments now succeed or fail on integration, data access and evals, and that's where an engineer like me adds the most."
+
+### What do you know about our product/platform?
+
+Prepare it as a 30-second answer: product, buyer, user, how it's deployed, one launch. Then make it personal:
+
+> I've [used the API / tried the free tier / read the docs] and built [the small project: I-19]. What stood out was [one specific thing], and what confused me was [one rough edge]. That's exactly the kind of thing I'd expect to smooth over for a customer.
+
+Never bluff. If you haven't tried it, say what you've read and ask what customers find hardest about it.
+
+### What parts of the job are you excited about, and what do you think you'll struggle with?
+
+> **Excited:** sitting with the people who'll use the system, finding the real need, and shipping something they depend on. That's the best part of my current job (S2, S8), and in an FDE role it's the whole job. I'm also excited to do it on AI deployments.
+>
+> **Struggle:** two honest ones. First, I've mostly had internal customers, so external commercial pressure (contracts, renewals, an executive who isn't my colleague) will be newer. I'm preparing by treating every internal stakeholder like a customer and writing things up the way an account team would. Second, my hands-on LLM work is recent [I-19], so I'm building portfolio projects now rather than learning on a customer's time.
+
+Pick real struggles with a plan, not disguised strengths.
+
+### Where do you see yourself in 3–5 years?
+
+> In three to five years I want to be the person a company sends to its hardest or most strategic deployments, and who turns what we learn in the field into product. At principal level today, that probably means a staff or principal FDE, or a field CTO, track: leading a group of deployments, setting the patterns other FDEs reuse, and owning the feedback loop into product. I've already done a version of this internally: design patterns for migrations (ID mapping, retries, rollback) that other engineers executed from my specs (S1).
+
+Tie it to the company's career ladder, and don't make it sound like you'll leave for a PM or founder role in a year.
+
+### How do you feel about work that's part engineering, part consulting?
+
+> It's the mix I've ended up doing anyway, and the part I like most. The discount engine (S2) was maybe a third code and two thirds getting sales and finance to agree on one set of rules, then writing those rules down so they could be audited. I don't see consulting as a break from engineering: the time spent finding the real requirement is what makes the code worth shipping. What I'm careful about is staying hands-on. I want to be the person who builds the thing, not just the person who writes the slide about it.
+
+### Customer work: how I'd answer the Tier 1 questions
+
+The model answers are in [topics/09-customer-scenarios](../topics/09-customer-scenarios/ANSWERS.md). Use the framework from there and add one line of **my own evidence**, so it isn't just theory:
+
+| Question | My evidence to add |
+|---|---|
+| A customer says "we want to use AI to improve operations." What do you do in the first meeting? | S5: we started from the use case, the users and the data constraints (the DPDP Act), not from the model. "The first meeting is for the problem, the users and the constraints." |
+| What questions do you ask in a discovery call? | S2: "What happens today when a discount is requested? Who approves it? What goes wrong?" I ask for the current workflow and the exceptions, not the wish list. |
+| The customer wants a feature our product doesn't support. | S2: not every exception becomes a rule. Find the need behind the request, offer a workaround or configuration, and log it as product feedback with the business impact attached. |
+| The customer asks for something technically bad. How do you push back? | S5: I said no to self-hosting GPUs by laying out a break-even analysis and a reversible alternative (buy behind an adapter). Push back with options and numbers, not opinions. |
+| An angry executive: the deployment is late. | S12: I'd use what I did in phased rollouts. Acknowledge it, own the part that's ours, give the new date with the reason, and show the smallest thing we can deliver first. Then follow up in writing. [I-23] if you have a real one. |
+| How do you deliver bad news? | S4: when the sync drifted, I said what happened, the impact, the fix and how we'd catch it next time (reconciliation), before anyone asked. Early, in person, with a plan. |
+| A technical question in front of a customer that you can't answer. | "I don't know, I'll find out by [time]," then actually do it. S5's honest non-goals, saying what the system *won't* do, is the same habit. |
+| Explain a technical concept (RAG, an API, an index) to a non-technical executive. | S2: I explained the discount approval ladder to finance in their terms (who signs off, at what margin), not in table and rule-engine terms. Use one analogy and one business consequence. |
+| How do you define success criteria with a customer? | S3: billing work was tied to a business metric (days-sales-outstanding), not just "invoices generate". Agree a baseline, a target, and who measures it, before building. [I-04] for the result. |
 
 ### What are your strengths?
 
