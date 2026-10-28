@@ -64,6 +64,7 @@ Assumes ~10–12 hours a week. Cases are the core of this loop: do at least two 
 - [ ] Read [Business cases and ROI — model answers](./README.md#business-cases-and-roi-1), including the [predictive-maintenance case](./README.md#build-a-business-case-for-a-predictive-maintenance-deployment-at-a-manufacturer-walk-through-the-numbers) and the [claims estimation](./README.md#estimation-roughly-how-many-staff-hours-a-year-does-a-mid-sized-insurer-spend-on-manual-claims-document-review).
 - [ ] Study [09 Customer scenarios — E. Business acumen](../../topics/09-customer-scenarios/ANSWERS.md#e-business-acumen).
 - [ ] Read [presenting a pilot that under-delivered](./README.md#the-pilot-delivered-less-value-than-promised-how-do-you-present-it-to-the-sponsor).
+- [ ] Add supply chain to your sector reps: read [15-supply-chain-ai](../../topics/15-supply-chain-ai/README.md) sections [A (fundamentals)](../../topics/15-supply-chain-ai/README.md#a-supply-chain-fundamentals), [G (case prompts)](../../topics/15-supply-chain-ai/README.md#g-decomposition--case-prompts) and [H (customer scenarios)](../../topics/15-supply-chain-ai/README.md#h-customer-scenarios), with [answers](../../topics/15-supply-chain-ai/ANSWERS.md) and [part 2](../../topics/15-supply-chain-ai/ANSWERS-part2.md).
 
 **Deliverables:**
 1. A spreadsheet business case for one use case with a base, low and high scenario and a one-line sensitivity summary ("the case depends mostly on X").

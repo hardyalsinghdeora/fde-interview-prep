@@ -4,7 +4,7 @@ A complete interview prep kit for **Forward Deployed Engineer (FDE)** and the fa
 
 **What's inside**
 - **17 roles**, each with an overview, the typical interview loop, role-specific questions with model answers, and a 6-week study plan
-- **15 shared topic sections** with more than 900 questions, each with a model answer
+- **16 shared topic sections** with more than 1,000 questions, each with a model answer
 - **A personal prep folder** with my profile, story bank and personalised answers
 
 > Sources: candidate reports (Glassdoor, Blind, 1point3acres), prep guides (Exponent/Aced, IGotAnOffer, Educative, techinterview.org, GSD Council), and the common structure of these interview loops. Interview content changes and is often under NDA, so company-specific items are marked *reported*, and volatile facts are marked *(verify)*.
@@ -76,7 +76,7 @@ fde-solutions-interview-prep/
 | 03 | System design | [README](topics/03-system-design/README.md) | [ANSWERS](topics/03-system-design/ANSWERS.md) |
 | 04 | Decomposition | [README](topics/04-decomposition/README.md) | [ANSWERS](topics/04-decomposition/ANSWERS.md) |
 | 05 | Learning round | [README](topics/05-learning-round/README.md) | [ANSWERS](topics/05-learning-round/ANSWERS.md) |
-| 06 | AI / LLM | [README](topics/06-ai-llm/README.md) | [ANSWERS (A–E)](topics/06-ai-llm/ANSWERS.md) · [Part 2 (F–J)](topics/06-ai-llm/ANSWERS-part2.md) |
+| 06 | AI / LLM | [README](topics/06-ai-llm/README.md) | [ANSWERS (A–E)](topics/06-ai-llm/ANSWERS.md) · [Part 2 (F–K)](topics/06-ai-llm/ANSWERS-part2.md) |
 | 07 | Data & SQL | [README](topics/07-data-and-sql/README.md) | [ANSWERS](topics/07-data-and-sql/ANSWERS.md) |
 | 08 | Cloud, DevOps & integration | [README](topics/08-cloud-devops-integration/README.md) | [ANSWERS](topics/08-cloud-devops-integration/ANSWERS.md) |
 | 09 | Customer scenarios | [README](topics/09-customer-scenarios/README.md) | [ANSWERS](topics/09-customer-scenarios/ANSWERS.md) |
@@ -85,6 +85,7 @@ fde-solutions-interview-prep/
 | 12 | Debugging & troubleshooting | [README](topics/12-debugging-troubleshooting/README.md) | [ANSWERS](topics/12-debugging-troubleshooting/ANSWERS.md) |
 | 13 | CS fundamentals | [README](topics/13-cs-fundamentals/README.md) | [ANSWERS](topics/13-cs-fundamentals/ANSWERS.md) |
 | 14 | Questions to ask | [README](topics/14-questions-to-ask/README.md) | [ANSWERS](topics/14-questions-to-ask/ANSWERS.md) |
+| 15 | Supply chain & AI for supply chain | [README](topics/15-supply-chain-ai/README.md) | [ANSWERS (A–D)](topics/15-supply-chain-ai/ANSWERS.md) · [Part 2 (E–I)](topics/15-supply-chain-ai/ANSWERS-part2.md) |
 
 Behavioral answers in `topics/` are **templates with labelled examples**, not real stories. My real stories are in [my-prep/](my-prep/README.md).
 

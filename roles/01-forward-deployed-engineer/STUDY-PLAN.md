@@ -103,6 +103,7 @@ Assumes ~10–12 hours a week. Each week ends with a mock interview and a short 
 - [ ] Debugging: [12 — A. Live debugging round formats](../../topics/12-debugging-troubleshooting/ANSWERS.md#a-live-debugging-round-formats), [B. Production troubleshooting](../../topics/12-debugging-troubleshooting/ANSWERS.md#b-production-troubleshooting-scenarios) and [C. LLM-specific troubleshooting](../../topics/12-debugging-troubleshooting/ANSWERS.md#c-llm-specific-troubleshooting).
 - [ ] Rehearse the [live triage exercise](./README.md#exercise-live-triage-a-customer-integration-broke-overnight-diagnose-it-with-incomplete-information-while-keeping-the-customer-informed).
 - [ ] Read [Field-to-product feedback](./README.md#field-to-product-feedback-1) and [Hack versus productize](./README.md#hack-versus-productize-1).
+- [ ] Supply chain is a common FDE customer domain: read [15-supply-chain-ai](../../topics/15-supply-chain-ai/README.md) sections [A (fundamentals)](../../topics/15-supply-chain-ai/README.md#a-supply-chain-fundamentals), [E (generative AI and agents)](../../topics/15-supply-chain-ai/README.md#e-generative-ai--agents-in-supply-chain) and [F (system design)](../../topics/15-supply-chain-ai/README.md#f-system-design), with [answers](../../topics/15-supply-chain-ai/ANSWERS.md) and [part 2](../../topics/15-supply-chain-ai/ANSWERS-part2.md).
 
 **Deliverables:**
 1. A sample product feedback ticket for a gap you hit in Week 4's build (problem, evidence, customers affected, proposed fix).

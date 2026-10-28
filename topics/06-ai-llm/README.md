@@ -154,3 +154,10 @@ The core of FDE loops at OpenAI, Anthropic, Scale AI, Cohere, Mistral, Sierra, D
 - [ ] Build a customer-support bot prototype and present it as if to the customer.
 - [ ] Build a structured-data extraction pipeline from unstructured documents.
 - [ ] Live follow-up: Why this chunking strategy? Why not another retrieval method? What would you change at 100x data? What failed? What would you do with another week?
+
+## K. Recent topics (2025–2026)
+- [ ] What is context engineering, and how is it different from prompt engineering?
+- [ ] What is the A2A (Agent2Agent) protocol, and how does it relate to MCP?
+- [ ] Estimate the monthly cost of an LLM feature for a customer (back-of-envelope).
+- [ ] When would you use a small or on-device model instead of a frontier model?
+- [ ] What are time-series foundation models, and should a customer use one for forecasting?

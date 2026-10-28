@@ -2,7 +2,7 @@
 
 Questions: [README.md](README.md)
 
-This file covers sections A–E (fundamentals, prompting, RAG, agents, evaluation). Sections F–J are in [ANSWERS-part2.md](ANSWERS-part2.md).
+This file covers sections A–E (fundamentals, prompting, RAG, agents, evaluation). Sections F–K are in [ANSWERS-part2.md](ANSWERS-part2.md).
 
 **How to use these answers:** these are reference answers, not scripts. Adapt them to your own projects and numbers, and practise saying them out loud in 1–2 minutes. Model names, prices and limits change fast — check current docs before an interview and say "as of the last time I checked" when quoting specifics.
 

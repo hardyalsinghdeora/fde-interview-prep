@@ -2,7 +2,7 @@
 
 Questions: [README.md](README.md) · Sections A–E (fundamentals, prompting, RAG, agents, evaluation): [ANSWERS.md](ANSWERS.md)
 
-**How to use these answers:** these are reference answers covering sections F–J. Adapt them to your own projects and numbers, and practise saying them out loud — interviewers probe for depth, so know *why* behind every bullet, not just the bullet.
+**How to use these answers:** these are reference answers covering sections F–K. Adapt them to your own projects and numbers, and practise saying them out loud — interviewers probe for depth, so know *why* behind every bullet, not just the bullet.
 
 ---
 
@@ -877,3 +877,73 @@ What interviewers want: that your decisions were **deliberate and evidence-based
 - Prioritised by expected impact on the eval: bigger, expert-validated eval set; fix the top failure category; contextual retrieval / re-ranker tuning; production readiness (auth, permissions-aware retrieval, monitoring, rate-limit handling, caching); user feedback loop; latency/cost optimisation.
 
 **Behaviour in the session:** don't get defensive — "that's a fair point; I chose X because of Y, but if Z were true I'd switch to W." Separate what you measured from what you believe. If you don't know, say how you'd find out.
+
+---
+
+## K. Recent topics (2025–2026)
+
+### What is context engineering, and how is it different from prompt engineering?
+
+**Prompt engineering** is writing good instructions. **Context engineering** is designing *everything* the model sees at each step: instructions, retrieved documents, tool definitions, tool results, conversation history, memory and task state, so that the model has the right information, in the right form, at the right time, within the token budget. The term became common in 2025 as agents ran longer and most failures turned out to be about missing, stale or noisy context rather than wording.
+
+**What it involves:**
+- **Selection:** retrieve only what the step needs (RAG, search tools, just-in-time file reads) instead of stuffing everything in.
+- **Compression:** summarise or trim old turns and long tool outputs; return compact, structured tool results (IDs and key fields, not full JSON dumps).
+- **Structure and order:** stable content first (good for prompt caching), clear sections or tags, the most relevant material near the question (long contexts suffer from "lost in the middle").
+- **State outside the context:** plans, to-do lists and notes kept in files or memory and re-loaded, so long tasks survive context limits and resets.
+- **Isolation:** sub-agents with their own focused context that return a short summary to the orchestrator.
+- **Tool design:** fewer, well-described tools; too many overlapping tools confuse the model and consume tokens.
+
+**How to say it in an interview:** "When an agent fails, I first look at the trace of what was in its context at the failing step. Usually the model wasn't wrong given what it saw; it saw the wrong things."
+
+### What is the A2A (Agent2Agent) protocol, and how does it relate to MCP?
+
+- **MCP (Model Context Protocol)** connects an agent or LLM application to **tools and data**: a client calls a server's tools, reads its resources and uses its prompts. It is agent-to-tool.
+- **A2A (Agent2Agent)** is an open protocol, introduced by Google in April 2025 and later moved to the Linux Foundation (*verify current status*), for **agents to communicate with other agents** across vendors and frameworks. It is agent-to-agent.
+
+**A2A's main ideas:**
+- An **Agent Card** (a JSON description, published at a well-known URL) advertises what an agent can do, its endpoint and its authentication requirements, so other agents can discover it.
+- Agents exchange **tasks** with a lifecycle (submitted, working, input required, completed, failed), messages and **artifacts** (the outputs), over HTTP with JSON-RPC and streaming for long-running work.
+- The remote agent is **opaque**: the caller doesn't see its tools, prompts or memory, only the task interface, which suits calling another company's or another team's agent.
+
+**How they fit together:** an agent uses MCP to reach its own tools and data, and A2A to delegate work to another agent, e.g. a buyer's procurement agent asking a supplier's order agent for availability. **Customer concerns to raise:** authentication and authorisation between agents, trust in what a remote agent returns (treat it as untrusted input, like any tool result), audit trails across organisations, and that many enterprises still prefer plain APIs for cross-company integrations.
+
+### Estimate the monthly cost of an LLM feature for a customer (back-of-envelope).
+
+Walk through it out loud; the structure matters more than exact prices (always check the current price list).
+
+**Example: a support assistant.**
+1. **Volume:** 5,000 conversations a day × 30 days = 150,000 conversations a month.
+2. **Calls per conversation:** 4 turns, each one LLM call (plus maybe a classification call).
+3. **Tokens per call:** system prompt and tools 3,000 + retrieved context 2,000 + history 1,000 = ~6,000 input tokens; ~300 output tokens.
+4. **Monthly tokens:** 150,000 × 4 = 600,000 calls → 3.6B input tokens and 180M output tokens.
+5. **Price:** with an illustrative mid-tier price of $3 per million input and $15 per million output tokens: 3,600 × $3 = $10,800 input + 180 × $15 = $2,700 output ≈ **$13,500/month**, or about $0.09 per conversation.
+6. **Levers:** prompt caching on the 3,000-token stable prefix (cached reads at a fraction of the input price) could cut input cost by about 40%; routing easy turns to a small model; trimming history; batch APIs for offline work.
+7. **Compare with value:** if a human-handled conversation costs $4 and the assistant resolves 30% of them, savings are ~150,000 × 0.3 × $4 = $180,000/month. The LLM cost is not the deciding factor; quality and resolution rate are.
+
+**Also mention:** retries and agent loops multiply calls (cap them); evals and development traffic cost money too; reasoning models add "thinking" output tokens; self-hosting turns token cost into GPU cost, which only pays off at high, steady volume.
+
+### When would you use a small or on-device model instead of a frontier model?
+
+**Small models** (from roughly 1B to tens of billions of parameters, open-weight or the "mini/flash/haiku" tiers of API providers) are the right choice when:
+- **The task is narrow and high-volume:** classification, routing, extraction from fixed formats, PII detection, query rewriting. A small model (often fine-tuned) matches a frontier model on evals at a fraction of the cost and latency.
+- **Latency matters:** autocomplete, voice turn-taking, real-time moderation.
+- **Data can't leave the device or the network:** air-gapped sites, factories and warehouses with poor connectivity, mobile and edge devices, strict data residency. Quantised open-weight models can run on a laptop, phone or edge box.
+- **Cost at scale:** millions of calls a day.
+
+**Use a frontier model when:** the task requires complex reasoning, long-horizon agents, broad world knowledge, high-quality writing, or when volume is low and engineering time is the bigger cost.
+
+**Common pattern:** a **cascade** where the small model handles most traffic and escalates hard or low-confidence cases to the frontier model, or the frontier model is used to generate training data and labels to distil a small model. Decide with **evals on the customer's data**, not benchmarks.
+
+### What are time-series foundation models, and should a customer use one for forecasting?
+
+**What they are:** models pre-trained on very large collections of time series from many domains that can forecast a new series **zero-shot**, without training on the customer's data. Examples include Amazon **Chronos**, Google **TimesFM**, Salesforce **Moirai** and Nixtla **TimeGPT** (*verify current versions and licences*). Some tokenise values the way language models tokenise text; most output probabilistic forecasts.
+
+**Where they help:** quick baselines in a new engagement; series with short histories and new products; many heterogeneous series where building per-domain models is expensive; teams without forecasting expertise.
+
+**Where to be careful:**
+- They don't automatically beat a well-built **gradient boosting model with business features** (promotions, prices, events), which many versions use only partly or not at all.
+- Retail and supply chain decisions depend on those drivers and on **hierarchy and constraints**.
+- Inference cost and latency at millions of series, and licence terms for commercial use.
+
+**What to tell the customer:** "Treat it as one more candidate in the backtest: same rolling-origin evaluation, same metrics (WAPE, bias, quantile loss) at the decision horizon, compared with seasonal naive and a LightGBM model. If it wins on the segments that matter, or wins on cold-start items, use it there; an ensemble is also an option." See [choosing a forecasting approach](../15-supply-chain-ai/ANSWERS.md#classical-statistics-ets-arima-vs-gradient-boosting-vs-deep-learning-vs-time-series-foundation-models-how-do-you-choose).
