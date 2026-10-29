@@ -16,7 +16,8 @@ A complete interview prep kit for **Forward Deployed Engineer (FDE)** and the fa
 1. **Pick your roles:** read the [role map](roles/README.md). It compares all 17 roles and shows which rounds each one gets.
 2. **Master the common questions:** [roles/COMMON-QUESTIONS.md](roles/COMMON-QUESTIONS.md) lists 60 questions asked in every role, each linked to its answer.
 3. **Follow the study plan for your role:** `roles/<role>/STUDY-PLAN.md`. Each plan links to the exact topic files to study, week by week.
-4. **Make it personal:** fill in [my-prep/INPUTS-NEEDED.md](my-prep/INPUTS-NEEDED.md), then practise [my stories](my-prep/STORY-BANK.md) and [my answers](my-prep/MY-ANSWERS.md).
+4. **Drill by skill:** [skills/](skills/README.md) has a question list per skill — strengths to deepen and gaps to close, ranked by demand.
+5. **Make it personal:** fill in [my-prep/INPUTS-NEEDED.md](my-prep/INPUTS-NEEDED.md), then practise [my stories](my-prep/STORY-BANK.md) and [my answers](my-prep/MY-ANSWERS.md).
 
 ---
 
@@ -31,6 +32,8 @@ fde-solutions-interview-prep/
 │   └── NN-<role>/
 │       ├── README.md                 ← overview, loop, role-specific Q&A
 │       └── STUDY-PLAN.md             ← 6-week plan + 2-week crash plan
+├── skills/                           ← QUESTION LISTS BY SKILL (26 skills, ranked by demand)
+│   └── README.md                     ← index: strengths to deepen, gaps to close
 ├── topics/                           ← SHARED QUESTION BANK (by interview round)
 │   └── NN-<topic>/
 │       ├── README.md                 ← questions (checklist)
