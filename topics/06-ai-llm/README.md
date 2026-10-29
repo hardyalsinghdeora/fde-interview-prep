@@ -161,3 +161,28 @@ The core of FDE loops at OpenAI, Anthropic, Scale AI, Cohere, Mistral, Sierra, D
 - [ ] Estimate the monthly cost of an LLM feature for a customer (back-of-envelope).
 - [ ] When would you use a small or on-device model instead of a frontier model?
 - [ ] What are time-series foundation models, and should a customer use one for forecasting?
+
+## L. MCP in depth
+- [ ] Walk through an MCP connection: discovery, capabilities and versions, then requests. What changed in the 2026-07-28 revision?
+- [ ] stdio vs. Streamable HTTP: when do you use each transport, and what replaced HTTP+SSE?
+- [ ] MCP vs. plain function calling vs. a REST/OpenAPI integration: when is MCP worth it?
+- [ ] Explain sampling, elicitation and roots with an example of each.
+- [ ] Write a small MCP server with one tool, one resource and one prompt, and test it.
+- [ ] How do you design good MCP tools (granularity, names, descriptions, output size, errors)?
+- [ ] How does authorization work for a remote MCP server?
+- [ ] What are the main MCP security risks (tool poisoning, rug pulls, confused deputy, token passthrough, injection through tool results) and how do you mitigate them?
+- [ ] How do you handle long-running operations, progress and cancellation in MCP?
+- [ ] How do you deploy and scale a remote MCP server in production?
+- [ ] A client has hundreds of MCP tools available. How do you keep tool selection accurate and context cost low?
+- [ ] How do you test and evaluate an MCP server before giving it to a customer?
+- [ ] How would you roll out MCP across an enterprise (registry, gateway, allowlists, observability)?
+- [ ] MCP vs. A2A vs. Agent Skills: when do you use which?
+
+## M. More LLM topics
+- [ ] What are logprobs, and what can you use them for?
+- [ ] Decoding strategies: greedy, beam search, sampling, and constrained decoding. How are structured outputs enforced?
+- [ ] What is agentic RAG, and when is it better than a fixed retrieval pipeline?
+- [ ] What are late-interaction (ColBERT-style) and multi-vector retrieval, and when are they worth it?
+- [ ] What is reinforcement fine-tuning (RL with verifiable rewards, GRPO), and when would a customer use it?
+- [ ] How would you roll out a coding agent (Claude Code, Codex, Cursor) safely in a customer's engineering organisation?
+- [ ] How do you handle a model's knowledge cutoff and questions about recent events?

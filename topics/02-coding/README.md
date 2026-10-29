@@ -127,6 +127,107 @@ Languages: Python is the safe default. Know one of Java/TypeScript/Go as well.
 - [ ] GCD/LCM, prime sieve, fast exponentiation
 - [ ] Reservoir sampling; random pick with weight
 
+## B2. Standard problem list: NeetCode 150 gaps
+
+These complete the NeetCode 150 / Blind 75 lists together with section B; model answers are in [ANSWERS-dsa-problems.md](ANSWERS-dsa-problems.md).
+
+### Foundations
+- [ ] Big-O cheat sheet (common Python operations and data structures)
+- [ ] Sorting algorithms (merge sort, quicksort, counting/bucket sort; when Timsort is enough)
+- [ ] Quickselect (kth element in average O(n))
+- [ ] String matching (KMP, Rabin-Karp)
+- [ ] Fenwick tree and segment tree (range sum with point updates)
+- [ ] Bellman-Ford and Floyd-Warshall (negative edges, all-pairs)
+
+### Arrays & hashing
+- [ ] Contains Duplicate (set)
+- [ ] Encode and Decode Strings (length-prefix each string)
+- [ ] Valid Sudoku (row/column/box sets)
+- [ ] Longest Consecutive Sequence (set; start only at sequence heads)
+
+### Sliding window
+- [ ] Best Time to Buy and Sell Stock (track running minimum)
+- [ ] Longest Repeating Character Replacement (window length minus max frequency <= k)
+- [ ] Permutation in String (fixed-size window of counts)
+
+### Stack
+- [ ] Evaluate Reverse Polish Notation (operand stack; truncate division toward zero)
+- [ ] Car Fleet (sort by position; stack of arrival times)
+
+### Binary search
+- [ ] Search a 2D Matrix (treat as one sorted array)
+- [ ] Find Minimum in Rotated Sorted Array (compare mid with right end)
+- [ ] Time Based Key-Value Store (per-key timestamp list + bisect)
+
+### Linked list
+- [ ] Reorder List (find middle, reverse second half, merge)
+- [ ] Add Two Numbers (digit-by-digit with carry)
+- [ ] Find the Duplicate Number (Floyd's cycle detection on indices)
+
+### Trees
+- [ ] Invert Binary Tree
+- [ ] Same Tree
+- [ ] Subtree of Another Tree (same-tree check at every node; or serialise)
+- [ ] Binary Tree Right Side View (BFS, last node per level)
+- [ ] Count Good Nodes in Binary Tree (DFS carrying the path maximum)
+- [ ] Construct Binary Tree from Preorder and Inorder Traversal (root from preorder, split by inorder index)
+
+### Heap
+- [ ] Kth Largest Element in a Stream (min-heap of size k)
+- [ ] Last Stone Weight (max-heap via negation)
+- [ ] K Closest Points to Origin (max-heap of size k, or nsmallest)
+- [ ] Design Twitter (per-user tweet lists + heap merge of followees)
+
+### Backtracking
+- [ ] Palindrome Partitioning (backtrack over prefix cuts)
+
+### Graphs
+- [ ] Max Area of Island (DFS returning area)
+- [ ] Pacific Atlantic Water Flow (reverse flow: search inward from each ocean)
+- [ ] Surrounded Regions (mark border-connected O's first)
+- [ ] Graph Valid Tree (n - 1 edges and connected)
+
+### Advanced graphs
+- [ ] Reconstruct Itinerary (Hierholzer's Eulerian path)
+- [ ] Min Cost to Connect All Points (dense Prim, O(n^2))
+- [ ] Swim in Rising Water (Dijkstra on max elevation along the path)
+
+### 1-D dynamic programming
+- [ ] Min Cost Climbing Stairs
+- [ ] Palindromic Substrings (expand around centres)
+
+### 2-D dynamic programming
+- [ ] Best Time to Buy and Sell Stock with Cooldown (state machine: hold / sold / rest)
+- [ ] Target Sum (subset-sum reduction or count of sums)
+- [ ] Interleaving String (dp over prefixes of both strings)
+- [ ] Longest Increasing Path in a Matrix (DFS + memo)
+- [ ] Distinct Subsequences (count dp over prefixes)
+- [ ] Burst Balloons (interval DP: choose the last balloon to burst)
+- [ ] Regular Expression Matching (dp over string and pattern indices)
+
+### Greedy
+- [ ] Jump Game (track farthest reachable)
+- [ ] Jump Game II (BFS by levels over ranges)
+- [ ] Gas Station (greedy: running surplus)
+- [ ] Hand of Straights (count map; start groups at the smallest card)
+- [ ] Merge Triplets to Form Target Triplet (keep only triplets that never exceed the target)
+- [ ] Partition Labels (last occurrence of each character)
+- [ ] Valid Parenthesis String (track range of open counts)
+
+### Intervals
+- [ ] Minimum Interval to Include Each Query (sort queries; min-heap by interval size)
+
+### Math & geometry
+- [ ] Happy Number (cycle detection on digit-square sums)
+- [ ] Multiply Strings (grade-school multiplication into a digit array)
+- [ ] Detect Squares (count points; enumerate diagonal corners)
+
+### Bit manipulation
+- [ ] Reverse Bits
+- [ ] Missing Number (XOR or Gauss sum)
+- [ ] Sum of Two Integers (XOR plus carry, masked to 32 bits)
+- [ ] Reverse Integer (digit by digit with 32-bit overflow check)
+
 ## C. Object-oriented / low-level design (code it)
 - [ ] Parking lot
 - [ ] Elevator system

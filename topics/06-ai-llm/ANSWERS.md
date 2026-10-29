@@ -2,7 +2,7 @@
 
 Questions: [README.md](README.md)
 
-This file covers sections A–E (fundamentals, prompting, RAG, agents, evaluation). Sections F–K are in [ANSWERS-part2.md](ANSWERS-part2.md).
+This file covers sections A–E (fundamentals, prompting, RAG, agents, evaluation). Sections F–M are in [ANSWERS-part2.md](ANSWERS-part2.md).
 
 **How to use these answers:** these are reference answers, not scripts. Adapt them to your own projects and numbers, and practise saying them out loud in 1–2 minutes. Model names, prices and limits change fast — check current docs before an interview and say "as of the last time I checked" when quoting specifics.
 
@@ -939,14 +939,14 @@ Client-side features include **sampling** (server asks the client's LLM for a co
 
 **Build:**
 1. **Scope with the customer:** which user workflows matter (e.g. "look up an order, check shipment, issue a return"). Design tools around those tasks, not a 1:1 mirror of 200 REST endpoints.
-2. Use an official SDK (Python `mcp` with FastMCP, or TypeScript). Wrap the internal API with typed tools, good descriptions, concise outputs, pagination, helpful errors.
+2. Use an official SDK (Python `mcp`, where the high-level class is `MCPServer` in 2.x and `FastMCP` in 1.x; or TypeScript). Wrap the internal API with typed tools, good descriptions, concise outputs, pagination, helpful errors.
 3. Expose reference data as **resources** (schemas, policy docs) and common workflows as **prompts**.
 4. Transport: **stdio** for local developer use; **Streamable HTTP** for a shared remote server deployed in the customer's VPC.
-5. Test with the MCP Inspector and an eval set of tasks; version the server.
+5. Test with the MCP Inspector and an eval set of tasks; version the server. A full, tested example is in [part 2, section L](ANSWERS-part2.md#write-a-small-mcp-server-with-one-tool-one-resource-and-one-prompt-and-test-it).
 
 ```python
-from mcp.server.fastmcp import FastMCP
-mcp = FastMCP("orders")
+from mcp.server.mcpserver import MCPServer   # SDK 1.x: from mcp.server.fastmcp import FastMCP
+mcp = MCPServer("orders")
 
 @mcp.tool()
 def get_order(order_id: str) -> dict:
