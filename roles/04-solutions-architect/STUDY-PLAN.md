@@ -62,6 +62,7 @@ Assumes ~10–12 hours a week. Pick one cloud (usually the employer's) and use i
 - [ ] Read [Multi-account and landing zones — model answers](./README.md#multi-account-and-landing-zones-1).
 - [ ] Read [Security and compliance — model answers](./README.md#security-and-compliance-1) and [08 — B. Authentication, authorization and security](../../topics/08-cloud-devops-integration/ANSWERS.md#b-authentication-authorization--security).
 - [ ] Read the official AWS Well-Architected pillar summaries (see Resources).
+- [ ] Service-level AWS questions: work through [16-aws](../../topics/16-aws/README.md) sections [A–G (compute to operations)](../../topics/16-aws/README.md#a-compute), with [answers](../../topics/16-aws/ANSWERS.md).
 
 **Deliverables:**
 1. A written review report for the single-EC2 exercise: findings ranked by risk, each with a fix and effort estimate.
@@ -96,6 +97,7 @@ Assumes ~10–12 hours a week. Pick one cloud (usually the employer's) and use i
 - [ ] Study [06 AI/LLM — C. RAG](../../topics/06-ai-llm/ANSWERS.md#c-rag-retrieval-augmented-generation), [E. Evaluation](../../topics/06-ai-llm/ANSWERS.md#e-evaluation-most-important) and [part 2 — G. Production LLM engineering](../../topics/06-ai-llm/ANSWERS-part2.md#g-production-llm-engineering).
 - [ ] Do two prompts from [03 System design — B. AI / LLM prompts](../../topics/03-system-design/ANSWERS.md#b-ai--llm-system-design-prompts).
 - [ ] Read [Presenting and influencing — model answers](./README.md#presenting-and-influencing-1), including [writing an ADR or design document](./README.md#how-do-you-write-an-architecture-decision-record-or-design-document-for-a-customer).
+- [ ] AWS AI services: read [16-aws section H (AI/ML on AWS)](../../topics/16-aws/README.md#h-aiml-on-aws) and practise the [scenarios in section I](../../topics/16-aws/README.md#i-scenarios--troubleshooting).
 
 **Deliverables:**
 1. A 15-minute presentation of an architecture you designed in real life: context, one diagram, key decisions and trade-offs, cost, results, what you would change.
