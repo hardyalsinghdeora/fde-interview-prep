@@ -76,6 +76,7 @@
 - **Salesforce (Agentforce), ServiceNow, Microsoft** — enterprise agents, CRM integration.
 - **Anduril, Shield AI** — defense, edge/air-gapped deployments, clearance.
 - **Snowflake, MongoDB** — data platform integration, SQL, solution architecture.
+- **HighLevel (GoHighLevel)** — multi-tenant CRM and marketing automation at large scale: Node.js/TypeScript and Go on GCP; billing correctness, contacts and search, workflow engines. A full targeting file is in [my-prep/TARGET-HIGHLEVEL.md](../../my-prep/TARGET-HIGHLEVEL.md).
 - **Startups (YC AI companies)** — take-homes, founder chats, "build a demo in 48 hours".
 
 ## Company research checklist (do for every company)

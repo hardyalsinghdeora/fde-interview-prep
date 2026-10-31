@@ -7,6 +7,7 @@ This folder turns the generic question bank into **my** answers, using my real c
 | [PROFILE.md](PROFILE.md) | My background, strengths, gaps, and which roles fit me best |
 | [STORY-BANK.md](STORY-BANK.md) | My 12 core interview stories in STAR form, ready to adapt to any behavioral question |
 | [MY-ANSWERS.md](MY-ANSWERS.md) | My personalised answers to the most-asked questions, plus a map from every behavioral question to the story to use |
+| [TARGET-HIGHLEVEL.md](TARGET-HIGHLEVEL.md) | HighLevel Staff Engineer (CRM backend) openings ranked by fit, my gaps with learning materials, and HighLevel-style questions with model answers |
 | [INPUTS-NEEDED.md](INPUTS-NEEDED.md) | What only I can fill in: missing details, numbers and stories. **Fill this first** |
 
 ## Privacy rules for this folder (the repo is public)
